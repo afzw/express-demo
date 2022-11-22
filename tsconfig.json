@@ -1,0 +1,29 @@
+{
+  "ts-node": {
+    "transpileOnly": true,  //  ts-node不进行类型检查，加快速度
+    "files": true, //  使 ts-node 识别 tsconfig.json 的 files, include or exclude 配置
+  },
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["DOM", "ES2020"],
+    "allowJs": false,
+    "module": "CommonJS", //  Nodejs项目建议都设置为CommonJS
+    "target": "ES6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    // "declaration": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "composite": true,
+    /*  if you are working with node.js or some environment that doesn't use a module bundler like webpack
+        you will additionally need the npmjs.com/package/module-alias module：https://www.npmjs.com/package/module-alias */
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"],
+      "@src/*": ["src/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/node_modules/*", "uploads/*", "test/*"]
+}

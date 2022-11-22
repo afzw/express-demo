@@ -1,0 +1,15 @@
+# common
+**/.DS_Store
+
+# dependencies
+node_modules
+package-lock.json
+
+# example files
+**/config.ts
+
+# uplaod dir
+**/uploads
+
+# compile dir
+dist
