@@ -1,5 +1,5 @@
 import { UserProps } from "@/modules/user/user";
-import * as UserDao from "@/modules/user/user.dao"
+import UserDao from "@/modules/user/user.dao"
 import { callAsync } from "@/lib/utils/callAsync";
 
 /**

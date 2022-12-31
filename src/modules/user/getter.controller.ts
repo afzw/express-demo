@@ -2,7 +2,7 @@ import _ from "lodash";
 import { Request, Response } from "express";
 import * as SessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
 import { callAsync } from "@/lib/utils/callAsync";
-import * as UserDao from '@/modules/user/user.dao'
+import UserDao from '@/modules/user/user.dao'
 
 /**
  * 获取用户个人信息

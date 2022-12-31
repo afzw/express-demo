@@ -1,6 +1,6 @@
 import utils from "@/lib/utils/common"
 import { UserProps } from "@/modules/user/user";
-import * as userDao from '@/modules/user/user.dao'
+import UserDao from '@/modules/user/user.dao'
 
 /**
  * @fileoverview 【默认脚本】创建系统管理员
@@ -18,5 +18,5 @@ exports.start = async function start () {
     roles: ['admin']
   }
 
-  return userDao.findUserAndUpdate({ username: 'admin' }, adminDoc, { upsert: true, new: false })
+  return UserDao.findUserAndUpdate({ username: 'admin' }, adminDoc, { upsert: true, new: false })
 }

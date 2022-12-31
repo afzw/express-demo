@@ -4,7 +4,7 @@
 import _ from "lodash"
 import utils from "@/lib/utils/common"
 import { callAsync } from "@/lib/utils/callAsync"
-import * as userDao from '@/modules/user/user.dao'
+import UserDao from '@/modules/user/user.dao'
 import { Request, Response } from "express"
 import { saveSessionInfo } from "@/lib/session"
 import * as sessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
@@ -21,7 +21,7 @@ export async function signIn(req: Request, res: Response) {
   if (!signInProfile.email || !signInProfile.password)
     return res.status(400).send({ error: '邮箱或密码未填写' })
 
-  const [err, user] = await callAsync(userDao.findUserByFilter({ email: signInProfile.email, deleted: { $ne: true } }))
+  const [err, user] = await callAsync(UserDao.findUserByFilter({ email: signInProfile.email, deleted: { $ne: true } }))
   if (err) return res.status(500).send(`查询用户失败${err}`)
   if (!user) return res.status(401).send({ error: '邮箱或密码错误' })
 
@@ -68,7 +68,7 @@ export async function signUp(req: Request, res: Response) {
     nickname: signUpProfile.nickname
   }
 
-  const [err, user] = await callAsync(userDao.create(newUserDoc))
+  const [err, user] = await callAsync(UserDao.create(newUserDoc))
   if (err) return res.status(500).send(`注册失败！详情：${err}`)
 
   // @ts-ignore

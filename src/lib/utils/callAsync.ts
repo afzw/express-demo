@@ -27,3 +27,5 @@ export function call<T, U = any>(func: Function, ...args: any[]): Promise<[U | n
   const _promise = promise as Promise<any>
   return callAsync<T, U>(_promise)
 }
+
+export default callAsync
