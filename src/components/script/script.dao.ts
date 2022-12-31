@@ -1,11 +1,16 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
-import { ScriptDoc, ScriptModel } from "./script.schema";
+import { ScriptProps } from "./script";
+import { ScriptModel } from "./script.model"
 import * as Curd from "@/lib/mongo/curd"
 
-export async function updateOne(filter: FilterQuery<ScriptDoc>, update: UpdateQuery<ScriptDoc>, options?: QueryOptions<ScriptDoc>) {
-  return Curd.updateOne(ScriptModel, filter, update, options)
+const ScriptDao: any = {
+  async updateOne(filter: FilterQuery<ScriptProps>, update: UpdateQuery<ScriptProps>, options?: QueryOptions<ScriptProps>) {
+    return Curd.updateOne(ScriptModel, filter, update, options)
+  },
+  
+  async findOneAndUpdate(filter: FilterQuery<ScriptProps>, update: UpdateQuery<ScriptProps>, options?: QueryOptions<ScriptProps>) {
+    return Curd.findOneAndUpdate(ScriptModel, filter, update, options)
+  }
 }
 
-export async function findOneAndUpdate(filter: FilterQuery<ScriptDoc>, update: UpdateQuery<ScriptDoc>, options?: QueryOptions<ScriptDoc>) {
-  return Curd.findOneAndUpdate(ScriptModel, filter, update, options)
-}
+export default ScriptDao
