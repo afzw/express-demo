@@ -10,7 +10,7 @@ interface Options {
 }
 
 class Logger {
-  private _prefix: string = 'EVM' //  日志信息前缀，标识符
+  private _prefix: string = 'Express Demo' //  日志信息前缀，标识符
   private _connected: boolean = false
   private _ipAddr: string
   private levelMap = new Map([

@@ -1,5 +1,5 @@
-import { SessionInfoModel, SessionInfoDoc } from "@src/components/sessionInfo/sessionInfo.schema"
-import * as Curd from '@/src/lib/mongo/curd'
+import { SessionInfoModel, SessionInfoDoc } from "@/components/sessionInfo/sessionInfo.schema"
+import * as Curd from '@/lib/mongo/curd'
 import { FilterQuery } from "mongoose"
 
 /**

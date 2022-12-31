@@ -1,7 +1,7 @@
-import * as User from '@/src/modules/user/curd.controller'
-import * as UserGetter from '@/src/modules/user/getter.controller'
+import * as User from '@/modules/user/curd.controller'
+import * as UserGetter from '@/modules/user/getter.controller'
 
-const userRoutes: App.Route[] = [
+const userRoutes: Route[] = [
   //  新增用户
   {
     path: '/users',
@@ -20,7 +20,7 @@ const userRoutes: App.Route[] = [
   {
     path: '/users',
     method: 'GET',
-    middlewares: [User.retrieve],
+    middlewares: [User.search],
     permission: 'admin'
   },
   //  删除用户

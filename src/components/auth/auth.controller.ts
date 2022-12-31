@@ -2,13 +2,13 @@
  * @file 公共路由控制器
  */
 import _ from "lodash"
-import utils from "@/src/lib/utils/common"
-import { callAsync } from "@/src/lib/utils/callAsync"
-import * as userDao from '@/src/modules/user/user.dao'
+import utils from "@/lib/utils/common"
+import { callAsync } from "@/lib/utils/callAsync"
+import * as userDao from '@/modules/user/user.dao'
 import { Request, Response } from "express"
-import { saveSessionInfo } from "@src/lib/session"
-import * as sessionInfoDao from '@/src/components/sessionInfo/sessionInfo.dao'
-import * as Rbac from "@src/lib/rbac/index"
+import { saveSessionInfo } from "@/lib/session"
+import * as sessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
+import * as Rbac from "@/lib/rbac/index"
 
 //  注册表单字段
 const signUpFields = ['email', 'password', 'username', 'nickname']

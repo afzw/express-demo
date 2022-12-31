@@ -1,9 +1,9 @@
 /**
  * @fileoverview 公共路由
  */
-import * as Auth from '@/src/components/auth/auth.controller'
+import * as Auth from '@/components/auth/auth.controller'
 
-const publicRoutes: App.Route[] = [
+const publicRoutes: Route[] = [
   //  登录
   {
     path: "/sign-in",

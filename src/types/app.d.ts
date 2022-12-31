@@ -1,4 +1,7 @@
-declare namespace App {
+/**
+ * Http上下文
+ */
+declare namespace Ctx {
   //  请求对象--查询字符串
   type Query = {
     [x: string]: string
@@ -22,33 +25,31 @@ declare namespace App {
     } //  IUserModel
     hasPermission: (permission: string) => boolean
   }
+}
 
-  //  路由
-  interface Route {
-    path: string
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-    middlewares?: any[],
-    permission?: string,
-    threshold?: any
-    csrf?: boolean
-  }
+/**
+ * 路由
+ */
+declare interface Route {
+  path: string
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+  middlewares?: any[],
+  permission?: string,
+  threshold?: any
+  csrf?: boolean
+}
 
-  //  角色
-  interface Role {
-    permissions: string[]
-  }
-
-  //  项目配置
-  namespace Config {
-    //  mongodb配置项
-    interface Mongo {
-      name: string,
-      username?: string,
-      password?: string,
-      host: string,
-      port: number,
-      debug: boolean
-      uri?: string
-    }
+/**
+ * 配置
+ */
+declare interface Config {
+  mongo: {
+    name: string,
+    username?: string,
+    password?: string,
+    host: string,
+    port: number,
+    debug: boolean
+    uri?: string
   }
 }

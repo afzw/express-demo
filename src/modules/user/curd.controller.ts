@@ -1,6 +1,6 @@
-import { UserModel } from "@src/modules/user/user.schema";
+import { UserModel } from "@/modules/user/user.model";
 import { Request, Response } from "express";
-import * as UserDao from '@/src/modules/user/user.dao'
+import * as UserDao from '@/modules/user/user.dao'
 
 /**
  * 新增用户
@@ -12,7 +12,7 @@ export async function create(req: Request, res: Response) {
 /**
  * 查询用户
  */
-export async function retrieve(req: Request, res: Response) {
+export async function search(req: Request, res: Response) {
   const users = await UserDao.findUsersByFilter({})
   return res.status(200).send(users)
 }

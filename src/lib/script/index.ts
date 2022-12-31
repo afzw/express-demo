@@ -1,8 +1,8 @@
 import path from 'path'
-import { callAsync } from '@/src/lib/utils/callAsync'
-import logger from '@/src/lib/utils/logger'
-import { readdirp } from '@/src/lib/utils/fs/read'
-import * as scriptDao from '@/src/components/script/script.dao'
+import { callAsync } from '@/lib/utils/callAsync'
+import logger from '@/lib/utils/logger'
+import { readdirp } from '@/lib/utils/fs/read'
+import * as scriptDao from '@/components/script/script.dao'
 
 /**
  * 执行脚本

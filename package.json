@@ -15,8 +15,8 @@
     "exec": "ts-node"
   },
   "_moduleAliases": {
-    "@": ".",
-    "@src": "src/"
+    "@": "src/",
+    "@test": "test/"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

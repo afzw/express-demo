@@ -1,11 +1,11 @@
-import { UserDoc } from "@/src/modules/user/user.schema";
-import * as UserDao from "@/src/modules/user/user.dao"
-import { callAsync } from "@/src/lib/utils/callAsync";
+import { UserProps } from "@/modules/user/user";
+import * as UserDao from "@/modules/user/user.dao"
+import { callAsync } from "@/lib/utils/callAsync";
 
 /**
  * 序列化用户（记录用户id）
  */
-export function serializeUserCb (user: UserDoc, done: (err?: any, userId?: any) => void) {
+export function serializeUserCb (user: UserProps, done: (err?: any, userId?: any) => void) {
   done(null, user?._id)
 }
 

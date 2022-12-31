@@ -1,8 +1,8 @@
 import express from 'express'
 import { checkRoutePermission } from './router.middleware'
-import publicRoutes from '@/src/lib/router/public.route'    //  公开路由
-import moduleRoutes from '@/src/lib/router/module.route'    //  业务路由
-import otherRoutes from '@/src/lib/router/other.route'      //  其他路由
+import publicRoutes from '@/lib/router/public.route'    //  公开路由
+import moduleRoutes from '@/lib/router/module.route'    //  业务路由
+import otherRoutes from '@/lib/router/other.route'      //  其他路由
 
 //  路由字典
 export const routesMap = new Map()
@@ -33,7 +33,7 @@ export function initRouters(app: express.Express) {
  * @param routes 注册到路由对象的路由
  * @param defaultPermission 该路由对象上路由的默认permission值。
  */
-function applyRouters(router: express.Router, routes: App.Route[], defaultPermission = 'admin') {
+function applyRouters(router: express.Router, routes: Route[], defaultPermission = 'admin') {
   for (const route of routes) {
     //  路由重复校验
     const key = `${route.method}:${route.path}`

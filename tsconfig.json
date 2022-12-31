@@ -20,8 +20,8 @@
         you will additionally need the npmjs.com/package/module-alias module：https://www.npmjs.com/package/module-alias */
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"],
-      "@src/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@test/*": ["test/*"]
     }
   },
   "include": ["**/*.ts"],

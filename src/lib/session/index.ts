@@ -1,6 +1,6 @@
-import { SessionInfoDoc } from "@src/components/sessionInfo/sessionInfo.schema"
-import * as sessionInfoDao from '@/src/components/sessionInfo/sessionInfo.dao'
-import { callAsync } from "@/src/lib/utils/callAsync"
+import { SessionInfoDoc } from "@/components/sessionInfo/sessionInfo.schema"
+import * as sessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
+import { callAsync } from "@/lib/utils/callAsync"
 
 /**
  * 用户登录，记录sessionInfo

@@ -1,27 +1,7 @@
-import { Schema, model, Model, Query, HydratedDocument, Types } from 'mongoose'
+import { Schema, model, Model, Query, HydratedDocument } from 'mongoose'
+import { UserProps } from '@/modules/user/user'
 
 /* --------------------------------- 接口定义 --------------------------------- */
-//  【MongoDB】用户文档接口：定义文档在MongoDB中的存储形式
-interface UserDoc {
-  /* base fields */
-  _id?: Types.ObjectId
-  email: string
-  username: string
-  password: string
-  salt?: string
-  roles?: string[]
-  disabled?: boolean
-  deleted?: boolean
-  nickname?: string
-  avatar?: string
-  createdAt?: Date
-  updatedAt?: Date
-  activedAt?: Date
-  deletedAt?: Date
-
-  /* custom fields */
-}
-
 //  【Mongoose】用户实例方法接口：定义用户集合文档实例的方法
 interface UserMethods {
   /**
@@ -38,7 +18,7 @@ interface UserMethods {
   hasRoles(roleNames: string[], only?: boolean): boolean
 }
 
-type UserModelQuery = Query<any, HydratedDocument<UserDoc>, UserQueryHelpers> & UserQueryHelpers
+type UserModelQuery = Query<any, HydratedDocument<UserProps>, UserQueryHelpers> & UserQueryHelpers
 
 interface UserQueryHelpers {
   oneById(this: UserModelQuery, id: string): UserModelQuery
@@ -53,7 +33,7 @@ interface UserVirtuals {
 }
 
 //  【Mongoose】定义用户Model类型
-type UserModelType = Model<UserDoc, UserQueryHelpers, UserMethods, UserVirtuals>
+type UserModelType = Model<UserProps, UserQueryHelpers, UserMethods, UserVirtuals>
 
 //  【Mongoose】定义用户Model扩展类型，可以为扩展的Model添加静态方法
 //  一般情况下用不到，若有需要，可以进行拓展，注意将下文中的UserModelType改为extendedUserModelType
@@ -62,7 +42,7 @@ type UserModelType = Model<UserDoc, UserQueryHelpers, UserMethods, UserVirtuals>
 
 /* --------------------------------- Mongoose实现 --------------------------------- */
 //  【Mongoose】定义用户Schema
-const userSchema = new Schema<UserDoc, UserModelType, UserMethods, UserQueryHelpers, UserVirtuals>({
+const userSchema = new Schema<UserProps, UserModelType, UserMethods, UserQueryHelpers, UserVirtuals>({
   email: {
     type: String,
     index: true,
@@ -130,10 +110,9 @@ userSchema.query.byNickname = function(nickname: string) {
 }
 
 //  【Mongoose】编译用户Model
-const UserModel = model<UserDoc, UserModelType>("user", userSchema)
+const UserModel = model<UserProps, UserModelType>("user", userSchema)
 
 export {
-  UserDoc,
   UserMethods,
   UserQueryHelpers,
   UserVirtuals,

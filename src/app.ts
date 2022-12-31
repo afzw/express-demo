@@ -2,15 +2,15 @@ require('module-alias/register')  //  路径别名
 
 import path from "path"
 
-import "@src/modules/user/user.schema" // 优先编译用户表
-import config from '@src/config' //  加载软件配置文件
-import logger from "@/src/lib/utils/logger"  //  日志打印
-import { initPermissionsAndRoles, permissionHandler } from "@src/lib/rbac"  //  初始化系统权限&系统角色
-import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/src/lib/mongo/index" //  数据库连接
-import { initRouters } from "@/src/lib/router/router.init"  //  路由初始化
-import { startScript } from '@src/lib/script'    //  脚本自动执行
-import * as SessionService from '@src/lib/session' //  会话服务
-import { serializeUserCb, deserializeUserCb } from "@src/lib/auth/local"  //  Passport序列化/反序列化
+import "@/modules/user/user.model" // 优先编译用户表
+import config from '@/config' //  加载软件配置文件
+import logger from "@/lib/utils/logger"  //  日志打印
+import { initPermissionsAndRoles, permissionHandler } from "@/lib/rbac"  //  初始化系统权限&系统角色
+import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/lib/mongo/index" //  数据库连接
+import { initRouters } from "@/lib/router/router.init"  //  路由初始化
+import { startScript } from '@/lib/script'    //  脚本自动执行
+import * as SessionService from '@/lib/session' //  会话服务
+import { serializeUserCb, deserializeUserCb } from "@/lib/auth/local"  //  Passport序列化/反序列化
 
 import express from 'express'
 import multer from "multer"
@@ -21,7 +21,7 @@ import session from "express-session"
 import passport from "passport"
 import moment from "moment"
 import MongoStore from 'connect-mongo'
-import { initProcessEventEmitter } from "@/src/lib/process"
+import { initProcessEventEmitter } from "@/lib/process"
 
 // @ts-ignore
 const app: express.Express = new express()

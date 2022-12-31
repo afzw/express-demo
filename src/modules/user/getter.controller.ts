@@ -1,13 +1,13 @@
 import _ from "lodash";
 import { Request, Response } from "express";
-import * as SessionInfoDao from '@/src/components/sessionInfo/sessionInfo.dao'
-import { callAsync } from "@/src/lib/utils/callAsync";
-import * as UserDao from '@/src/modules/user/user.dao'
+import * as SessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
+import { callAsync } from "@/lib/utils/callAsync";
+import * as UserDao from '@/modules/user/user.dao'
 
 /**
  * 获取用户个人信息
  */
-export async function getProfile(req: Request & App.reqAddition, res: Response) {
+export async function getProfile(req: Request & Ctx.reqAddition, res: Response) {
   const [updateSessionInfoerr] = await callAsync(SessionInfoDao.updateTheActiveAt({ sessionId: req.sessionID }))
   if (updateSessionInfoerr) return res.status(500).send(`获取用户信息失败！更新会话信息失败！详情：${updateSessionInfoerr}`)
 
