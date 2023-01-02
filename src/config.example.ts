@@ -14,13 +14,13 @@ const config = {
 
   /* 数据存储 */
   session: {
-    name: 'ERM-sid',
-    secret: 'Secret Password For ERM',
+    name: 'ExpressDemo-sid',
+    secret: 'Secret Password For ExpressDemo',
     expireDays: 7,
     maxPerUser: 0
   },
   mongo: {
-    name: 'ERM',
+    name: 'ExpressDemo',
     host: '127.0.0.1',
     port: 27017,
     debug: false,
