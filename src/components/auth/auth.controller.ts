@@ -6,8 +6,8 @@ import utils from "@/lib/utils/common";
 import { callAsync } from "@/lib/utils/callAsync";
 import UserDao from "@/modules/user/user.dao";
 import { Request, Response } from "express";
-import { saveSessionInfo } from "@/lib/session";
 import * as sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
+import { SessionInfoProps } from "../sessionInfo/sessionInfo.model";
 
 /**
  * 登录
@@ -42,11 +42,15 @@ export async function signIn(req: Request, res: Response) {
     if (error) return res.status(500).send(`passport登录失败！详情：${error}`);
 
     //  记录sessionInfo
-    const [saveSessionErr, sessionInfo] = await callAsync(saveSessionInfo(req));
-    if (saveSessionErr)
-      return res
-        .status(500)
-        .send(`登录失败！记录session信息失败！详情：${saveSessionErr}`);
+    const SessionInfoProps: SessionInfoProps = {
+      sessionId: req.sessionID,
+      userId: req.user._id,
+      expireAt: req.session.cookie._expires,
+      ipAddress: req.ip,
+      userAgent: req.headers['user-agent'],
+    }
+    const [createSessionInfoErr, sessionInfo] = await callAsync(sessionInfoDao.create( SessionInfoProps))
+    if (createSessionInfoErr) console.log(`记录sessionInfo失败：${createSessionInfoErr}`)
 
     // @ts-ignore
     process.eventEmitter.emit("signIn", user, sessionInfo);

@@ -1,4 +1,4 @@
-import * as sessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
+import * as sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
 
 /**
  * 定期清理过期会话

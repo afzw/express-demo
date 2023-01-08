@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose'
 
-interface SessionInfoDoc {
+interface SessionInfoProps {
   _id?: Types.ObjectId
   sessionId?: string,
   userId?: Types.ObjectId
@@ -12,7 +12,7 @@ interface SessionInfoDoc {
   userAgent?: string
 }
 
-const sessionInfoSchema = new Schema<SessionInfoDoc>({
+const sessionInfoSchema = new Schema<SessionInfoProps>({
   sessionId: {
     type: String,
     required: true,
@@ -44,9 +44,9 @@ const sessionInfoSchema = new Schema<SessionInfoDoc>({
   userAgent: String
 })
 
-const SessionInfoModel = model<SessionInfoDoc>('sessionInfo', sessionInfoSchema)
+const SessionInfoModel = model<SessionInfoProps>('sessionInfo', sessionInfoSchema)
 
 export {
-  SessionInfoDoc,
+  SessionInfoProps,
   SessionInfoModel
 }
