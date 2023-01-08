@@ -3,7 +3,7 @@
  */
 import * as Auth from '@/components/auth/auth.controller'
 
-const publicRoutes: Route[] = [
+const publicRoutes: App.Route[] = [
   //  登录
   {
     path: "/sign-in",

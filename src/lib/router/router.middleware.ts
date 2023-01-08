@@ -7,7 +7,7 @@ import logger from "@/lib/utils/logger";
  * 限制API调用频率
  * 需要限制时启用。
  */
-export function validThreshold(route: Route) {
+export function validThreshold(route: App.Route) {
   if (!route.threshold)
     route.threshold = { total: 20, expire: 60 * 1000 } // 默认一分钟最多允许调用20次
 
@@ -30,7 +30,7 @@ export function validThreshold(route: Route) {
 /**
  * 检查路由权限
  */
-export function checkRoutePermission(req: Request & Ctx.reqAddition, res: Response, next: NextFunction) {
+export function checkRoutePermission(req: Request, res: Response, next: NextFunction) {
   const key = `${req.route.stack[0].method.toUpperCase()}:${req.route.path}`
   const route = routesMap.get(key)
   if (!route) return res.status(500).send({ error: 'route not found: ' + req.route.path })

@@ -7,7 +7,7 @@ import UserDao from '@/modules/user/user.dao'
 /**
  * 获取用户个人信息
  */
-export async function getProfile(req: Request & Ctx.reqAddition, res: Response) {
+export async function getProfile(req: Request, res: Response) {
   const [updateSessionInfoerr] = await callAsync(SessionInfoDao.updateTheActiveAt({ sessionId: req.sessionID }))
   if (updateSessionInfoerr) return res.status(500).send(`获取用户信息失败！更新会话信息失败！详情：${updateSessionInfoerr}`)
 

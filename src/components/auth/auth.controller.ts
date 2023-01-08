@@ -8,7 +8,6 @@ import UserDao from '@/modules/user/user.dao'
 import { Request, Response } from "express"
 import { saveSessionInfo } from "@/lib/session"
 import * as sessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
-import * as Rbac from "@/lib/rbac/index"
 
 //  注册表单字段
 const signUpFields = ['email', 'password', 'username', 'nickname']
@@ -84,7 +83,7 @@ export async function signOut(req: Request, res: Response) {
   const [err, session] = await callAsync(sessionInfoDao.findOneAndDelete({ sessionId: req.sessionID }))
   if (err) return console.log('sessionInfo销毁失败')
 
-  req.session.destroy((err) => {
+  req.session.destroy((err: any) => {
     if (err) console.log('session销毁失败')
   })
 
@@ -92,17 +91,6 @@ export async function signOut(req: Request, res: Response) {
   process.eventEmitter.emit('signOut', req.user, session)
 
   req.logout(() => { res.sendStatus(200) })
-}
-
-/**
- * 获取系统角色&权限
- */
-export function getRbacInfo(req: any, res: Response) {
-
-  return res.send({
-    roles: Rbac.getRoles(req.query.extended),
-    permissions: Rbac.getPermissions(req.query.extended)
-  })
 }
 
 /**

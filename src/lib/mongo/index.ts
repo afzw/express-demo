@@ -5,7 +5,7 @@ import logger from '@/lib/utils/logger'
 /**
  * 连接mongo数据库
  */
-export async function connectMongoDB(mongoConifg: Config["mongo"], cb: Function) {
+export async function connectMongoDB(mongoConifg: App.Config["mongo"], cb: Function) {
   const uri = getMongoUri(mongoConifg)
 
   logInfo(`开始连接 Mongo 数据库: ${uri.replace(/:.*@/, ':****@')}`)
@@ -33,7 +33,7 @@ export function disconnectMongoDB(cb: (error?: any) => void) {
   mongoose.disconnect(cb)
 }
 
-export function getMongoUri(conf: Config["mongo"]) {
+export function getMongoUri(conf: App.Config["mongo"]) {
   if (!conf.port) conf.port = 27017
   if (conf.uri) return conf.uri
   else if (conf.username && conf.password)

@@ -5,7 +5,7 @@
 import path from "path"
 import { Request, Response } from "express"
 
-const otherRoutes: Route[] = [
+const otherRoutes: App.Route[] = [
   //  捕获所有未匹配的路由
   {
     path: '/*',

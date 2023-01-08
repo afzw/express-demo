@@ -5,7 +5,8 @@ import path from "path"
 import "@/modules/user/user.model" // 优先编译用户表
 import config from '@/config' //  加载软件配置文件
 import logger from "@/lib/utils/logger"  //  日志打印
-import { initPermissionsAndRoles, permissionHandler } from "@/lib/rbac"  //  初始化系统权限&系统角色
+import { initRoles } from "@/loaders/rbac"
+import { permissionHandler } from "@/lib/rbac"  //  初始化系统权限&系统角色
 import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/lib/mongo/index" //  数据库连接
 import { initRouters } from "@/lib/router/router.init"  //  路由初始化
 import { startScript } from '@/lib/script'    //  脚本自动执行
@@ -59,7 +60,7 @@ function launchApp(options?: LaunchOptions, cb?: Function) {
   app.use(permissionHandler)
 
   /* 初始化系统权限和角色 */
-  initPermissionsAndRoles()
+  initRoles()
 
   /* 初始化路由 */
   initRouters(app)

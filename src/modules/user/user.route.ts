@@ -1,7 +1,7 @@
 import * as User from '@/modules/user/curd.controller'
 import * as UserGetter from '@/modules/user/getter.controller'
 
-const userRoutes: Route[] = [
+const userRoutes: App.Route[] = [
   //  新增用户
   {
     path: '/users',

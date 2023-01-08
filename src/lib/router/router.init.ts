@@ -33,7 +33,7 @@ export function initRouters(app: express.Express) {
  * @param routes 注册到路由对象的路由
  * @param defaultPermission 该路由对象上路由的默认permission值。
  */
-function applyRouters(router: express.Router, routes: Route[], defaultPermission = 'admin') {
+function applyRouters(router: express.Router, routes: App.Route[], defaultPermission = 'admin') {
   for (const route of routes) {
     //  路由重复校验
     const key = `${route.method}:${route.path}`
