@@ -7,6 +7,7 @@ import config from '@/config' //  加载软件配置文件
 import { initRoles, permissionHandler } from "@/loaders/rbac" //  初始化系统权限&系统角色
 import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/loaders/mongo" //  数据库连接
 import { initRouters } from "@/loaders/router/router.init"  //  路由初始化
+import { sessionExpireCheck } from "@/loaders/session" // session
 import { startScript } from '@/loaders/script'    //  脚本自动执行
 import { serializeUserCb, deserializeUserCb } from "@/loaders/auth/local"  //  Passport序列化/反序列化
 
@@ -73,6 +74,7 @@ function launchApp(options?: LaunchOptions, cb?: Function) {
     const server = app.listen(10240, () => {
       logger.info(`web服务器已启动，监听端口: ${(server.address() as any).port}`, { label: 'App' })
       startScript(path.join(__dirname, 'scripts'))  //  执行脚本
+      sessionExpireCheck() // 检查过期session
       if (cb) cb(server)
     })
   })
