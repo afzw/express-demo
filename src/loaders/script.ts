@@ -1,7 +1,7 @@
 import path from 'path'
 import { callAsync } from '@/lib/utils/callAsync'
 import logger from '@/lib/utils/logger'
-import { readdirp } from '@/lib/utils/fs/read'
+import { readdirp } from '@/lib/fs/read'
 import ScriptDao from '@/components/script/script.dao'
 
 /**

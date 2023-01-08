@@ -4,14 +4,14 @@ import path from "path"
 
 import "@/modules/user/user.model" // 优先编译用户表
 import config from '@/config' //  加载软件配置文件
+import { initRoles, permissionHandler } from "@/loaders/rbac" //  初始化系统权限&系统角色
+
 import logger from "@/lib/utils/logger"  //  日志打印
-import { initRoles } from "@/loaders/rbac"
-import { permissionHandler } from "@/lib/rbac"  //  初始化系统权限&系统角色
-import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/lib/mongo/index" //  数据库连接
-import { initRouters } from "@/lib/router/router.init"  //  路由初始化
-import { startScript } from '@/lib/script'    //  脚本自动执行
+import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/loaders/mongo" //  数据库连接
+import { initRouters } from "@/loaders/router/router.init"  //  路由初始化
+import { startScript } from '@/loaders/script'    //  脚本自动执行
 import * as SessionService from '@/lib/session' //  会话服务
-import { serializeUserCb, deserializeUserCb } from "@/lib/auth/local"  //  Passport序列化/反序列化
+import { serializeUserCb, deserializeUserCb } from "@/loaders/auth/local"  //  Passport序列化/反序列化
 
 import express from 'express'
 import multer from "multer"
@@ -75,7 +75,6 @@ function launchApp(options?: LaunchOptions, cb?: Function) {
     const server = app.listen(10240, () => {
       logger.info(`web服务器已启动，监听端口: ${(server.address() as any).port}`, { label: 'App' })
       startScript(path.join(__dirname, 'scripts'))  //  执行脚本
-      SessionService.sessionExpireCheck() //  检查过期会话
       if (cb) cb(server)
     })
   })

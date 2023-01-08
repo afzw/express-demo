@@ -1,8 +1,8 @@
 import express from 'express'
 import { checkRoutePermission } from './router.middleware'
-import publicRoutes from '@/lib/router/public.route'    //  公开路由
-import moduleRoutes from '@/lib/router/module.route'    //  业务路由
-import otherRoutes from '@/lib/router/other.route'      //  其他路由
+import publicRoutes from '@/loaders/router/public.route'    //  公开路由
+import moduleRoutes from '@/loaders/router/module.route'    //  业务路由
+import otherRoutes from '@/loaders/router/other.route'      //  其他路由
 
 //  路由字典
 export const routesMap = new Map()

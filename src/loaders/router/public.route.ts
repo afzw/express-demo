@@ -22,12 +22,6 @@ const publicRoutes: App.Route[] = [
     method: "POST",
     middlewares: [Auth.signOut]
   },
-  //  获取系统角色&权限
-  {
-    path: "/rbac",
-    method: "GET",
-    middlewares: [Auth.getRbacInfo]
-  },
   //  获取软件版本
   {
     path: "/VERSION",

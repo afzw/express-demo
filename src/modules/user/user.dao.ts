@@ -1,7 +1,7 @@
 import { FilterQuery, ProjectionType, QueryOptions, UpdateQuery } from "mongoose";
 import { UserModel } from "./user.model";
 import { UserDoc, UserProps } from "./user";
-import * as Curd from '@/lib/mongo/curd'
+import * as Curd from '@/lib/odm/curd'
 
 const UserDao = {
   /**
