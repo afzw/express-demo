@@ -6,8 +6,8 @@ import utils from "@/lib/utils/common";
 import { callAsync } from "@/lib/utils/callAsync";
 import UserDao from "@/modules/user/user.dao";
 import { Request, Response } from "express";
-import * as sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
-import { SessionInfoProps } from "../sessionInfo/sessionInfo.model";
+import sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
+import { SessionInfoProps } from "@/components/sessionInfo/sessionInfo";
 
 /**
  * 登录

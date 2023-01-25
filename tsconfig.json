@@ -18,7 +18,7 @@
     "composite": true,
     /*  if you are working with node.js or some environment that doesn't use a module bundler like webpack
         you will additionally need the npmjs.com/package/module-alias module：https://www.npmjs.com/package/module-alias */
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@test/*": ["test/*"]

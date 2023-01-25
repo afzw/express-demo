@@ -15,7 +15,7 @@ exports.start = async function start () {
     salt,
     password: utils.md5(salt + initPassword),
     nickname: '系统管理员',
-    roles: ['admin']
+    roles: ['admin', 'user']
   }
 
   return UserDao.findUserAndUpdate({ username: 'admin' }, adminDoc, { upsert: true, new: false })

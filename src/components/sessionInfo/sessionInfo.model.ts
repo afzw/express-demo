@@ -1,31 +1,20 @@
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model } from 'mongoose'
+import { SessionInfoProps } from '@/components/sessionInfo/sessionInfo'
 
-interface SessionInfoProps {
-  _id?: Types.ObjectId
-  sessionId?: string,
-  userId?: Types.ObjectId
-  createAt?: Date
-  activeAt?: Date
-  expireAt?: Date
-  sessionGroupId?: string
-  ipAddress?: string
-  userAgent?: string
-}
-
-const sessionInfoSchema = new Schema<SessionInfoProps>({
+export const sessionInfoSchema = new Schema<SessionInfoProps>({
   sessionId: {
     type: String,
     required: true,
+    index: true
+  },
+  sessionGroupId: {
+    type: String,
     index: true
   },
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
     index: true
-  },
-  createAt: {
-    type: Date,
-    default: Date.now
   },
   activeAt: {
     type: Date,
@@ -36,17 +25,10 @@ const sessionInfoSchema = new Schema<SessionInfoProps>({
     required: true,
     index: true
   },
-  sessionGroupId: {
-    type: String,
-    index: true
-  },
   ipAddress: String,
   userAgent: String
+}, {
+  timestamps: true
 })
 
-const SessionInfoModel = model<SessionInfoProps>('sessionInfo', sessionInfoSchema)
-
-export {
-  SessionInfoProps,
-  SessionInfoModel
-}
+export const SessionInfoModel = model<SessionInfoProps>('sessionInfo', sessionInfoSchema)

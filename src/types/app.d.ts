@@ -3,15 +3,13 @@
  */
 declare namespace App {
   /**
-   * 权限
-   */
-  type Permission = string
-  /**
    * 角色
    */
-  type Role = Permission[]
+  interface Role {
+    permissions: string[]
+  }
   /**
-   * 角色权限字典
+   * 角色字典
    */
   interface RolesMap {
     [roleName: string]: Role
@@ -26,6 +24,13 @@ declare namespace App {
     permission?: string,
     threshold?: any
     csrf?: boolean
+  }
+
+  /**
+   * 程序启动选项
+   */
+  interface LaunchOptions {
+    testing: boolean; // 启动程序 for testing ?
   }
 
   /**

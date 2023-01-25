@@ -2,6 +2,7 @@ require('module-alias/register')  //  路径别名
 
 import path from "path"
 
+// 程序启动相关
 import "@/modules/user/user.model" // 优先编译用户表
 import config from '@/config' //  加载软件配置文件
 import { initRoles, permissionHandler } from "@/loaders/rbac" //  初始化系统权限&系统角色
@@ -11,6 +12,7 @@ import { sessionExpireCheck } from "@/loaders/session" // session
 import { startScript } from '@/loaders/script'    //  脚本自动执行
 import { serializeUserCb, deserializeUserCb } from "@/loaders/auth/local"  //  Passport序列化/反序列化
 
+// 库
 import express from 'express'
 import multer from "multer"
 import morgan from 'morgan'
@@ -28,14 +30,10 @@ const app: express.Express = new express()
 app.set('x-powered-by', false)
 app.set('trust proxy', ['1', 'true'].includes(process.env.TRUST_PROXY))
 
-interface LaunchOptions {
-  testing: boolean; // 启动程序 for testing ?
-}
-
 /**
- * 启动程序
+ * 程序启动函数
  */
-function launchApp(options?: LaunchOptions, cb?: Function) {
+function launchApp(options?: App.LaunchOptions, cb?: Function) {
   /* 配置中间件（注意中间件顺序） */
   app.use(multer({ dest: config.uploadDir }).any())  // multer上传文件目录
   app.use(express.static(config.staticDir))  // 静态资源目录
@@ -81,7 +79,7 @@ function launchApp(options?: LaunchOptions, cb?: Function) {
 }
 
 /**
- * 结束程序
+ * 程序结束函数
  */
 function endApp(cb: (error?: any) => void): void {
   disconnectMongoDB(cb)
