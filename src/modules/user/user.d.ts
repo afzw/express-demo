@@ -53,13 +53,6 @@ export interface UserProps {
     updatedAt?: Date
 }
 
-export interface UserProfile extends UserProps {
-    /**
-     * 权限
-     */
-    permissions?: string[]
-}
-
 export type UserFilter = FilterQuery<UserProps>
 export type UserUpdate = UpdateQuery<UserProps>
 export type UserDoc = HydratedDocument<UserProps>

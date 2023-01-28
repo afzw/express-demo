@@ -2,6 +2,7 @@ import Curd from "@/lib/odm/curd"
 import { QueryOptions } from "mongoose"
 import { ItemDoc, ItemFilter, ItemProps, ItemUpdate } from "./item"
 import ItemModel from "./item.model"
+import mongodb from "mongodb";
 
 const ItemDao = {
     create: function (createDoc: ItemProps) {
@@ -36,7 +37,7 @@ const ItemDao = {
         return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).lean().exec()
     },
 
-    updateMany: function (filter: ItemFilter, updateDoc: ItemUpdate, options: QueryOptions) {
+    updateMany: function (filter: ItemFilter, updateDoc: ItemUpdate, options?: QueryOptions): Promise<mongodb.UpdateResult> {
         return Curd.updateMany(ItemModel, filter, updateDoc, options).exec()
     },
 
@@ -48,7 +49,7 @@ const ItemDao = {
         return Curd.findOneAndDelete(ItemModel, filter, options).lean().exec()
     },
 
-    deleteMany: function (filter: ItemFilter) {
+    deleteMany: function (filter: ItemFilter): Promise<mongodb.DeleteResult> {
         return Curd.deleteMany(ItemModel, filter).exec()
     },
 

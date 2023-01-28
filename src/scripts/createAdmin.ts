@@ -18,5 +18,5 @@ exports.start = async function start () {
     roles: ['admin', 'user']
   }
 
-  return UserDao.findUserAndUpdate({ username: 'admin' }, adminDoc, { upsert: true, new: false })
+  return UserDao.findOneDocAndUpdate({ username: 'admin' }, adminDoc, { upsert: true, new: false })
 }

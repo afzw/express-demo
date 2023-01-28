@@ -8,24 +8,32 @@ import UserDao from "@/modules/user/user.dao";
 import { Request, Response } from "express";
 import sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
 import { SessionInfoProps } from "@/components/sessionInfo/sessionInfo";
+import { UserFilter, UserProps } from "@/modules/user/user";
+import { getPermissionsByRoles } from "@/lib/rbac";
+import UserStore from "@/modules/user/user.store";
 
 /**
  * 登录
  */
-export async function signIn(req: Request, res: Response) {
+export async function signIn(req: Request, res: Response): Promise<Response> {
   const signInProfile = _.pick(req.body, "email", "password");
+
+  // 验证表单
   if (!signInProfile.email || !signInProfile.password)
     return res.status(400).send({ error: "邮箱或密码未填写" });
 
-  const [err, user] = await callAsync(
-    UserDao.findUserByFilter({
-      email: signInProfile.email,
-      deleted: { $ne: true },
-    })
-  );
+  // 查询用户
+  const findUserFilter: UserFilter = {
+    email: signInProfile.email,
+    deleted: { $ne: true }
+  }
+  const [err, user] = await callAsync<UserProps & { permissions?: string[] }>(
+    UserDao.findOneObjByFilter(findUserFilter)
+  )
   if (err) return res.status(500).send(`查询用户失败${err}`);
   if (!user) return res.status(401).send({ error: "邮箱或密码错误" });
 
+  // 密码验证
   const salt = user.salt;
   const enPass = utils.md5(salt + signInProfile.password);
   if (enPass !== user.password)
@@ -34,12 +42,12 @@ export async function signIn(req: Request, res: Response) {
   if (user.disabled) {
     req.logout(function (err: any) {
       if (err) console.log("登录失败，用户已禁用");
-      res.status(400).send({ error: "登录失败，用户已禁用" });
+      return res.status(400).send({ error: "登录失败，用户已禁用" });
     });
   }
 
   req.login(user, async (error: any) => {
-    if (error) return res.status(500).send(`passport登录失败！详情：${error}`);
+    if (error) return res.status(500).send(`登录失败 => ${error}`);
 
     //  记录sessionInfo
     const SessionInfoProps: SessionInfoProps = {
@@ -49,13 +57,17 @@ export async function signIn(req: Request, res: Response) {
       ipAddress: req.ip,
       userAgent: req.headers['user-agent'],
     }
-    const [createSessionInfoErr, sessionInfo] = await callAsync(sessionInfoDao.create( SessionInfoProps))
+    const [createSessionInfoErr, sessionInfo] = await callAsync(sessionInfoDao.create(SessionInfoProps))
     if (createSessionInfoErr) console.log(`记录sessionInfo失败：${createSessionInfoErr}`)
 
     // @ts-ignore
     process.eventEmitter.emit("signIn", user, sessionInfo);
 
-    res.sendStatus(200);
+    const permissions = getPermissionsByRoles(user.roles)
+    user.permissions = permissions
+    const profile = _.pick(user, UserStore.theProfileKeys())
+
+    res.json(profile);
   });
 }
 
@@ -102,7 +114,7 @@ export async function signUp(req: Request, res: Response) {
  */
 export async function signOut(req: Request, res: Response) {
   const [err, session] = await callAsync(
-    sessionInfoDao.findOneAndDelete({ sessionId: req.sessionID })
+    sessionInfoDao.findOneDocAndDelete({ sessionId: req.sessionID })
   );
   if (err) return console.log("sessionInfo销毁失败");
 

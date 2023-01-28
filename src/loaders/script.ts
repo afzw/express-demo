@@ -22,7 +22,7 @@ export async function startScript(scriptDir: string): Promise<void> {
     totalCount++
 
     //  查询脚本执行状态
-    const [queryScriptErr, script] = await callAsync(ScriptDao.findOneAndUpdate({ name }, { name }, { upsert: true, new: false }))
+    const [queryScriptErr, script] = await callAsync(ScriptDao.findOneDocAndUpdate({ name }, { name }, { upsert: true, new: false }))
     if (queryScriptErr) { console.log(`查询脚本执行状态失败：${queryScriptErr}`); break; }
     if (script) continue  //  脚本已执行，继续查询下一个脚本
 
@@ -41,7 +41,7 @@ export async function startScript(scriptDir: string): Promise<void> {
       duration: Date.now() - begin,
       message: execScriptErr ? execScriptErr.message || execScriptErr : null
     }
-    await ScriptDao.updateOne({ name }, update)
+    await ScriptDao.findOneDocAndUpdate({ name }, update)
   }
 
   logger.info(`脚本执行完成，共有${totalCount}个迁移脚本，已经执行过${totalCount - doingCount}个脚本，本次执行${doingCount}个脚本`, { label: 'Script' })

@@ -10,7 +10,7 @@ import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/loaders/mongo"
 import { initRouters } from "@/loaders/router/router.init"  //  路由初始化
 import { sessionExpireCheck } from "@/loaders/session" // session
 import { startScript } from '@/loaders/script'    //  脚本自动执行
-import { serializeUserCb, deserializeUserCb } from "@/loaders/auth/local"  //  Passport序列化/反序列化
+import { localSerialize, localDeserialize } from "@/loaders/auth/local/local.service"  //  Passport序列化/反序列化
 
 // 库
 import express from 'express'
@@ -52,8 +52,8 @@ function launchApp(options?: App.LaunchOptions, cb?: Function) {
   }))
   app.use(passport.initialize())
   app.use(passport.session())
-  passport.serializeUser(serializeUserCb)
-  passport.deserializeUser(deserializeUserCb)
+  passport.serializeUser(localSerialize)
+  passport.deserializeUser(localDeserialize)
   app.use(permissionHandler)
 
   /* 初始化系统权限和角色 */
