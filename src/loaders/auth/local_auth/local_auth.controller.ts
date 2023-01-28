@@ -11,12 +11,13 @@ import { SessionInfoProps } from "@/components/sessionInfo/sessionInfo";
 import { UserFilter, UserProps } from "@/modules/user/user";
 import { getPermissionsByRoles } from "@/lib/rbac";
 import UserStore from "@/modules/user/user.store";
+import LocalAuthStore from "./local_auth.store";
 
 /**
  * 登录
  */
 export async function signIn(req: Request, res: Response): Promise<Response> {
-  const signInProfile = _.pick(req.body, "email", "password");
+  const signInProfile = _.pick(req.body, LocalAuthStore.theSignInKeys());
 
   // 验证表单
   if (!signInProfile.email || !signInProfile.password)

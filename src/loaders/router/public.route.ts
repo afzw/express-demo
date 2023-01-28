@@ -1,7 +1,7 @@
 /**
  * @fileoverview 公共路由
  */
-import * as Auth from '@/loaders/auth/local/local.controller'
+import * as Auth from '@/loaders/auth/local_auth/local_auth.controller'
 
 const publicRoutes: App.Route[] = [
   //  登录

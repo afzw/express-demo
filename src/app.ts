@@ -10,7 +10,7 @@ import { connectMongoDB, disconnectMongoDB, getMongoUri } from "@/loaders/mongo"
 import { initRouters } from "@/loaders/router/router.init"  //  路由初始化
 import { sessionExpireCheck } from "@/loaders/session" // session
 import { startScript } from '@/loaders/script'    //  脚本自动执行
-import { localSerialize, localDeserialize } from "@/loaders/auth/local/local.service"  //  Passport序列化/反序列化
+import { localSerialize, localDeserialize } from "@/loaders/auth/local_auth/local_auth.service"  //  Passport序列化/反序列化
 
 // 库
 import express from 'express'
