@@ -89,12 +89,13 @@ export async function signUp(req: Request, res: Response) {
   const salt = utils.genRandom();
   const password = utils.md5(salt + signUpProfile.password);
 
-  const newUserDoc = {
+  const newUserDoc: UserProps = {
     password,
     salt,
     email: signUpProfile.email,
     username: signUpProfile.username,
     nickname: signUpProfile.nickname,
+    roles: ['user']
   };
 
   const [err, user] = await callAsync(UserDao.create(newUserDoc));
