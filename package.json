@@ -20,7 +20,7 @@
     "@test": "test/"
   },
   "lint-staged": {
-    "*.{js,css,md,ts}": "prettier --write"
+    "*.{js,ts,css,md}": "prettier --write"
   },
   "dependencies": {
     "axios": "^1.2.2",
