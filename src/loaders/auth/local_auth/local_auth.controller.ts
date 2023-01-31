@@ -9,7 +9,6 @@ import { Request, Response } from "express";
 import sessionInfoDao from "@/components/sessionInfo/sessionInfo.dao";
 import { SessionInfoProps } from "@/components/sessionInfo/sessionInfo";
 import { UserFilter, UserProps } from "@/modules/user/user";
-import { getPermissionsByRoles } from "@/lib/rbac";
 import UserStore from "@/modules/user/user.store";
 import LocalAuthStore from "./local_auth.store";
 
@@ -59,6 +58,7 @@ export async function signIn(req: Request, res: Response): Promise<Response> {
     const [createSessionInfoErr, sessionInfo] = await callAsync(sessionInfoDao.create(SessionInfoProps))
     if (createSessionInfoErr) console.log(`记录sessionInfo失败：${createSessionInfoErr}`)
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     process.eventEmitter.emit("signIn", user, sessionInfo);
 
@@ -101,6 +101,7 @@ export async function signUp(req: Request, res: Response) {
   const [err, user] = await callAsync(UserDao.create(newUserDoc));
   if (err) return res.status(500).send(`注册失败！详情：${err}`);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   process.eventEmitter.emit("signUp", user);
 
@@ -120,6 +121,7 @@ export async function signOut(req: Request, res: Response) {
     if (err) console.log("session销毁失败");
   });
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   process.eventEmitter.emit("signOut", req.user, session);
 
