@@ -1,21 +1,24 @@
 import { Schema, model } from 'mongoose'
 
-const itemSchema = new Schema({
+const itemSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     price: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true
     },
     ownerId: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+      type: Schema.Types.ObjectId,
+      ref: 'user'
     }
-}, {
+  },
+  {
     timestamps: true
-})
+  }
+)
 
 const ItemModel = model('item', itemSchema)
 

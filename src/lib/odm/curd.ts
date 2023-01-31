@@ -1,12 +1,5 @@
-import {
-  Model,
-  FilterQuery,
-  QueryOptions,
-  UpdateQuery,
-  HydratedDocument,
-  QueryWithHelpers
-} from "mongoose";
-import mongodb from "mongodb";
+import { Model, FilterQuery, QueryOptions, UpdateQuery, HydratedDocument, QueryWithHelpers } from 'mongoose'
+import mongodb from 'mongodb'
 
 const Curd = {
   /* -------------------- 新建 -------------------- */
@@ -26,11 +19,8 @@ const Curd = {
    * @param createDoc 新建文档对象
    * @returns 新建结果
    */
-  insertMany<D>(
-    model: Model<D>,
-    newDocs: D[]
-  ): Promise<Array<HydratedDocument<D>>> {
-    return model.insertMany(newDocs);
+  insertMany<D>(model: Model<D>, newDocs: D[]): Promise<Array<HydratedDocument<D>>> {
+    return model.insertMany(newDocs)
   },
 
   /* -------------------- 查询并更新 -------------------- */
@@ -49,7 +39,7 @@ const Curd = {
     update: UpdateQuery<D>,
     options?: QueryOptions
   ): QueryWithHelpers<HydratedDocument<D>, HydratedDocument<D>> {
-    return model.findOneAndUpdate(filter, update, options);
+    return model.findOneAndUpdate(filter, update, options)
   },
 
   /**
@@ -66,7 +56,7 @@ const Curd = {
     update: UpdateQuery<D>,
     options?: QueryOptions
   ): QueryWithHelpers<mongodb.UpdateResult, HydratedDocument<D>> {
-    return model.updateMany(filter, update, options);
+    return model.updateMany(filter, update, options)
   },
 
   /* -------------------- 查询并删除 -------------------- */
@@ -81,7 +71,7 @@ const Curd = {
     filter: FilterQuery<D>,
     options?: QueryOptions
   ): QueryWithHelpers<HydratedDocument<D>, HydratedDocument<D>> {
-    return model.findOneAndDelete(filter, options);
+    return model.findOneAndDelete(filter, options)
   },
 
   /**
@@ -90,11 +80,8 @@ const Curd = {
    * @param filter 筛选条件
    * @returns 删除操作结果
    */
-  deleteMany<D>(
-    model: Model<D>,
-    filter: FilterQuery<D>
-  ): QueryWithHelpers<mongodb.DeleteResult, HydratedDocument<D>> {
-    return model.deleteMany(filter);
+  deleteMany<D>(model: Model<D>, filter: FilterQuery<D>): QueryWithHelpers<mongodb.DeleteResult, HydratedDocument<D>> {
+    return model.deleteMany(filter)
   },
 
   /* -------------------- 查询 -------------------- */
@@ -112,7 +99,7 @@ const Curd = {
     projection?: unknown | null,
     options?: QueryOptions
   ): QueryWithHelpers<Array<HydratedDocument<D>>, HydratedDocument<D>> {
-    return model.find(filter, projection, options);
+    return model.find(filter, projection, options)
   },
 
   /**
@@ -129,7 +116,7 @@ const Curd = {
     projection?: unknown | null,
     options?: QueryOptions
   ): QueryWithHelpers<HydratedDocument<D>, HydratedDocument<D>> {
-    return model.findOne(filter, projection, options);
+    return model.findOne(filter, projection, options)
   },
 
   /**
@@ -138,11 +125,8 @@ const Curd = {
    * @param filter 筛选条件
    * @returns 文档数量
    */
-  countDocuments<D>(
-    model: Model<D>,
-    filter: FilterQuery<D>
-  ): QueryWithHelpers<number, HydratedDocument<D>> {
-    return model.countDocuments(filter);
+  countDocuments<D>(model: Model<D>, filter: FilterQuery<D>): QueryWithHelpers<number, HydratedDocument<D>> {
+    return model.countDocuments(filter)
   },
 
   /**
@@ -158,7 +142,7 @@ const Curd = {
     filed: string,
     filter: FilterQuery<D>
   ): QueryWithHelpers<Array<string>, HydratedDocument<D>> {
-    return model.distinct(filed as string, filter);
+    return model.distinct(filed as string, filter)
   }
 }
 

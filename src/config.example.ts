@@ -1,7 +1,7 @@
 /**
  * @fileOverview 程序配置文件--示例文件
  */
-import path from 'path';
+import path from 'path'
 
 const config = {
   /* 基本：web服务器 */
@@ -9,8 +9,8 @@ const config = {
   frontendUrl: '',
 
   /* 资源 */
-  staticDir: path.join(__dirname, 'assets'),   //  静态资源目录
-  uploadDir: path.join(__dirname, '..', 'uploads'),  //  文件默认上传目录（multer上传目录）
+  staticDir: path.join(__dirname, 'assets'), //  静态资源目录
+  uploadDir: path.join(__dirname, '..', 'uploads'), //  文件默认上传目录（multer上传目录）
 
   /* 数据存储 */
   session: {
@@ -23,7 +23,7 @@ const config = {
     name: 'ExpressDemo',
     host: '127.0.0.1',
     port: 27017,
-    debug: false,
+    debug: false
     // username: '',
     // password: '',
     //  uri: '',

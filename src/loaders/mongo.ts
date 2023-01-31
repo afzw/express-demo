@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
-import { callAsync } from "@/lib/utils/callAsync";
+import mongoose from 'mongoose'
+import { callAsync } from '@/lib/utils/callAsync'
 import logger from '@/lib/utils/logger'
 
 /**
  * 连接mongo数据库
  */
-export async function connectMongoDB(mongoConifg: App.Config["mongo"], cb: Function) {
+export async function connectMongoDB(mongoConifg: App.Config['mongo'], cb: Function) {
   const uri = getMongoUri(mongoConifg)
 
   logInfo(`开始连接 Mongo 数据库: ${uri.replace(/:.*@/, ':****@')}`)
@@ -13,8 +13,9 @@ export async function connectMongoDB(mongoConifg: App.Config["mongo"], cb: Funct
     // 尝试解决 topology was destroyed
     // 问题来源似乎是数据库连接长时间未使用导致数据库挂起
     const [err] = await callAsync(mongoose.connect(uri))
-    if (err) { logError(`连接 Mongo 数据库失败: ${err.message}`) }
-    else {
+    if (err) {
+      logError(`连接 Mongo 数据库失败: ${err.message}`)
+    } else {
       logger.setConnect(true)
       logInfo('连接 Mongo 数据库成功')
       break
@@ -33,13 +34,12 @@ export function disconnectMongoDB(cb: (error?: any) => void) {
   mongoose.disconnect(cb)
 }
 
-export function getMongoUri(conf: App.Config["mongo"]) {
+export function getMongoUri(conf: App.Config['mongo']) {
   if (!conf.port) conf.port = 27017
   if (conf.uri) return conf.uri
   else if (conf.username && conf.password)
     return `mongodb://${conf.username}:${conf.password}@${conf.host}:${conf.port}/${conf.name}?authSource=admin`
-  else
-    return `mongodb://${conf.host}:${conf.port}/${conf.name}`
+  else return `mongodb://${conf.host}:${conf.port}/${conf.name}`
 }
 
 function sleep(ms: number) {

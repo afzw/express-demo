@@ -1,43 +1,71 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
-import { ScriptDoc, ScriptFilter, ScriptProps, ScriptUpdate } from "./script";
-import { ScriptModel } from "./script.model"
-import Curd from "@/lib/odm/curd"
+import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose'
+import { ScriptDoc, ScriptFilter, ScriptProps, ScriptUpdate } from './script'
+import { ScriptModel } from './script.model'
+import Curd from '@/lib/odm/curd'
 import mongodb from 'mongodb'
 
 const ScriptDao = {
   create: function (createProps: ScriptProps) {
-    return Curd.create(ScriptModel, createProps);
+    return Curd.create(ScriptModel, createProps)
   },
 
   createMany: function (createDocs: ScriptProps[]) {
     return Curd.insertMany(ScriptModel, createDocs)
   },
 
-  findDocsByFilter: function (filter: ScriptFilter, projection?: unknown, options?: QueryOptions): Promise<ScriptDoc[]> {
+  findDocsByFilter: function (
+    filter: ScriptFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ScriptDoc[]> {
     return Curd.find(ScriptModel, filter, projection, options).exec()
   },
 
-  findObjsByFilter: function (filter: ScriptFilter, projection?: unknown, options?: QueryOptions): Promise<ScriptProps[]> {
+  findObjsByFilter: function (
+    filter: ScriptFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ScriptProps[]> {
     return Curd.find(ScriptModel, filter, projection, options).lean().exec()
   },
 
-  findOneDocByFilter: function (filter: ScriptFilter, projection?: unknown, options?: QueryOptions): Promise<ScriptDoc> {
+  findOneDocByFilter: function (
+    filter: ScriptFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ScriptDoc> {
     return Curd.findOne(ScriptModel, filter, projection, options).exec()
   },
 
-  findOneObjByFilter: function (filter: ScriptFilter, projection?: unknown, options?: QueryOptions): Promise<ScriptProps> {
+  findOneObjByFilter: function (
+    filter: ScriptFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ScriptProps> {
     return Curd.findOne(ScriptModel, filter, projection, options).lean().exec()
   },
 
-  findOneDocAndUpdate: function (filter: ScriptFilter, updateDoc: ScriptUpdate, options?: QueryOptions): Promise<ScriptDoc> {
+  findOneDocAndUpdate: function (
+    filter: ScriptFilter,
+    updateDoc: ScriptUpdate,
+    options?: QueryOptions
+  ): Promise<ScriptDoc> {
     return Curd.findOneAndUpdate(ScriptModel, filter, updateDoc, options).exec()
   },
 
-  findOneObjAndUpdate: function (filter: ScriptFilter, updateDoc: ScriptUpdate, options?: QueryOptions): Promise<ScriptProps> {
+  findOneObjAndUpdate: function (
+    filter: ScriptFilter,
+    updateDoc: ScriptUpdate,
+    options?: QueryOptions
+  ): Promise<ScriptProps> {
     return Curd.findOneAndUpdate(ScriptModel, filter, updateDoc, options).lean().exec()
   },
 
-  updateMany: function (filter: ScriptFilter, updateDoc: ScriptUpdate, options?: QueryOptions): Promise<mongodb.UpdateResult> {
+  updateMany: function (
+    filter: ScriptFilter,
+    updateDoc: ScriptUpdate,
+    options?: QueryOptions
+  ): Promise<mongodb.UpdateResult> {
     return Curd.updateMany(ScriptModel, filter, updateDoc, options).exec()
   },
 

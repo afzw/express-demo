@@ -19,9 +19,9 @@ declare namespace App {
    */
   interface Route {
     path: string
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-    middlewares?: any[],
-    permission?: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+    middlewares?: any[]
+    permission?: string
     threshold?: any
     csrf?: boolean
   }
@@ -30,7 +30,7 @@ declare namespace App {
    * 程序启动选项
    */
   interface LaunchOptions {
-    testing: boolean; // 启动程序 for testing ?
+    testing: boolean // 启动程序 for testing ?
   }
 
   /**
@@ -38,11 +38,11 @@ declare namespace App {
    */
   interface Config {
     mongo: {
-      name: string,
-      username?: string,
-      password?: string,
-      host: string,
-      port: number,
+      name: string
+      username?: string
+      password?: string
+      host: string
+      port: number
       debug: boolean
       uri?: string
     }

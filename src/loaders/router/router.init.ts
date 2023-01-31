@@ -1,8 +1,8 @@
 import express from 'express'
 import { checkRoutePermission } from './router.middleware'
-import publicRoutes from '@/loaders/router/public.route'    //  公开路由
-import moduleRoutes from '@/loaders/router/module.route'    //  业务路由
-import otherRoutes from '@/loaders/router/other.route'      //  其他路由
+import publicRoutes from '@/loaders/router/public.route' //  公开路由
+import moduleRoutes from '@/loaders/router/module.route' //  业务路由
+import otherRoutes from '@/loaders/router/other.route' //  其他路由
 
 //  路由字典
 export const routesMap = new Map()
@@ -14,17 +14,17 @@ export function initRouters(app: express.Express) {
   //  监听公开路由
   const publicRouter = express.Router()
   applyRouters(publicRouter, publicRoutes, 'public')
-  app.use("/", publicRouter)
+  app.use('/', publicRouter)
 
   //  监听业务路由
   const moduleRouter = express.Router()
   applyRouters(moduleRouter, moduleRoutes, 'admin')
-  app.use("/", moduleRouter)
+  app.use('/', moduleRouter)
 
   //  监听捕获其他路由
   const otherRouter = express.Router()
   applyRouters(otherRouter, otherRoutes, 'public')
-  app.use("/", otherRouter)
+  app.use('/', otherRouter)
 }
 
 /**
@@ -44,7 +44,7 @@ function applyRouters(router: express.Router, routes: App.Route[], defaultPermis
 
     //  路由添加前置中间件
     const middlewares: any[] = []
-    middlewares.push(checkRoutePermission)  // 校验路由权限
+    middlewares.push(checkRoutePermission) // 校验路由权限
 
     // 路由自定义中间件
     if (route.middlewares) Array.prototype.push.apply(middlewares, route.middlewares)

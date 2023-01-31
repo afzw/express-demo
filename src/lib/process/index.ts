@@ -1,4 +1,4 @@
-import events from "events"
+import events from 'events'
 
 /**
  * 为程序进程设置一个事件发射器，可用于监听程序事件并与其他系统交互
@@ -14,7 +14,7 @@ export function initProcessEventEmitter() {
   })
 
   // @ts-ignore
-  process.eventEmitter.on('signUp', (user) => {
+  process.eventEmitter.on('signUp', user => {
     console.log(`欢迎新用户${user.username}`)
   })
 

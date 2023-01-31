@@ -1,7 +1,7 @@
 {
   "ts-node": {
-    "transpileOnly": true,  //  ts-node不进行类型检查，加快速度
-    "files": true, //  使 ts-node 识别 tsconfig.json 的 files, include or exclude 配置
+    "transpileOnly": true, //  ts-node不进行类型检查，加快速度
+    "files": true //  使 ts-node 识别 tsconfig.json 的 files, include or exclude 配置
   },
   "compilerOptions": {
     "outDir": "dist",

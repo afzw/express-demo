@@ -3,12 +3,9 @@
  */
 declare namespace Express {
   interface Request {
-    user?: import("@/modules/user/user").UserProps;
-    hasPermission(permission: string): boolean;
-    logIn(
-      user: import("@/modules/user/user").UserProps,
-      done: (err: unknown) => void
-    ): void;
-    session: any;
+    user?: import('@/modules/user/user').UserProps
+    hasPermission(permission: string): boolean
+    logIn(user: import('@/modules/user/user').UserProps, done: (err: unknown) => void): void
+    session: any
   }
 }

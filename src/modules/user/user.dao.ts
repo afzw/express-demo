@@ -1,6 +1,6 @@
-import { QueryOptions } from "mongoose";
-import { UserModel } from "./user.model";
-import { UserDoc, UserFilter, UserProps, UserUpdate } from "./user";
+import { QueryOptions } from 'mongoose'
+import { UserModel } from './user.model'
+import { UserDoc, UserFilter, UserProps, UserUpdate } from './user'
 import Curd from '@/lib/odm/curd'
 
 const UserDao = {
@@ -37,7 +37,11 @@ const UserDao = {
     return Curd.findOneAndUpdate(UserModel, filter, updateDoc, options).exec()
   },
 
-  findOneObjAndUpdate: function (filter: UserFilter, updateDoc: UserUpdate, options?: QueryOptions): Promise<UserProps> {
+  findOneObjAndUpdate: function (
+    filter: UserFilter,
+    updateDoc: UserUpdate,
+    options?: QueryOptions
+  ): Promise<UserProps> {
     return Curd.findOneAndUpdate(UserModel, filter, updateDoc, options).lean().exec()
   },
 

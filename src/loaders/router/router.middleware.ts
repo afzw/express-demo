@@ -1,18 +1,16 @@
-import _ from "lodash"
-import { Request, Response, NextFunction } from "express"
-import { routesMap } from "./router.init";
-import logger from "@/lib/utils/logger";
+import _ from 'lodash'
+import { Request, Response, NextFunction } from 'express'
+import { routesMap } from './router.init'
+import logger from '@/lib/utils/logger'
 
 /**
  * 限制API调用频率
  * 需要限制时启用。
  */
 export function validThreshold(route: App.Route) {
-  if (!route.threshold)
-    route.threshold = { total: 20, expire: 60 * 1000 } // 默认一分钟最多允许调用20次
+  if (!route.threshold) route.threshold = { total: 20, expire: 60 * 1000 } // 默认一分钟最多允许调用20次
 
-  if (!_.isFunction(route.threshold.lookup))
-    route.threshold.lookup = (req: any) => [req.path, req.user?._id || req.ip]
+  if (!_.isFunction(route.threshold.lookup)) route.threshold.lookup = (req: any) => [req.path, req.user?._id || req.ip]
 
   if (route.threshold.disable) {
     route.threshold.onRateLimited = function (req: Request, res: Response, next: NextFunction) {
@@ -20,7 +18,7 @@ export function validThreshold(route: App.Route) {
     }
   } else {
     route.threshold.onRateLimited = function (req: Request, res: Response, next: NextFunction) {
-      res.status(429).send({ error: "您的操作过于频繁，请稍后再试！" })
+      res.status(429).send({ error: '您的操作过于频繁，请稍后再试！' })
     }
   }
 
@@ -37,8 +35,7 @@ export function checkRoutePermission(req: Request, res: Response, next: NextFunc
 
   //  检查用户是否被禁用或删除
   if (route.permission !== 'public')
-    if (req.user?.disabled || req.user?.deleted)
-      return res.status(403).send({ error: '账号非法！' })
+    if (req.user?.disabled || req.user?.deleted) return res.status(403).send({ error: '账号非法！' })
 
   //  检查访问权限
   let hasPermission = false

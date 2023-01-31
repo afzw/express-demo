@@ -1,4 +1,4 @@
-import { __roles } from "@/loaders/rbac"
+import { __roles } from '@/loaders/rbac'
 
 /**
  * 根据角色获取权限
@@ -6,14 +6,14 @@ import { __roles } from "@/loaders/rbac"
  * @returns 权限数组
  */
 export function getPermissionsByRoles(roleNames: string[]): string[] {
-    const permissions = []
+  const permissions = []
 
-    for (const role in __roles) {
-        if (roleNames.includes(role)) {
-            permissions.push(...__roles[role]['permissions'])
-        }
+  for (const role in __roles) {
+    if (roleNames.includes(role)) {
+      permissions.push(...__roles[role]['permissions'])
     }
-    const result = Array.from(new Set(...permissions))
+  }
+  const result = Array.from(new Set(...permissions))
 
-    return result
+  return result
 }

@@ -24,12 +24,12 @@ class Logger {
     [7, ['Debug', '调试', '\x1B[1m']]
   ])
 
-  constructor () {
+  constructor() {
     this._ipAddr = this.getIpAddr()
   }
 
-  setConnect (isconnect: boolean) {
-    return this._connected = isconnect
+  setConnect(isconnect: boolean) {
+    return (this._connected = isconnect)
   }
 
   /**
@@ -39,7 +39,7 @@ class Logger {
    * @param message 日志信息
    * @param options 可选项
    */
-  print (level: number, message: any, options: Options = {}) {
+  print(level: number, message: any, options: Options = {}) {
     if (!message) return
 
     const timestamp = moment().format('YYYY/MM/DD HH:mm:ss')
@@ -48,46 +48,50 @@ class Logger {
     if (message.message) message = message.message
 
     if (level < 7 || process.env.NODE_ENV === 'dev') {
-      console.log(`\x1B[34m【${this._prefix}】\x1B[0m[${this.levelMap.get(level)[2]}${this.levelMap.get(level)[0]}\x1B[0m] {${timestamp}} ${tags ? `<${tags}>` : ``}: ${message}`)
+      console.log(
+        `\x1B[34m【${this._prefix}】\x1B[0m[${this.levelMap.get(level)[2]}${
+          this.levelMap.get(level)[0]
+        }\x1B[0m] {${timestamp}} ${tags ? `<${tags}>` : ``}: ${message}`
+      )
     }
   }
 
-  debug (message: any, options?: Options) {
+  debug(message: any, options?: Options) {
     this.print(7, message, options)
   }
 
-  info (message: any, options?: Options) {
+  info(message: any, options?: Options) {
     this.print(6, message, options)
   }
 
-  notice (message: any, options?: Options) {
+  notice(message: any, options?: Options) {
     this.print(5, message, options)
   }
 
-  warning (message: any, options?: Options) {
+  warning(message: any, options?: Options) {
     this.print(4, message, options)
   }
 
-  error (message: any, options?: Options) {
+  error(message: any, options?: Options) {
     this.print(3, message, options)
   }
 
-  critical (message: any, options?: Options) {
+  critical(message: any, options?: Options) {
     this.print(2, message, options)
   }
 
-  alert (message: any, options?: Options) {
+  alert(message: any, options?: Options) {
     this.print(1, message, options)
   }
 
-  fatal (message: any, options?: Options) {
+  fatal(message: any, options?: Options) {
     this.print(0, message, options)
   }
 
   /**
    * ### 获取ip地址
    */
-  getIpAddr () {
+  getIpAddr() {
     let ipv6 = ''
     const networkInterfaces = os.networkInterfaces()
     for (const key in networkInterfaces) {

@@ -8,13 +8,13 @@
  * 除了系统级别的角色和权限，还可能有业务角色和权限。
  * 推荐使用中间件函数的方式去判断业务角色和权限。
  */
-import _ from "lodash";
-import { Request, Response, NextFunction } from "express";
+import _ from 'lodash'
+import { Request, Response, NextFunction } from 'express'
 
 /**
  * 全局变量——系统角色
  */
-const __roles: App.RolesMap = Object.create(null);
+const __roles: App.RolesMap = Object.create(null)
 __roles.anon = { permissions: ['anon'] }
 __roles.user = { permissions: ['user'] }
 __roles.admin = { permissions: ['admin', 'user'] }
@@ -25,7 +25,7 @@ __roles.admin = { permissions: ['admin', 'user'] }
  */
 function initRoles() {
   for (const roleName in __roles) {
-    __roles[roleName]['permissions'].unshift("public");
+    __roles[roleName]['permissions'].unshift('public')
   }
 }
 
@@ -35,28 +35,24 @@ function initRoles() {
  * @param permName 权限名称
  */
 function hasPermission(roleName: string, permName: string) {
-  if (roleName === "admin") return true;
-  if (__roles[roleName]['permissions'].includes(permName)) return true;
+  if (roleName === 'admin') return true
+  if (__roles[roleName]['permissions'].includes(permName)) return true
 
-  return false;
+  return false
 }
 
 /**
  * Express自定义中间件：权限校验器
  */
-export function permissionHandler(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export function permissionHandler(req: Request, res: Response, next: NextFunction) {
   req.hasPermission = (permission: string) => {
-    const roles = req.user?.roles || ["anon"];
+    const roles = req.user?.roles || ['anon']
     for (const role of roles) {
-      if (hasPermission(role, permission)) return true;
+      if (hasPermission(role, permission)) return true
     }
-    return false;
-  };
-  next();
+    return false
+  }
+  next()
 }
 
-export { __roles, initRoles };
+export { __roles, initRoles }

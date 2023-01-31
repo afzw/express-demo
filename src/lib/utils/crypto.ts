@@ -5,7 +5,7 @@ import moment from 'moment'
  * 生成24位密钥
  */
 export function generate24BitsKey(): string {
-  return crypto.randomBytes(100).toString('base64').replace(/[+/]/g, '').substring(0, 24);
+  return crypto.randomBytes(100).toString('base64').replace(/[+/]/g, '').substring(0, 24)
 }
 
 /**
