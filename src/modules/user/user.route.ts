@@ -16,8 +16,6 @@ const userRoutes: App.Route[] = [
     middlewares: [UserGetter.getProfile],
     permission: 'user'
   }
-
-
 ]
 
 export default userRoutes
