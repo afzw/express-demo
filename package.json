@@ -42,6 +42,8 @@
     "redis": "^4.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "@faker-js/faker": "^7.6.0",
     "@types/body-parser": "^1.19.2",
     "@types/compression": "^1.7.2",
