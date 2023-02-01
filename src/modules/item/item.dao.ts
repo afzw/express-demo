@@ -13,27 +13,27 @@ const ItemDao = {
     return Curd.insertMany(ItemModel, createDocs)
   },
 
-  findDocsByFilter: function (filter: ItemFilter, projection: unknown, options: QueryOptions): Promise<ItemDoc[]> {
+  findDocsByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc[]> {
     return Curd.find(ItemModel, filter, projection, options).exec()
   },
 
-  findObjsByFilter: function (filter: ItemFilter, projection: unknown, options: QueryOptions): Promise<ItemProps[]> {
+  findObjsByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemProps[]> {
     return Curd.find(ItemModel, filter, projection, options).lean().exec()
   },
 
-  findOneDocByFilter: function (filter: ItemFilter, projection: unknown, options: QueryOptions): Promise<ItemDoc> {
+  findOneDocByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc> {
     return Curd.findOne(ItemModel, filter, projection, options).exec()
   },
 
-  findOneObjByFilter: function (filter: ItemFilter, projection: unknown, options: QueryOptions): Promise<ItemProps> {
+  findOneObjByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemProps> {
     return Curd.findOne(ItemModel, filter, projection, options).lean().exec()
   },
 
-  findOneDocAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options: QueryOptions): Promise<ItemDoc> {
+  findOneDocAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options?: QueryOptions): Promise<ItemDoc> {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).exec()
   },
 
-  findOneObjAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options: QueryOptions): Promise<ItemProps> {
+  findOneObjAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options?: QueryOptions): Promise<ItemProps> {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).lean().exec()
   },
 
@@ -45,11 +45,11 @@ const ItemDao = {
     return Curd.updateMany(ItemModel, filter, updateDoc, options).exec()
   },
 
-  findOneDocAndDelete: function (filter: ItemFilter, options: QueryOptions) {
+  findOneDocAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ItemModel, filter, options).exec()
   },
 
-  findOneObjAndDelete: function (filter: ItemFilter, options: QueryOptions) {
+  findOneObjAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ItemModel, filter, options).lean().exec()
   },
 
