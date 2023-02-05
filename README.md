@@ -8,7 +8,7 @@
 
 ```sh
 # 在项目根目录执行以下命令：
-cp src/config.example.ts src/config.ts
+cp src/config/config.example.ts src/config/config.ts
 ```
 
 2. 项目依赖安装

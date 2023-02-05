@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { SessionInfoProps } from '@/components/sessionInfo/sessionInfo'
+import { SessionInfoProps } from '@/modules/sessionInfo/sessionInfo'
 
 export const sessionInfoSchema = new Schema<SessionInfoProps>(
   {

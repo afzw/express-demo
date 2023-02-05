@@ -1,11 +1,11 @@
 import { QueryOptions } from 'mongoose'
-import { SessionInfoModel } from '@/components/sessionInfo/sessionInfo.model'
+import { SessionInfoModel } from '@/modules/sessionInfo/sessionInfo.model'
 import {
   SessionInfoDoc,
   SessionInfoFilter,
   SessionInfoProps,
   SessionInfoUpdate
-} from '@/components/sessionInfo/sessionInfo'
+} from '@/modules/sessionInfo/sessionInfo'
 import Curd from '@/lib/odm/curd'
 import mongodb from 'mongodb'
 

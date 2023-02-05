@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { Request, Response } from 'express'
-import SessionInfoDao from '@/components/sessionInfo/sessionInfo.dao'
+import SessionInfoDao from '@/modules/sessionInfo/sessionInfo.dao'
 import { callAsync } from '@/lib/utils/callAsync'
 import UserDao from '@/modules/user/user.dao'
 import { __roles } from '@/loaders/rbac'

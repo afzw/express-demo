@@ -6,7 +6,7 @@ import { AddressInfo } from 'node:net'
 
 // 程序启动相关
 import '@/modules/user/user.model' // 优先编译用户表
-import config from '@/config' //  加载软件配置文件
+import config from '@/config/config' //  加载软件配置文件
 import { initRoles, permissionHandler } from '@/loaders/rbac' //  初始化系统权限&系统角色
 import { connectMongoDB, disconnectMongoDB, getMongoUri } from '@/loaders/mongo' //  数据库连接
 import { initRouters } from '@/loaders/router/router.init' //  路由初始化
