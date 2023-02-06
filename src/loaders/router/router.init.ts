@@ -55,6 +55,7 @@ function applyRouters(router: express.Router, routes: App.Route[], defaultPermis
       switch (route.method.toUpperCase()) {
         case 'GET':
           router.get.apply(router, middlewares)
+          break
         case 'POST':
           router.post.apply(router, middlewares)
           break
