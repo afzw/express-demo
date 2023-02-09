@@ -1,6 +1,6 @@
-import { loadMongoDB } from './mongo'
 import config from '@/config/config'
 import express from 'express'
+import loadMongoDB from './mongo'
 import loadExpress from './express'
 import loadRbac from './rbac'
 import loadRouters from './router'
