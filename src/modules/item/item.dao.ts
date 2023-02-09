@@ -1,6 +1,6 @@
 import Curd from '@/lib/odm/curd'
 import { QueryOptions } from 'mongoose'
-import { ItemDoc, ItemFilter, ItemProps, ItemUpdate } from './item'
+import { ItemDoc, ItemDocPojo, ItemFilter, ItemProps, ItemUpdate } from './item'
 import ItemModel from './item.model'
 import mongodb from 'mongodb'
 
@@ -17,7 +17,11 @@ const ItemDao = {
     return Curd.find(ItemModel, filter, projection, options).exec()
   },
 
-  findObjsByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemProps[]> {
+  findPojosByFilter: function (
+    filter: ItemFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ItemDocPojo[]> {
     return Curd.find(ItemModel, filter, projection, options).lean().exec()
   },
 
@@ -25,7 +29,11 @@ const ItemDao = {
     return Curd.findOne(ItemModel, filter, projection, options).exec()
   },
 
-  findOneObjByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemProps> {
+  findOnePojoByFilter: function (
+    filter: ItemFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<ItemDocPojo> {
     return Curd.findOne(ItemModel, filter, projection, options).lean().exec()
   },
 
@@ -33,7 +41,11 @@ const ItemDao = {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).exec()
   },
 
-  findOneObjAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options?: QueryOptions): Promise<ItemProps> {
+  findOnePojoAndUpdate: function (
+    filter: ItemFilter,
+    updateDoc: ItemUpdate,
+    options?: QueryOptions
+  ): Promise<ItemDocPojo> {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).lean().exec()
   },
 
@@ -49,7 +61,7 @@ const ItemDao = {
     return Curd.findOneAndDelete(ItemModel, filter, options).exec()
   },
 
-  findOneObjAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
+  findOnePojoAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ItemModel, filter, options).lean().exec()
   },
 
@@ -57,7 +69,7 @@ const ItemDao = {
     return Curd.deleteMany(ItemModel, filter).exec()
   },
 
-  count: function (filter: ItemFilter) {
+  countDocuments: function (filter: ItemFilter) {
     return Curd.countDocuments(ItemModel, filter).exec()
   },
 

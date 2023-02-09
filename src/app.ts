@@ -15,7 +15,7 @@ import { startScript } from '@/loaders/script' //  脚本自动执行
 import { localSerialize, localDeserialize } from '@/loaders/auth/local_auth/local_auth.service' //  Passport序列化/反序列化
 
 // 库
-import express from 'express'
+import express, { Request, Response } from 'express'
 import multer from 'multer'
 import morgan from 'morgan'
 import compression from 'compression'
@@ -67,6 +67,13 @@ function launchApp(options?: App.LaunchOptions, cb?: (server: http.Server) => vo
   /* 初始化路由 */
   initRouters(app)
 
+  /**
+   * 路由最末端的错误捕获
+   */
+  app.use(function (err: any, req: Request, res: Response) {
+    return res.status(500).json(`系统出现未知错误，请联系系统管理员！ => ${err}`)
+  })
+
   /* 连接数据库 */
   connectMongoDB(config.mongo, (err: unknown) => {
     if (err) {
@@ -74,10 +81,10 @@ function launchApp(options?: App.LaunchOptions, cb?: (server: http.Server) => vo
       process.exit(1)
     }
     //  监听端口，服务启动
-    const server = app.listen(10240, () => {
-      logger.info(`web服务器已启动，监听端口: ${(server.address() as AddressInfo).port}`, { label: 'App' })
-      startScript(path.join(__dirname, 'scripts')) //  执行脚本
+    const server = app.listen(config.port, async () => {
       sessionExpireCheck() // 检查过期session
+      await startScript(path.join(__dirname, 'scripts')) //  执行脚本
+      logger.info(`web服务器已启动，监听端口: ${(server.address() as AddressInfo).port}`, { label: 'App' })
       if (cb) cb(server)
     })
   })
