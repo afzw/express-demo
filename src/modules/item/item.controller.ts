@@ -1,13 +1,16 @@
 import _ from 'lodash'
 import callAsync from '@/lib/utils/callAsync'
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import ItemCurdService from '@/modules/item/curd.service'
 import ItemStore from '@/modules/item/item.store'
 import { ItemFilter } from '@/modules/item/item'
 
 /** 新建item */
-export async function create(req: Request, res: Response) {
+export async function create(req: Request, res: Response, next: NextFunction) {
   const createProps = _.pick(req.body, ItemStore.theCreateKeys())
+
+  // const err = new Error(`asdasssss`)
+  // next(err)
 
   const [errCreate, newItem] = await callAsync(ItemCurdService.createItem(createProps))
   if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
@@ -16,7 +19,7 @@ export async function create(req: Request, res: Response) {
 }
 
 /** 查询items */
-export async function search(req: Request, res: Response) {
+export async function search(req: Request, res: Response, next: NextFunction) {
   const { name, price, ownerId } = req.query
 
   const filter: ItemFilter = {}

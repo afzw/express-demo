@@ -1,18 +1,15 @@
-/**
- * 所有业务路由
- */
 import userRoutes from '@/modules/user/user.route'
 import ItemRoutes from '@/modules/item/item.route'
 
-//  所有的业务路由
-const moduleRoutes: App.Route[] = []
+/** 业务路由 */
+const __moduleRoutes: App.Route[] = []
 function addRoutes(routes: App.Route[]) {
   for (const route of routes) {
-    moduleRoutes.push(route)
+    __moduleRoutes.push(route)
   }
 }
 
 addRoutes(userRoutes)
 addRoutes(ItemRoutes)
 
-export default moduleRoutes
+export default __moduleRoutes

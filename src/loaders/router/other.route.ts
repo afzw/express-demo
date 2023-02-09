@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import path from 'path'
 
 /** 其他路由 */
-const otherRoutes: App.Route[] = [
+const __otherRoutes: App.Route[] = [
   /** 访问服务器 */
   {
     path: '/',
@@ -25,4 +25,4 @@ const otherRoutes: App.Route[] = [
   }
 ]
 
-export default otherRoutes
+export default __otherRoutes

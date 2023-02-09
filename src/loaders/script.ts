@@ -7,7 +7,7 @@ import ScriptDao from '@/modules/script/script.dao'
 /**
  * 执行脚本
  */
-export async function startScript(scriptDir: string): Promise<void> {
+export async function executScripts(scriptDir: string): Promise<void> {
   if (!scriptDir) return
 
   let totalCount = 0
@@ -34,6 +34,7 @@ export async function startScript(scriptDir: string): Promise<void> {
 
     //  脚本未执行，执行脚本
     console.log(`开始执行脚本${name}`)
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const _script = require(`${scriptDir}/${name}`)
     const begin = Date.now()
     const [execScriptErr] = await callAsync(_script.start())

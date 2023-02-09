@@ -1,57 +1,33 @@
-import _ from 'lodash'
 import { Request, Response, NextFunction } from 'express'
-import { routesMap } from './router.init'
+import { routesMap } from '.'
 import logger from '@/lib/utils/logger'
 
 /**
- * 限制API调用频率
- * 需要限制时启用。
+ * 路由校验器
  */
-export function validThreshold(route: App.Route) {
-  if (!route.threshold) route.threshold = { total: 20, expire: 60 * 1000 } // 默认一分钟最多允许调用20次
-
-  if (!_.isFunction(route.threshold.lookup)) route.threshold.lookup = (req: any) => [req.path, req.user?._id || req.ip]
-
-  if (route.threshold.disable) {
-    route.threshold.onRateLimited = function (req: Request, res: Response, next: NextFunction) {
-      next()
-    }
-  } else {
-    route.threshold.onRateLimited = function (req: Request, res: Response, next: NextFunction) {
-      res.status(429).send({ error: '您的操作过于频繁，请稍后再试！' })
-    }
-  }
-
-  return route.threshold
-}
-
-/**
- * 检查路由权限
- */
-export function checkRoutePermission(req: Request, res: Response, next: NextFunction) {
+export function routeValidator(req: Request, res: Response, next: NextFunction) {
+  // 校验路由存在性
   const key = `${req.route.stack[0].method.toUpperCase()}:${req.route.path}`
   const route = routesMap.get(key)
   if (!route) return res.status(500).send({ error: 'route not found: ' + req.route.path })
 
-  //  检查用户是否被禁用或删除
+  //  校验路由权限
   if (route.permission !== 'public')
     if (req.user?.disabled || req.user?.deleted) return res.status(403).send({ error: '账号非法！' })
 
-  //  检查访问权限
-  let hasPermission = false
+  let pass = false
   if (route.permission instanceof Array) {
     for (const perm of route.permission) {
       if (req.hasPermission(perm)) {
-        hasPermission = true
+        pass = true
         break
       }
     }
   } else {
-    hasPermission = req.hasPermission(route.permission)
+    pass = req.hasPermission(route.permission)
   }
 
-  //  接口权限校验失败
-  if (!hasPermission) {
+  if (!pass) {
     if (!req.user) {
       return res.status(403).send({ code: 'LoginRequired', error: '请您先登录！' })
     } else if (route.permission === 'anon') {

@@ -1,14 +1,16 @@
 import mongoose from 'mongoose'
-import { callAsync } from '@/lib/utils/callAsync'
+import callAsync from '@/lib/utils/callAsync'
 import logger from '@/lib/utils/logger'
 
 /**
  * 连接mongo数据库
  */
-export async function connectMongoDB(mongoConifg: App.Config['mongo'], cb: Function) {
+export async function loadMongoDB(mongoConifg: App.Config['mongo']) {
   const uri = getMongoUri(mongoConifg)
 
   logInfo(`开始连接 Mongo 数据库: ${uri.replace(/:.*@/, ':****@')}`)
+
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     // 尝试解决 topology was destroyed
     // 问题来源似乎是数据库连接长时间未使用导致数据库挂起
@@ -27,11 +29,6 @@ export async function connectMongoDB(mongoConifg: App.Config['mongo'], cb: Funct
   }
 
   listenEvent()
-  if (cb) cb()
-}
-
-export function disconnectMongoDB(cb: (error?: any) => void) {
-  mongoose.disconnect(cb)
 }
 
 export function getMongoUri(conf: App.Config['mongo']) {

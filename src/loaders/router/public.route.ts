@@ -1,9 +1,7 @@
-/**
- * @fileoverview 公共路由
- */
 import * as Auth from '@/loaders/auth/local_auth/local_auth.controller'
 
-const publicRoutes: App.Route[] = [
+/** 公共路由 */
+const __publicRoutes: App.Route[] = [
   //  登录
   {
     path: '/sign-in',
@@ -30,4 +28,4 @@ const publicRoutes: App.Route[] = [
   }
 ]
 
-export default publicRoutes
+export default __publicRoutes
