@@ -1,6 +1,4 @@
 import mongoose from 'mongoose'
-import callAsync from '@/lib/utils/callAsync'
-import logger from '@/lib/utils/logger'
 
 /**
  * 连接mongo数据库

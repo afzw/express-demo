@@ -4,7 +4,6 @@ import * as http from 'http'
 import { AddressInfo } from 'node:net'
 import express from 'express'
 
-import '@/modules/user/user.model' // 优先编译用户表
 import config from '@/config/config' //  加载软件配置文件
 import initLoaders from '@/loaders'
 import logger from '@/lib/utils/logger' //  日志打印
