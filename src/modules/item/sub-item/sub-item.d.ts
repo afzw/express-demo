@@ -4,7 +4,7 @@ import { ItemDoc, ItemProps, IItemCurdService } from '@/modules/item/item'
 /**
  * 业务逻辑 - 增删改查
  */
-export interface SubItemCurdService extends IItemCurdService {
+export interface ISubItemCurdService extends IItemCurdService {
   /**
    * 新建一个sub-item
    * @param createProps 新建sub-item的属性

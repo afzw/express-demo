@@ -4,12 +4,13 @@ import { Request, Response } from 'express'
 import ItemCurdService from '@/modules/item/curd.service'
 import ItemStore from '@/modules/item/item.store'
 import { ItemFilter } from '@/modules/item/item'
+import SubItemCurdService from './sub-item/sub-item.service'
 
 /** 新建item */
 export async function create(req: Request, res: Response) {
   const createProps = _.pick(req.body, ItemStore.theCreateKeys())
 
-  const [errCreate, newItem] = await callAsync(ItemCurdService.createItem(createProps))
+  const [errCreate, newItem] = await callAsync(SubItemCurdService.createSubItem(createProps))
   if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
 
   return res.json(newItem)

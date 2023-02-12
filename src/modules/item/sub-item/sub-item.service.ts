@@ -1,9 +1,9 @@
 import callAsync from '@/lib/utils/callAsync'
 import ItemCurdService from '../curd.service'
 import { IItemCurdService, ItemProps } from '../item'
-import { SubItemCurdService } from './sub-item'
+import { ISubItemCurdService } from './sub-item'
 
-const SubItemCurdService = Object.create(ItemCurdService)
+const SubItemCurdService: ISubItemCurdService = Object.create(ItemCurdService)
 
 SubItemCurdService.createSubItem = async function (this: IItemCurdService, createProps: ItemProps) {
   const [errCreate, newItem] = await callAsync(this.createItem(createProps))
@@ -13,3 +13,5 @@ SubItemCurdService.createSubItem = async function (this: IItemCurdService, creat
 
   return newItem
 }
+
+export default SubItemCurdService
