@@ -1,7 +1,7 @@
 import Curd from '@/lib/odm/curd'
 import { QueryOptions } from 'mongoose'
-import { ItemDoc, ItemDocPojo, ItemFilter, ItemProps, ItemUpdate } from './item'
-import ItemModel from './item.model'
+import { ItemDoc, ItemDocPojo, ItemFilter, ItemProps, ItemUpdate } from '@/modules/item/item'
+import ItemModel from '@/modules/item/item.model'
 import mongodb from 'mongodb'
 
 /** 【item】Dao层操作 */

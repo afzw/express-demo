@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
+import { ItemProps } from './item'
 
-export const ItemSchema = new Schema(
+export const ItemSchema = new Schema<ItemProps>(
   {
     name: {
       type: String,
@@ -20,6 +21,6 @@ export const ItemSchema = new Schema(
   }
 )
 
-const ItemModel = model('item', ItemSchema)
+const ItemModel = model<ItemProps>('item', ItemSchema)
 
 export default ItemModel
