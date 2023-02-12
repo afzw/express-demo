@@ -34,7 +34,7 @@ export interface ItemProps {
 /**
  * 业务逻辑 - 增删改查
  */
-export interface ItemCurdService {
+export interface IItemCurdService {
   /**
    * 新建一个item
    * @param createProps 新建item的属性
@@ -60,16 +60,6 @@ export interface ItemCurdService {
    * @param 删除的item mongoose 文档
    */
   deleteItem: (itemId: string) => Promise<ItemDoc>
-}
-/**
- * 业务逻辑 - 校验
- */
-export interface ItemValidationService {
-  /**
-   * 根据id验证某个item是否存在。
-   * @param itemId item id
-   */
-  validateItemExistById: (itemId: string) => Promise<ItemDoc>
 }
 
 /* --------------------------- odm (mongoose) 相关  --------------------------- */

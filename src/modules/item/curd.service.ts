@@ -1,45 +1,45 @@
 import callAsync from '@/lib/utils/callAsync'
-import { ItemDoc, ItemProps, ItemCurdService, ItemFilter } from '@/modules/item/item'
+import { ItemDoc, ItemProps, IItemCurdService, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
 
-const ItemCurdService: ItemCurdService = {
-  createItem: async function (createProps: ItemProps): Promise<ItemDoc> {
-    const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
-    if (errCreate) throw new Error(`数据库插入操作失败 => ${errCreate}`)
+const ItemCurdService: IItemCurdService = Object.create(null)
 
-    return newItem
-  },
+ItemCurdService.createItem = async function (createProps: ItemProps): Promise<ItemDoc> {
+  const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
+  if (errCreate) throw new Error(`数据库插入操作失败 => ${errCreate}`)
 
-  searchItems: async function (filter: ItemFilter): Promise<{ items: ItemDoc[]; total: number }> {
-    const [errSearchItems, items] = await callAsync(ItemDao.findDocsByFilter(filter))
-    if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
+  return newItem
+}
 
-    const [errSearchTotal, total] = await callAsync(ItemDao.countDocuments(filter))
-    if (errSearchTotal) throw new Error(`数据库查询items总数失败 => ${errSearchTotal}`)
+ItemCurdService.searchItems = async function (filter: ItemFilter): Promise<{ items: ItemDoc[]; total: number }> {
+  const [errSearchItems, items] = await callAsync(ItemDao.findDocsByFilter(filter))
+  if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
 
-    const result = { items, total }
+  const [errSearchTotal, total] = await callAsync(ItemDao.countDocuments(filter))
+  if (errSearchTotal) throw new Error(`数据库查询items总数失败 => ${errSearchTotal}`)
 
-    return result
-  },
+  const result = { items, total }
 
-  updateItem: async function (itemId: string, updateProps: ItemProps): Promise<ItemDoc> {
-    const filter: ItemFilter = { _id: itemId }
-    const queryOptions = { new: true }
+  return result
+}
 
-    const [errUpdate, newItem] = await callAsync(ItemDao.findOneDocAndUpdate(filter, updateProps, queryOptions))
-    if (errUpdate) throw new Error(`数据库更新操作失败 => ${errUpdate}`)
+ItemCurdService.updateItem = async function (itemId: string, updateProps: ItemProps): Promise<ItemDoc> {
+  const filter: ItemFilter = { _id: itemId }
+  const queryOptions = { new: true }
 
-    return newItem
-  },
+  const [errUpdate, newItem] = await callAsync(ItemDao.findOneDocAndUpdate(filter, updateProps, queryOptions))
+  if (errUpdate) throw new Error(`数据库更新操作失败 => ${errUpdate}`)
 
-  deleteItem: async function (itemId: string): Promise<ItemDoc> {
-    const filter: ItemFilter = { _id: itemId }
+  return newItem
+}
 
-    const [errDelete, deletedItem] = await callAsync(ItemDao.findOneDocAndDelete(filter))
-    if (errDelete) throw new Error(`数据库删除操作失败 => ${errDelete}`)
+ItemCurdService.deleteItem = async function (itemId: string): Promise<ItemDoc> {
+  const filter: ItemFilter = { _id: itemId }
 
-    return deletedItem
-  }
+  const [errDelete, deletedItem] = await callAsync(ItemDao.findOneDocAndDelete(filter))
+  if (errDelete) throw new Error(`数据库删除操作失败 => ${errDelete}`)
+
+  return deletedItem
 }
 
 export default ItemCurdService
