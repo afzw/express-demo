@@ -4,76 +4,81 @@ import { ItemDoc, ItemDocPojo, ItemFilter, ItemProps, ItemUpdate } from './item'
 import ItemModel from './item.model'
 import mongodb from 'mongodb'
 
-const ItemDao = {
-  create: function (createDoc: ItemProps) {
+/** 【item】Dao层操作 */
+class ItemDao {
+  public static create(createDoc: ItemProps) {
     return Curd.create(ItemModel, createDoc)
-  },
+  }
 
-  createMany: function (createDocs: ItemProps[]) {
+  public static createMany(createDocs: ItemProps[]) {
     return Curd.insertMany(ItemModel, createDocs)
-  },
+  }
 
-  findDocsByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc[]> {
+  public static findDocsByFilter(filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc[]> {
     return Curd.find(ItemModel, filter, projection, options).exec()
-  },
+  }
 
-  findPojosByFilter: function (
+  public static findPojosByFilter(
     filter: ItemFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<ItemDocPojo[]> {
     return Curd.find(ItemModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocByFilter: function (filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc> {
+  public static findOneDocByFilter(filter: ItemFilter, projection?: unknown, options?: QueryOptions): Promise<ItemDoc> {
     return Curd.findOne(ItemModel, filter, projection, options).exec()
-  },
+  }
 
-  findOnePojoByFilter: function (
+  public static findOnePojoByFilter(
     filter: ItemFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<ItemDocPojo> {
     return Curd.findOne(ItemModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocAndUpdate: function (filter: ItemFilter, updateDoc: ItemUpdate, options?: QueryOptions): Promise<ItemDoc> {
+  public static findOneDocAndUpdate(
+    filter: ItemFilter,
+    updateDoc: ItemUpdate,
+    options?: QueryOptions
+  ): Promise<ItemDoc> {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOnePojoAndUpdate: function (
+  public static findOnePojoAndUpdate(
     filter: ItemFilter,
     updateDoc: ItemUpdate,
     options?: QueryOptions
   ): Promise<ItemDocPojo> {
     return Curd.findOneAndUpdate(ItemModel, filter, updateDoc, options).lean().exec()
-  },
+  }
 
-  updateMany: function (
+  public static updateMany(
     filter: ItemFilter,
     updateDoc: ItemUpdate,
     options?: QueryOptions
   ): Promise<mongodb.UpdateResult> {
     return Curd.updateMany(ItemModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneDocAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
+  public static findOneDocAndDelete(filter: ItemFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ItemModel, filter, options).exec()
-  },
+  }
 
-  findOnePojoAndDelete: function (filter: ItemFilter, options?: QueryOptions) {
+  public static findOnePojoAndDelete(filter: ItemFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ItemModel, filter, options).lean().exec()
-  },
+  }
 
-  deleteMany: function (filter: ItemFilter): Promise<mongodb.DeleteResult> {
+  public static deleteMany(filter: ItemFilter): Promise<mongodb.DeleteResult> {
     return Curd.deleteMany(ItemModel, filter).exec()
-  },
+  }
 
-  countDocuments: function (filter: ItemFilter) {
+  public static countDocuments(filter: ItemFilter) {
     return Curd.countDocuments(ItemModel, filter).exec()
-  },
+  }
 
-  distinct: function (field: string, filter: ItemFilter) {
+  public static distinct(field: string, filter: ItemFilter) {
     return Curd.distinct(ItemModel, field, filter).exec()
   }
 }

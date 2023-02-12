@@ -26,7 +26,7 @@ export async function signIn(req: Request, res: Response): Promise<Response> {
     email: signInProfile.email,
     deleted: { $ne: true }
   }
-  const [err, user] = await callAsync(UserDao.findOneObjByFilter(findUserFilter))
+  const [err, user] = await callAsync(UserDao.findOnePojoByFilter(findUserFilter))
   if (err) return res.status(500).send(`查询用户失败${err}`)
   if (!user) return res.status(401).send({ error: '邮箱或密码错误' })
 

@@ -24,4 +24,4 @@ const scriptSchema = new Schema<ScriptProps>(
 
 const ScriptModel = model<ScriptProps>('migration', scriptSchema)
 
-export { ScriptModel }
+export default ScriptModel

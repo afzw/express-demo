@@ -16,7 +16,7 @@ export async function getProfile(req: Request, res: Response) {
   if (updateSessionInfoErr) return res.status(500).send(`更新会话信息失败 => ${updateSessionInfoErr}`)
 
   const [findUserInfoErr, userInfo] = await callAsync(
-    UserDao.findOneObjAndUpdate({ _id: req.user._id }, { activeAt: new Date() })
+    UserDao.findOnePojoAndUpdate({ _id: req.user._id }, { activeAt: new Date() })
   )
   if (findUserInfoErr) return res.status(500).send(`获取用户信息失败 => ${findUserInfoErr}`)
 

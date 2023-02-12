@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { Request, Response } from 'express'
 import UserDao from '@/modules/user/user.dao'
 import callAsync from '@/lib/utils/callAsync'

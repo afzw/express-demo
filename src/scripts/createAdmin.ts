@@ -9,7 +9,7 @@ exports.start = async function start() {
   const initPassword = '123456' //  管理员初始密码
   const salt = utils.genRandom()
 
-  const adminDoc: UserProps = {
+  const adminDoc: Partial<UserProps> = {
     email: 'admin@example.com',
     username: 'admin',
     salt,

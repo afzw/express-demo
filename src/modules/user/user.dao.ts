@@ -1,71 +1,83 @@
 import { QueryOptions } from 'mongoose'
 import { UserModel } from './user.model'
-import { UserDoc, UserFilter, UserProps, UserUpdate } from './user'
+import { UserDoc, UserDocPojo, UserFilter, UserProps, UserUpdate } from './user'
 import Curd from '@/lib/odm/curd'
+import mongodb from 'mongodb'
 
-const UserDao = {
-  /**
-   * 新建用户文档
-   * @param createDoc 用户文档
-   * @returns 新建的用户文档
-   */
-  create(userInfo: UserProps): Promise<UserDoc> {
-    return Curd.create(UserModel, userInfo)
-  },
+class UserDao {
+  public static create(createDoc: UserProps) {
+    return Curd.create(UserModel, createDoc)
+  }
 
-  createMany: function (createDocs: UserProps[]) {
+  public static createMany(createDocs: UserProps[]) {
     return Curd.insertMany(UserModel, createDocs)
-  },
+  }
 
-  findDocsByFilter: function (filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserDoc[]> {
+  public static findDocsByFilter(filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserDoc[]> {
     return Curd.find(UserModel, filter, projection, options).exec()
-  },
+  }
 
-  findObjsByFilter: function (filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserProps[]> {
+  public static findPojosByFilter(
+    filter: UserFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<UserDocPojo[]> {
     return Curd.find(UserModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocByFilter: function (filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserDoc> {
+  public static findOneDocByFilter(filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserDoc> {
     return Curd.findOne(UserModel, filter, projection, options).exec()
-  },
+  }
 
-  findOneObjByFilter: function (filter: UserFilter, projection?: unknown, options?: QueryOptions): Promise<UserProps> {
+  public static findOnePojoByFilter(
+    filter: UserFilter,
+    projection?: unknown,
+    options?: QueryOptions
+  ): Promise<UserDocPojo> {
     return Curd.findOne(UserModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocAndUpdate: function (filter: UserFilter, updateDoc: UserUpdate, options?: QueryOptions): Promise<UserDoc> {
-    return Curd.findOneAndUpdate(UserModel, filter, updateDoc, options).exec()
-  },
-
-  findOneObjAndUpdate: function (
+  public static findOneDocAndUpdate(
     filter: UserFilter,
     updateDoc: UserUpdate,
     options?: QueryOptions
-  ): Promise<UserProps> {
+  ): Promise<UserDoc> {
+    return Curd.findOneAndUpdate(UserModel, filter, updateDoc, options).exec()
+  }
+
+  public static findOnePojoAndUpdate(
+    filter: UserFilter,
+    updateDoc: UserUpdate,
+    options?: QueryOptions
+  ): Promise<UserDocPojo> {
     return Curd.findOneAndUpdate(UserModel, filter, updateDoc, options).lean().exec()
-  },
+  }
 
-  updateMany: function (filter: UserFilter, updateDoc: UserUpdate, options?: QueryOptions) {
+  public static updateMany(
+    filter: UserFilter,
+    updateDoc: UserUpdate,
+    options?: QueryOptions
+  ): Promise<mongodb.UpdateResult> {
     return Curd.updateMany(UserModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneDocAndDelete: function (filter: UserFilter, options?: QueryOptions): Promise<UserDoc> {
+  public static findOneDocAndDelete(filter: UserFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(UserModel, filter, options).exec()
-  },
+  }
 
-  findOneObjAndDelete: function (filter: UserFilter, options?: QueryOptions): Promise<UserProps> {
+  public static findOnePojoAndDelete(filter: UserFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(UserModel, filter, options).lean().exec()
-  },
+  }
 
-  deleteMany: function (filter: UserFilter) {
+  public static deleteMany(filter: UserFilter): Promise<mongodb.DeleteResult> {
     return Curd.deleteMany(UserModel, filter).exec()
-  },
+  }
 
-  count: function (filter: UserFilter): Promise<number> {
+  public static countDocuments(filter: UserFilter) {
     return Curd.countDocuments(UserModel, filter).exec()
-  },
+  }
 
-  distinct: function (field: string, filter: UserFilter) {
+  public static distinct(field: string, filter: UserFilter) {
     return Curd.distinct(UserModel, field, filter).exec()
   }
 }

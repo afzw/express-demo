@@ -1,13 +1,9 @@
-import { FilterQuery, HydratedDocument, Types, UpdateQuery } from 'mongoose'
+import { FilterQuery, HydratedDocument, LeanDocument, Types, UpdateQuery } from 'mongoose'
 
 /**
  * Session信息属性
  */
 export interface SessionInfoProps {
-  /**
-   * 数据库唯一标识
-   */
-  _id?: Types.ObjectId
   /**
    * session ID
    */
@@ -36,11 +32,38 @@ export interface SessionInfoProps {
    * 过期时间
    */
   expireAt?: Date
-  createdAt?: Date
-  updatedAt?: Date
+  /**
+   * 数据库文档创建时间，不应与业务耦合。
+   */
+  createdAt: Date
+  /**
+   * 数据库文档更新时间，不应与业务耦合。
+   */
+  updatedAt: Date
 }
 
-export type SessionInfoFilter = FilterQuery<SessionInfoProps>
-export type SessionInfoUpdate = UpdateQuery<SessionInfoProps>
-export type SessionInfoDoc = HydratedDocument<SessionInfoProps>
+/**
+ * 业务属性名。
+ */
 export type SessionInfoKey = keyof SessionInfoProps
+/**
+ * mongoose文档，包含mongoose内置操作，不能直接更改内部的属性。
+ */
+export type SessionInfoDoc = HydratedDocument<SessionInfoProps>
+/**
+ * mongoose文档的Pojo格式，可以直接操作。
+ * 若您想修改数据库中查询出的文档，您应该使用该种类型。
+ */
+export type SessionInfoDocPojo = LeanDocument<SessionInfoDoc>
+/**
+ * mongoose文档的Pojo格式的属性名。
+ */
+export type SessionInfoDocPojoKey = keyof SessionInfoDocPojo
+/**
+ * mongoose 查询对象
+ */
+export type SessionInfoFilter = FilterQuery<SessionInfoProps>
+/**
+ * mongoose 更新对象
+ */
+export type SessionInfoUpdate = UpdateQuery<SessionInfoProps>

@@ -1,4 +1,4 @@
-import { FilterQuery, HydratedDocument, Types, UpdateQuery, Model, Query } from 'mongoose'
+import { FilterQuery, HydratedDocument, Types, UpdateQuery, Model, Query, LeanDocument } from 'mongoose'
 
 export interface UserProps {
   /**
@@ -49,14 +49,41 @@ export interface UserProps {
    * 删除时间
    */
   deletedAt?: Date
-  createdAt?: Date
-  updatedAt?: Date
+  /**
+   * 数据库文档创建时间，不应与业务耦合。
+   */
+  createdAt: Date
+  /**
+   * 数据库文档更新时间，不应与业务耦合。
+   */
+  updatedAt: Date
 }
 
-export type UserFilter = FilterQuery<UserProps>
-export type UserUpdate = UpdateQuery<UserProps>
-export type UserDoc = HydratedDocument<UserProps>
+/**
+ * 业务属性名。
+ */
 export type UserKey = keyof UserProps
+/**
+ * mongoose文档，包含mongoose内置操作，不能直接更改内部的属性。
+ */
+export type UserDoc = HydratedDocument<UserProps>
+/**
+ * mongoose文档的Pojo格式，可以直接操作。
+ * 若您想修改数据库中查询出的文档，您应该使用该种类型。
+ */
+export type UserDocPojo = LeanDocument<UserDoc>
+/**
+ * mongoose文档的Pojo格式的属性名。
+ */
+export type UserDocPojoKey = keyof UserDocPojo
+/**
+ * mongoose 查询对象
+ */
+export type UserFilter = FilterQuery<UserProps>
+/**
+ * mongoose 更新对象
+ */
+export type UserUpdate = UpdateQuery<UserProps>
 /* --------------------------------- 接口定义 --------------------------------- */
 //  【Mongoose】用户实例方法接口：定义用户集合文档实例的方法
 interface UserMethods {

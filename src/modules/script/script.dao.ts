@@ -1,91 +1,91 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose'
-import { ScriptDoc, ScriptFilter, ScriptProps, ScriptUpdate } from './script'
-import { ScriptModel } from './script.model'
+import { QueryOptions } from 'mongoose'
+import { ScriptDoc, ScriptDocPojo, ScriptFilter, ScriptProps, ScriptUpdate } from './script'
+import ScriptModel from './script.model'
 import Curd from '@/lib/odm/curd'
 import mongodb from 'mongodb'
 
-const ScriptDao = {
-  create: function (createProps: ScriptProps) {
-    return Curd.create(ScriptModel, createProps)
-  },
+class ScriptDao {
+  public static create(createDoc: ScriptProps) {
+    return Curd.create(ScriptModel, createDoc)
+  }
 
-  createMany: function (createDocs: ScriptProps[]) {
+  public static createMany(createDocs: ScriptProps[]) {
     return Curd.insertMany(ScriptModel, createDocs)
-  },
+  }
 
-  findDocsByFilter: function (
+  public static findDocsByFilter(
     filter: ScriptFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<ScriptDoc[]> {
     return Curd.find(ScriptModel, filter, projection, options).exec()
-  },
+  }
 
-  findObjsByFilter: function (
+  public static findPojosByFilter(
     filter: ScriptFilter,
     projection?: unknown,
     options?: QueryOptions
-  ): Promise<ScriptProps[]> {
+  ): Promise<ScriptDocPojo[]> {
     return Curd.find(ScriptModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocByFilter: function (
+  public static findOneDocByFilter(
     filter: ScriptFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<ScriptDoc> {
     return Curd.findOne(ScriptModel, filter, projection, options).exec()
-  },
+  }
 
-  findOneObjByFilter: function (
+  public static findOnePojoByFilter(
     filter: ScriptFilter,
     projection?: unknown,
     options?: QueryOptions
-  ): Promise<ScriptProps> {
+  ): Promise<ScriptDocPojo> {
     return Curd.findOne(ScriptModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocAndUpdate: function (
+  public static findOneDocAndUpdate(
     filter: ScriptFilter,
     updateDoc: ScriptUpdate,
     options?: QueryOptions
   ): Promise<ScriptDoc> {
     return Curd.findOneAndUpdate(ScriptModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneObjAndUpdate: function (
+  public static findOnePojoAndUpdate(
     filter: ScriptFilter,
     updateDoc: ScriptUpdate,
     options?: QueryOptions
-  ): Promise<ScriptProps> {
+  ): Promise<ScriptDocPojo> {
     return Curd.findOneAndUpdate(ScriptModel, filter, updateDoc, options).lean().exec()
-  },
+  }
 
-  updateMany: function (
+  public static updateMany(
     filter: ScriptFilter,
     updateDoc: ScriptUpdate,
     options?: QueryOptions
   ): Promise<mongodb.UpdateResult> {
     return Curd.updateMany(ScriptModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneDocAndDelete: function (filter: ScriptFilter, options?: QueryOptions) {
+  public static findOneDocAndDelete(filter: ScriptFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ScriptModel, filter, options).exec()
-  },
+  }
 
-  findOneObjAndDelete: function (filter: ScriptFilter, options?: QueryOptions) {
+  public static findOnePojoAndDelete(filter: ScriptFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(ScriptModel, filter, options).lean().exec()
-  },
+  }
 
-  deleteMany: function (filter: ScriptFilter): Promise<mongodb.DeleteResult> {
+  public static deleteMany(filter: ScriptFilter): Promise<mongodb.DeleteResult> {
     return Curd.deleteMany(ScriptModel, filter).exec()
-  },
+  }
 
-  count: function (filter: ScriptFilter) {
+  public static countDocuments(filter: ScriptFilter) {
     return Curd.countDocuments(ScriptModel, filter).exec()
-  },
+  }
 
-  distinct: function (field: string, filter: ScriptFilter) {
+  public static distinct(field: string, filter: ScriptFilter) {
     return Curd.distinct(ScriptModel, field, filter).exec()
   }
 }

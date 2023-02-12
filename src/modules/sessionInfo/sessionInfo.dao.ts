@@ -2,6 +2,7 @@ import { QueryOptions } from 'mongoose'
 import { SessionInfoModel } from '@/modules/sessionInfo/sessionInfo.model'
 import {
   SessionInfoDoc,
+  SessionInfoDocPojo,
   SessionInfoFilter,
   SessionInfoProps,
   SessionInfoUpdate
@@ -9,88 +10,88 @@ import {
 import Curd from '@/lib/odm/curd'
 import mongodb from 'mongodb'
 
-const SessionInfoDao = {
-  create: function (SessionInfoProps: SessionInfoProps) {
-    return Curd.create(SessionInfoModel, SessionInfoProps)
-  },
+class SessionInfoDao {
+  public static create(createDoc: SessionInfoProps) {
+    return Curd.create(SessionInfoModel, createDoc)
+  }
 
-  createMany: function (createDocs: SessionInfoProps[]) {
+  public static createMany(createDocs: SessionInfoProps[]) {
     return Curd.insertMany(SessionInfoModel, createDocs)
-  },
+  }
 
-  findDocsByFilter: function (
+  public static findDocsByFilter(
     filter: SessionInfoFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<SessionInfoDoc[]> {
     return Curd.find(SessionInfoModel, filter, projection, options).exec()
-  },
+  }
 
-  findObjsByFilter: function (
+  public static findPojosByFilter(
     filter: SessionInfoFilter,
     projection?: unknown,
     options?: QueryOptions
-  ): Promise<SessionInfoProps[]> {
+  ): Promise<SessionInfoDocPojo[]> {
     return Curd.find(SessionInfoModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocByFilter: function (
+  public static findOneDocByFilter(
     filter: SessionInfoFilter,
     projection?: unknown,
     options?: QueryOptions
   ): Promise<SessionInfoDoc> {
     return Curd.findOne(SessionInfoModel, filter, projection, options).exec()
-  },
+  }
 
-  findOneObjByFilter: function (
+  public static findOnePojoByFilter(
     filter: SessionInfoFilter,
     projection?: unknown,
     options?: QueryOptions
-  ): Promise<SessionInfoProps> {
+  ): Promise<SessionInfoDocPojo> {
     return Curd.findOne(SessionInfoModel, filter, projection, options).lean().exec()
-  },
+  }
 
-  findOneDocAndUpdate: function (
+  public static findOneDocAndUpdate(
     filter: SessionInfoFilter,
     updateDoc: SessionInfoUpdate,
     options?: QueryOptions
   ): Promise<SessionInfoDoc> {
     return Curd.findOneAndUpdate(SessionInfoModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneObjAndUpdate: function (
+  public static findOnePojoAndUpdate(
     filter: SessionInfoFilter,
     updateDoc: SessionInfoUpdate,
     options?: QueryOptions
-  ): Promise<SessionInfoProps> {
+  ): Promise<SessionInfoDocPojo> {
     return Curd.findOneAndUpdate(SessionInfoModel, filter, updateDoc, options).lean().exec()
-  },
+  }
 
-  updateMany: function (
+  public static updateMany(
     filter: SessionInfoFilter,
     updateDoc: SessionInfoUpdate,
     options?: QueryOptions
   ): Promise<mongodb.UpdateResult> {
     return Curd.updateMany(SessionInfoModel, filter, updateDoc, options).exec()
-  },
+  }
 
-  findOneDocAndDelete: function (filter: SessionInfoFilter, options?: QueryOptions) {
+  public static findOneDocAndDelete(filter: SessionInfoFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(SessionInfoModel, filter, options).exec()
-  },
+  }
 
-  findOneObjAndDelete: function (filter: SessionInfoFilter, options?: QueryOptions) {
+  public static findOnePojoAndDelete(filter: SessionInfoFilter, options?: QueryOptions) {
     return Curd.findOneAndDelete(SessionInfoModel, filter, options).lean().exec()
-  },
+  }
 
-  deleteMany: function (filter: SessionInfoFilter): Promise<mongodb.DeleteResult> {
+  public static deleteMany(filter: SessionInfoFilter): Promise<mongodb.DeleteResult> {
     return Curd.deleteMany(SessionInfoModel, filter).exec()
-  },
+  }
 
-  count: function (filter: SessionInfoFilter) {
+  public static countDocuments(filter: SessionInfoFilter) {
     return Curd.countDocuments(SessionInfoModel, filter).exec()
-  },
+  }
 
-  distinct: function (field: string, filter: SessionInfoFilter) {
+  public static distinct(field: string, filter: SessionInfoFilter) {
     return Curd.distinct(SessionInfoModel, field, filter).exec()
   }
 }
