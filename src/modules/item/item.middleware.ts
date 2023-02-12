@@ -1,6 +1,6 @@
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response, NextFunction } from 'express'
-import IItemCurdService from './curd.service'
+import ItemCurdService from './curd.service'
 import { ItemFilter } from './item'
 
 /**

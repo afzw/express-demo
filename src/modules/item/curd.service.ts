@@ -1,8 +1,8 @@
 import callAsync from '@/lib/utils/callAsync'
-import { ItemDoc, ItemProps, IItemCurdService, ItemFilter } from '@/modules/item/item'
+import { ItemDoc, ItemProps, ItemCurdService, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
 
-const ItemCurdService: IItemCurdService = Object.create(null)
+const ItemCurdService: ItemCurdService = Object.create(null)
 
 ItemCurdService.createItem = async function (createProps: ItemProps): Promise<ItemDoc> {
   const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))

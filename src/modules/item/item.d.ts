@@ -34,7 +34,7 @@ export interface ItemProps {
 /**
  * 业务逻辑 - 增删改查
  */
-export interface IItemCurdService {
+export interface ItemCurdService {
   /**
    * 新建一个item
    * @param createProps 新建item的属性
