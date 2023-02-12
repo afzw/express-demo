@@ -1,10 +1,6 @@
-import { FilterQuery, HydratedDocument, Types, UpdateQuery, Model, Query, LeanDocument } from 'mongoose'
+import { FilterQuery, HydratedDocument, UpdateQuery, Model, Query, LeanDocument } from 'mongoose'
 
 export interface UserProps {
-  /**
-   * 数据库唯一标识
-   */
-  _id?: Types.ObjectId
   /**
    * 邮箱
    */

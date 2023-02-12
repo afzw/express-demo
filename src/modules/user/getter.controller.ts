@@ -3,7 +3,6 @@ import { Request, Response } from 'express'
 import SessionInfoDao from '@/modules/sessionInfo/sessionInfo.dao'
 import { callAsync } from '@/lib/utils/callAsync'
 import UserDao from '@/modules/user/user.dao'
-import { __roles } from '@/loaders/rbac/roles'
 import UserStore from './user.store'
 
 /**
