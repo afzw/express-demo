@@ -1,5 +1,5 @@
 import callAsync from '@/lib/utils/callAsync'
-import { ItemDoc, ItemProps, ItemFilter } from '@/modules/item/item'
+import { ItemDoc, ItemProps, ItemFilter, ItemUpdate } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
 
 /** 【item】业务逻辑之增删改查 */
@@ -39,8 +39,7 @@ class ItemCurdService {
    * @param updateProps 更新的属性
    * @return 更新后的item
    */
-  public static async updateItem(itemId: string, updateProps: ItemProps): Promise<ItemDoc> {
-    const filter: ItemFilter = { _id: itemId }
+  public static async updateItem(filter: ItemFilter, updateProps: ItemUpdate): Promise<ItemDoc> {
     const queryOptions = { new: true }
 
     const [errUpdate, newItem] = await callAsync(ItemDao.findOneDocAndUpdate(filter, updateProps, queryOptions))

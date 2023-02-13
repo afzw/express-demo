@@ -8,26 +8,19 @@ import { FilterQuery, HydratedDocument, LeanDocument, Types, UpdateQuery } from 
  * 属性
  */
 export interface ItemProps {
-  /**
-   * 名称
-   */
+  /** 名称 */
   name: string
-  /**
-   * 价格
-   */
+  /** 价格 */
   price: number
-  /**
-   * 持有人id
-   */
+  /** 持有人id */
   ownerId?: Types.ObjectId
-  /**
-   * 数据库文档创建时间，不应与业务耦合。
-   */
+  /** 数据库文档创建时间，不应与业务耦合。 */
   createdAt: Date
-  /**
-   * 数据库文档更新时间，不应与业务耦合。
-   */
+  /** 数据库文档更新时间，不应与业务耦合。 */
   updatedAt: Date
+
+  /** 【discount-item】折扣率 */
+  discount?: number
 }
 
 /* --------------------------- odm (mongoose) 相关  --------------------------- */

@@ -33,9 +33,11 @@ export async function search(req: Request, res: Response) {
 /** 更新某个item */
 export async function update(req: Request, res: Response) {
   const itemId = req.params.itemId
+
+  const filter: ItemFilter = { _id: itemId }
   const updateProps = _.pick(req.body, ItemStore.theCreateKeys())
 
-  const [errUpdate, newItem] = await callAsync(ItemCurdService.updateItem(itemId, updateProps))
+  const [errUpdate, newItem] = await callAsync(ItemCurdService.updateItem(filter, updateProps))
   if (errUpdate) return res.status(500).send(`更新item失败 => ${errUpdate}`)
 
   return res.json(newItem)
