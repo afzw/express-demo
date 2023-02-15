@@ -27,13 +27,6 @@ declare namespace App {
   }
 
   /**
-   * 程序启动选项
-   */
-  interface LaunchOptions {
-    testing: boolean // 启动程序 for testing ?
-  }
-
-  /**
    * 程序配置
    */
   interface Config {

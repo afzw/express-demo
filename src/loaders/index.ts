@@ -14,8 +14,9 @@ async function initLoaders(app: express.Express) {
   await loadMongoDB(config.mongo)
   loadExpress(app)
   loadRouters(app)
-  loadRbac()
   loadEventEmitter()
+
+  loadRbac()
 
   sessionCleaner()
   await executScripts(path.join(__dirname, '..', 'scripts')) //  执行脚本
