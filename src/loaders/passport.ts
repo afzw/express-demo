@@ -1,11 +1,11 @@
-import { UserProps } from '@/modules/user/user'
+import { UserDocPojo } from '@/modules/user/user'
 import UserDao from '@/modules/user/user.dao'
 import { callAsync } from '@/lib/utils/callAsync'
 
 /**
  * 序列化用户（记录用户id）
  */
-export function localSerialize(user: UserProps, done: (err?: any, userId?: any) => void) {
+export function localSerialize(user: UserDocPojo, done: (err?: any, userId?: any) => void) {
   done(null, user?._id)
 }
 

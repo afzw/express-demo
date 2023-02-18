@@ -1,7 +1,7 @@
 import * as User from '@/modules/user/curd.controller'
 import * as UserGetter from '@/modules/user/getter.controller'
 
-const userRoutes: App.Route[] = [
+const UserRoutes: App.Route[] = [
   //  查询用户
   {
     path: '/users',
@@ -18,4 +18,4 @@ const userRoutes: App.Route[] = [
   }
 ]
 
-export default userRoutes
+export default UserRoutes

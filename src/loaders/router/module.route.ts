@@ -1,4 +1,5 @@
-import userRoutes from '@/modules/user/user.route'
+import AuthRoutes from '@/apis/auth/auth.route'
+import UserRoutes from '@/modules/user/user.route'
 import ItemRoutes from '@/modules/item/item.route'
 
 /** 业务路由 */
@@ -9,7 +10,8 @@ function addRoutes(routes: App.Route[]) {
   }
 }
 
-addRoutes(userRoutes)
+addRoutes(AuthRoutes)
+addRoutes(UserRoutes)
 addRoutes(ItemRoutes)
 
 export default __moduleRoutes
