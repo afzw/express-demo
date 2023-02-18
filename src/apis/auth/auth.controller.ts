@@ -6,7 +6,7 @@ import { callAsync } from '@/lib/utils/callAsync'
 import { Request, Response, NextFunction } from 'express'
 import sessionInfoDao from '@/modules/sessionInfo/sessionInfo.dao'
 import { SessionInfoProps } from '@/modules/sessionInfo/sessionInfo'
-import UserStore from '@/modules/user/user.store'
+import UserStore from '@/business/user/user.store'
 import LocalAuthService from '@/business/auth/local'
 
 /**
