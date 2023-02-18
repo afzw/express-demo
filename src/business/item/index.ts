@@ -2,8 +2,8 @@ import callAsync from '@/lib/utils/callAsync'
 import { ItemDoc, ItemProps, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
 
-/** 【item】业务逻辑之增删改查 */
-class ItemCurdService {
+/** 【item】业务逻辑 */
+class ItemService {
   /**
    * 新建一个item
    * @param createProps 新建item的属性
@@ -63,4 +63,4 @@ class ItemCurdService {
   }
 }
 
-export default ItemCurdService
+export default ItemService

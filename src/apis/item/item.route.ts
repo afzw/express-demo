@@ -1,28 +1,29 @@
-import * as ItemController from '@/modules/item/item.controller'
-import * as ItemMiddleware from '@/modules/item/item.middleware'
+import * as ItemController from '@/apis/item/item.controller'
+import * as ItemMiddleware from '@/apis/item/item.middleware'
+import { API_ITEM_CREATE, API_ITEM_DELETE_ONE, API_ITEM_SEARCH, API_ITEM_UPDATE_ONE } from './item.api'
 
 /** item路由 */
 const ItemRoutes: App.Route[] = [
   {
-    path: '/items',
+    path: API_ITEM_CREATE,
     method: 'POST',
     middlewares: [ItemController.create],
     permission: 'public'
   },
   {
-    path: '/items',
+    path: API_ITEM_SEARCH,
     method: 'GET',
     middlewares: [ItemController.search],
     permission: 'public'
   },
   {
-    path: '/items/:itemId',
+    path: API_ITEM_UPDATE_ONE,
     method: 'PUT',
     middlewares: [ItemMiddleware.validateItemInParams, ItemController.update],
     permission: 'public'
   },
   {
-    path: '/items/:itemId',
+    path: API_ITEM_DELETE_ONE,
     method: 'DELETE',
     middlewares: [ItemMiddleware.validateItemInParams, ItemController.remove],
     permission: 'public'

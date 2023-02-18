@@ -1,6 +1,6 @@
 import AuthRoutes from '@/apis/auth/auth.route'
 import UserRoutes from '@/apis/user/user.route'
-import ItemRoutes from '@/modules/item/item.route'
+import ItemRoutes from '@/apis/item/item.route'
 
 /** 业务路由 */
 const __moduleRoutes: App.Route[] = []
