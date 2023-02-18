@@ -12,12 +12,13 @@ import config from '@/config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { getMongoUri } from '@/loaders/mongo/mongo'
 import { localSerialize, localDeserialize } from '@/loaders/auth/local_auth/local_auth.service'
+import { commonErrorHandler } from './error'
 
 /**
- * 【初始化】加载express程序
- * @param app 初始的express程序
+ * 【初始化】加载express程序的（路由）前置配置
+ * @param app express程序
  */
-function loadExpress(app: express.Express) {
+export function loadExpressPreConfig(app: express.Express) {
   app.set('x-powered-by', false)
   app.set('trust proxy', ['1', 'true'].includes(process.env.TRUST_PROXY))
 
@@ -54,4 +55,11 @@ function loadExpress(app: express.Express) {
   app.use(permissionValidatorRegister)
 }
 
-export default loadExpress
+/**
+ * 【初始化】加载express程序的（路由）后置配置
+ * @param app express程序
+ */
+export function loadExpressPostConfig(app: express.Express) {
+  /** 添加一般性错误捕获 */
+  app.use(commonErrorHandler)
+}

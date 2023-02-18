@@ -8,9 +8,9 @@ import registerRouter from '@/loaders/router/register'
 export const routesMap = new Map()
 
 /**
- * 初始化路由器。
+ * 【初始化】加载express路由器。
  */
-function loadRouters(app: express.Express) {
+function loadExpressRouters(app: express.Express) {
   //  监听公开路由
   const publicRouter = express.Router()
   registerRouter(publicRouter, __publicRoutes, 'public')
@@ -27,4 +27,4 @@ function loadRouters(app: express.Express) {
   app.use('/', otherRouter)
 }
 
-export default loadRouters
+export default loadExpressRouters

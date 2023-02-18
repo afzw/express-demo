@@ -1,11 +1,12 @@
-require('module-alias/register') //  路径别名
+/** 加载路径别名机制 */
+require('module-alias/register')
 
 import { AddressInfo } from 'node:net'
 import express from 'express'
 
-import config from '@/config/config' //  加载软件配置文件
+import config from '@/config/config'
 import initLoaders from '@/loaders'
-import logger from '@/lib/utils/logger' //  日志打印
+import logger from '@/lib/utils/logger'
 
 /** 程序启动函数 */
 async function launchApp() {

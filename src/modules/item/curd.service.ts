@@ -39,8 +39,7 @@ class ItemCurdService {
    * @param updateProps 更新的属性
    * @return 更新后的item
    */
-  public static async updateItem(itemId: string, updateProps: ItemProps): Promise<ItemDoc> {
-    const filter: ItemFilter = { _id: itemId }
+  public static async updateItem(filter: ItemFilter, updateProps: ItemProps): Promise<ItemDoc> {
     const queryOptions = { new: true }
 
     const [errUpdate, newItem] = await callAsync(ItemDao.findOneDocAndUpdate(filter, updateProps, queryOptions))
