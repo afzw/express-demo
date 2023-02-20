@@ -1,6 +1,8 @@
 import callAsync from '@/lib/utils/callAsync'
 import { ItemDoc, ItemProps, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
+import _ from 'lodash'
+import ItemStore from './item.store'
 
 /** 【item】业务逻辑 */
 class ItemService {
@@ -9,7 +11,9 @@ class ItemService {
    * @param createProps 新建item的属性
    * @return 新建的item
    */
-  public static async createItem(createProps: ItemProps): Promise<ItemDoc> {
+  public static async createItem(createInfo: Pojo): Promise<ItemDoc> {
+    const createProps = _.pick(createInfo, ItemStore.theCreateKeys())
+
     const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
     if (errCreate) throw new Error(`数据库插入操作失败 => ${errCreate}`)
 

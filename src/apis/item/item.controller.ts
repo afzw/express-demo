@@ -7,9 +7,9 @@ import { ItemFilter } from '@/modules/item/item'
 
 /** 新建item */
 export async function create(req: Request, res: Response, next: NextFunction) {
-  const createProps = _.pick(req.body, ItemStore.theCreateKeys())
+  const createInfo: Ctx.Body = req.body
 
-  const [errCreate, newItem] = await callAsync(ItemService.createItem(createProps))
+  const [errCreate, newItem] = await callAsync(ItemService.createItem(createInfo))
   if (errCreate) return next({ code: 500, title: `新建item失败`, err: errCreate })
 
   return res.json(newItem)

@@ -11,6 +11,7 @@
     "target": "ES6",
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "types": ["reflect-metadata"],
     // "declaration": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
@@ -22,7 +23,9 @@
     "paths": {
       "@/*": ["src/*"],
       "@test/*": ["test/*"]
-    }
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["**/*.ts", "commitlint.config.js"],
   "exclude": ["**/node_modules/*", "uploads/*", "test/*"]
