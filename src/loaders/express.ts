@@ -18,7 +18,7 @@ import { commonErrorHandler } from './error'
  * 【初始化】加载express程序的（路由）前置配置
  * @param app express程序
  */
-export function loadExpressPreConfig(app: express.Express) {
+export function loadExpressPreConfig(app: express.Application) {
   app.set('x-powered-by', false)
   app.set('trust proxy', ['1', 'true'].includes(process.env.TRUST_PROXY))
 
@@ -59,7 +59,7 @@ export function loadExpressPreConfig(app: express.Express) {
  * 【初始化】加载express程序的（路由）后置配置
  * @param app express程序
  */
-export function loadExpressPostConfig(app: express.Express) {
+export function loadExpressPostConfig(app: express.Application) {
   /** 添加一般性错误捕获 */
   app.use(commonErrorHandler)
 }

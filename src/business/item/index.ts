@@ -2,13 +2,15 @@ import callAsync from '@/lib/utils/callAsync'
 import { ItemDoc, ItemProps, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/modules/item/item.dao'
 import _ from 'lodash'
-import { Document, Types } from 'mongoose'
 import ItemStore from './item.store'
+import { injectable } from 'inversify'
+import 'reflect-metadata'
 
 export interface ItemService {
   createItem(createInfo: Pojo): Promise<ItemDoc>
 }
 
+@injectable()
 class CommonItemService implements ItemService {
   public async createItem(createInfo: Pojo): Promise<ItemDoc> {
     const createProps = _.pick(createInfo, ItemStore.theCreateKeys())
@@ -20,7 +22,7 @@ class CommonItemService implements ItemService {
   }
 }
 
-export const commonItemService = new CommonItemService()
+export { CommonItemService }
 
 // 以下是原代码
 // /** 【item】业务逻辑 */

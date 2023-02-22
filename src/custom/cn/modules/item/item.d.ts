@@ -10,7 +10,7 @@ import { FilterQuery, HydratedDocument, LeanDocument, UpdateQuery } from 'mongoo
  */
 export interface CnItemProps extends ItemProps {
   /** 中文简介 */
-  cn_description: string
+  cn_description?: string
 }
 
 /* --------------------------- odm (mongoose) 相关  --------------------------- */

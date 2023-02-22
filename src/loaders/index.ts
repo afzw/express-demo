@@ -10,7 +10,7 @@ import { executScripts } from './script'
 import path from 'path'
 
 /** 程序初始化加载器 */
-async function initLoaders(app: express.Express) {
+async function initLoaders(app: express.Application) {
   // 数据持久化相关
   await loadMongoDB(config.mongo)
 

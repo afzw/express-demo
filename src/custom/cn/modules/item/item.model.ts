@@ -4,10 +4,7 @@ import { CnItemProps } from './item'
 
 export const CnItemSchema = new Schema<CnItemProps>(
   {
-    cn_description: {
-      type: String,
-      required: true
-    }
+    cn_description: String
   },
   {
     timestamps: true

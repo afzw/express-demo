@@ -10,7 +10,7 @@ export const routesMap = new Map()
 /**
  * 【初始化】加载express路由器。
  */
-function loadExpressRouters(app: express.Express) {
+function loadExpressRouters(app: express.Application) {
   //  监听公开路由
   const publicRouter = express.Router()
   registerRouter(publicRouter, __publicRoutes, 'public')

@@ -1,31 +1,36 @@
 import _ from 'lodash'
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response, NextFunction } from 'express'
-import { commonItemService, ItemService } from '@/business/item'
+import { ItemService } from '@/business/item'
 import ItemStore from '@/business/item/item.store'
 import { ItemFilter } from '@/modules/item/item'
+import 'reflect-metadata'
 import { inject, injectable } from 'inversify'
+import { container } from '@/inversify.config'
+import { controller, httpPost, next, request, response } from 'inversify-express-utils'
+import { ItemServiceSymbol } from '@/inversify.type'
 
-// @injectable()
-// class ItemController {
+interface ItemController {
+  create(req: Request, res: Response, next: NextFunction): any
+}
 
-//   private _itemService: ItemService
+@controller('/items')
+class CommonItemController implements ItemController {
+  constructor(@inject(ItemServiceSymbol) private _itemService: ItemService) {}
 
-//   public constructor(@inject(Symbol('ItemService')) itemService: ItemService) {
-//     this._itemService = itemService
-//   }
+  @httpPost('/')
+  public async create(@request() req: Request, @response() res: Response, @next() next: NextFunction) {
+    const createInfo: Ctx.Body = req.body
 
-//   public static async create(req: Request, res: Response, next: NextFunction) {
-//     const createInfo: Ctx.Body = req.body
+    const [errCreate, newItem] = await callAsync(this._itemService.createItem(createInfo))
+    if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
 
-//     const [errCreate, newItem] = await callAsync(this._itemService.createItem(createInfo))
-//     if (errCreate) return next({ code: 500, title: `新建item失败`, err: errCreate })
-
-//     return res.json(newItem)
-//   }
-// }
+    return res.status(200).json(newItem)
+  }
+}
 
 // export const itemController = new ItemController()
+export { ItemController, CommonItemController }
 
 // 以下是源代码
 // /** 新建item */
