@@ -4,21 +4,24 @@
 import path from 'path'
 
 const config = {
-  /* 基本：web服务器 */
+  /** 监听端口 */
   port: 10240,
+  /** 前端地址 */
   frontendUrl: '',
 
-  /* 资源 */
-  staticDir: path.join(__dirname, 'assets'), //  静态资源目录
-  uploadDir: path.join(__dirname, '..', 'uploads'), //  文件默认上传目录（multer上传目录）
+  /** 静态资源目录 */
+  staticDir: path.join(__dirname, '../../', 'assets'),
+  /** 文件默认上传目录（multer上传目录） */
+  uploadDir: path.join(__dirname, '../../', 'uploads'),
 
-  /* 数据存储 */
+  /** session配置 */
   session: {
     name: 'ExpressDemo-sid',
     secret: 'Secret Password For ExpressDemo',
     expireDays: 7,
     maxPerUser: 0
   },
+  /** MongoDB配置 */
   mongo: {
     name: 'ExpressDemo',
     host: '127.0.0.1',
