@@ -1,11 +1,14 @@
-import ItemStore from '@/business/item/item.store'
-import { CnItemKey } from '../../modules/item/item'
+import { CommonItemStore, ItemStore } from '@/business/item/item.store'
+import { injectable } from 'inversify'
+import { CnItemKey } from '@/custom/cn/modules/item/item'
 
-const CnItemStore = {
-  /**
-   * 创建属性
-   */
-  theCreateKeys: (): CnItemKey[] => [...ItemStore.theCreateKeys(), 'cn_description']
+const commonItemStore = new CommonItemStore()
+
+@injectable()
+class CnItemStore implements ItemStore {
+  public theCreateKeys = (): CnItemKey[] => [...commonItemStore.theCreateKeys(), 'cn_description']
+
+  public theSearchKeys = (): CnItemKey[] => commonItemStore.theSearchKeys()
 }
 
-export default CnItemStore
+export { CnItemStore }

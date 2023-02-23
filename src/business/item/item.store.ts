@@ -1,14 +1,19 @@
+import 'reflect-metadata'
 import { ItemKey } from '@/modules/item/item'
+import { injectable } from 'inversify'
 
-const ItemStore = {
-  /**
-   * 创建属性
-   */
-  theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId'],
-  /**
-   * 查询属性
-   */
-  theSearchKeys: (): ItemKey[] => ItemStore.theCreateKeys()
+interface ItemStore {
+  /** 创建item的属性 */
+  theCreateKeys(): string[]
+  /** 可筛选查询的属性 */
+  theSearchKeys(): string[]
 }
 
-export default ItemStore
+@injectable()
+class CommonItemStore implements ItemStore {
+  public theCreateKeys = (): ItemKey[] => ['name', 'price', 'ownerId']
+
+  public theSearchKeys = (): ItemKey[] => this.theCreateKeys()
+}
+
+export { ItemStore, CommonItemStore }
