@@ -26,11 +26,11 @@ interface ItemDao {
 /** 【item】Dao层操作 */
 @injectable()
 class CommonItemDao implements ItemDao {
-  public create(createDoc: ItemProps) {
+  public create(createDoc: ItemProps): Promise<ItemDoc> {
     return Curd.create(ItemModel, createDoc)
   }
 
-  public createMany(createDocs: ItemProps[]) {
+  public createMany(createDocs: ItemProps[]): Promise<ItemDoc[]> {
     return Curd.insertMany(ItemModel, createDocs)
   }
 
@@ -62,11 +62,11 @@ class CommonItemDao implements ItemDao {
     return Curd.updateMany(ItemModel, filter, updateDoc, options).exec()
   }
 
-  public findOneDocAndDelete(filter: ItemFilter, options?: QueryOptions) {
+  public findOneDocAndDelete(filter: ItemFilter, options?: QueryOptions): Promise<ItemDoc> {
     return Curd.findOneAndDelete(ItemModel, filter, options).exec()
   }
 
-  public findOnePojoAndDelete(filter: ItemFilter, options?: QueryOptions) {
+  public findOnePojoAndDelete(filter: ItemFilter, options?: QueryOptions): Promise<ItemDocPojo> {
     return Curd.findOneAndDelete(ItemModel, filter, options).lean().exec()
   }
 
@@ -74,12 +74,12 @@ class CommonItemDao implements ItemDao {
     return Curd.deleteMany(ItemModel, filter).exec()
   }
 
-  public countDocuments(filter: ItemFilter) {
+  public countDocuments(filter: ItemFilter): Promise<number> {
     return Curd.countDocuments(ItemModel, filter).exec()
   }
 
-  public distinct(field: string, filter: ItemFilter) {
-    return Curd.distinct(ItemModel, field, filter).exec()
+  public distinct<T>(field: string, filter: ItemFilter): Promise<T[]> {
+    return Curd.distinct<T, ItemProps>(ItemModel, field, filter).exec()
   }
 }
 

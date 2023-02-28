@@ -137,11 +137,11 @@ const Curd = {
    * @param options 查询选项
    * @returns 筛选查询后的文档
    */
-  distinct<D>(
+  distinct<T, D>(
     model: Model<D>,
     filed: string,
     filter: FilterQuery<D>
-  ): QueryWithHelpers<Array<string>, HydratedDocument<D>> {
+  ): QueryWithHelpers<Array<T>, HydratedDocument<D>> {
     return model.distinct(filed as string, filter)
   }
 }
