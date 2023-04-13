@@ -1,34 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import callAsync from '@/lib/utils/callAsync'
-
-/**
- * 获取 axios 错误信息
- */
-export function getAxiosError(error: AxiosError): string {
-  if (error.response) {
-    // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-    return `错误！ 状态码：${error.response.status} 数据：${error.response.data}`
-  } else if (error.request) {
-    // 请求已经成功发起，但没有收到响应
-    // `error.request` 在浏览器中是 XMLHttpRequest 的实例，
-    // 而在 node.js 中是 http.ClientRequest 的实例
-    return '服务器未响应！'
-  } else {
-    // 发送请求时出了点问题
-    return error.message
-  }
-}
-
-/**
- * 4500 ms 后自动取消
- */
-export function getCancelToken(): CancelToken {
-  const source = axios.CancelToken.source()
-  setTimeout(() => {
-    source.cancel()
-  }, 4500)
-  return source.token
-}
 
 /**
  * Axios HTTP客户端
