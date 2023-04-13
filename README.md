@@ -2,6 +2,28 @@
 
 基于 Express.js 框架实现，基础功能齐全，简单，快速。
 
+## 分支简介
+
+之前我做过一个 express 项目，敏捷开发，逐步迭代。
+刚上来这个项目只有一个版本，后来这个项目卖给了越来越多的客户，而且每个客户都有其定制化的需求。
+于是，这个项目多出了很多的分支，每次更新通用功能都要更新所有分支，直接无法维护。
+
+后面我接手这个项目，我在想，有没有办法能够在一个版本中区分开各种定制化需求，形成一条条逻辑清晰且互不干扰的业务线呢？
+
+其实做面向对象开发的朋友可能很熟悉，基于依赖注入的控制反转方案是一个经典的方案。
+于是我在 ts+node 的世界中找寻这种办法，后来就发现了`inversifyJS`这个项目。
+
+经过了一系列的调研，我最终确定了技术方案：`inversifyJS` + `inversify-express-utils` + `mongoose discriminator(鉴别器)`.
+
+本分支提供了一个使用这种技术方案的 demo，提供给那些想要在 express 项目中运用基于依赖注入实现控制反转的朋友。
+
+- [InversifyJS 官网](https://inversify.io/)
+- [InversifyJS GitHub](https://github.com/inversify/InversifyJS)
+- [InversifyJS npm](https://www.npmjs.com/package/inversify)
+- [适用于 express 应用的 InversifyJS 插件`inversify-express-utils`](https://www.npmjs.com/package/inversify-express-utils)
+- [推荐阅读](https://chinabigpan.github.io/inversifyjs_docs_cn/routes/ecosystem/utilities/utilities.html)
+- [mongoose 鉴别器](https://mongoosejs.com/docs/discriminators.html)
+
 ## 项目启动
 
 1. 基于模板生成项目配置文件
