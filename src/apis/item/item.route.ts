@@ -1,5 +1,5 @@
-import * as ItemController from '@/modules/item/item.controller'
-import * as ItemMiddleware from '@/modules/item/item.middleware'
+import * as ItemController from '@/apis/item/item.controller'
+import * as ItemMiddleware from '@/apis/item/item.middleware'
 
 /** item路由 */
 const ItemRoutes: App.Route[] = [

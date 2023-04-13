@@ -1,15 +1,15 @@
 import _ from 'lodash'
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response } from 'express'
-import ItemCurdService from '@/modules/item/curd.service'
-import ItemStore from '@/modules/item/item.store'
+import ItemService from '@/business/item'
+import ItemStore from '@/business/item/item.store'
 import { ItemFilter } from '@/modules/item/item'
 
 /** 新建item */
 export async function create(req: Request, res: Response) {
   const createProps = _.pick(req.body, ItemStore.theCreateKeys())
 
-  const [errCreate, newItem] = await callAsync(ItemCurdService.createItem(createProps))
+  const [errCreate, newItem] = await callAsync(ItemService.createItem(createProps))
   if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
 
   return res.json(newItem)
@@ -24,7 +24,7 @@ export async function search(req: Request, res: Response) {
   if (price) filter.price = Number(price)
   if (ownerId) filter.ownerId = ownerId
 
-  const [errSearch, items] = await callAsync(ItemCurdService.searchItems(filter))
+  const [errSearch, items] = await callAsync(ItemService.searchItems(filter))
   if (errSearch) return res.status(500).send(`查询item失败 => ${errSearch}`)
 
   return res.json(items)
@@ -37,7 +37,7 @@ export async function update(req: Request, res: Response) {
   const filter: ItemFilter = { _id: itemId }
   const updateProps = _.pick(req.body, ItemStore.theCreateKeys())
 
-  const [errUpdate, newItem] = await callAsync(ItemCurdService.updateItem(filter, updateProps))
+  const [errUpdate, newItem] = await callAsync(ItemService.updateItem(filter, updateProps))
   if (errUpdate) return res.status(500).send(`更新item失败 => ${errUpdate}`)
 
   return res.json(newItem)
@@ -47,7 +47,7 @@ export async function update(req: Request, res: Response) {
 export async function remove(req: Request, res: Response) {
   const itemId = req.params.itemId
 
-  const [errRemove, removedItem] = await callAsync(ItemCurdService.deleteItem(itemId))
+  const [errRemove, removedItem] = await callAsync(ItemService.deleteItem(itemId))
   if (errRemove) return res.status(500).send(`删除item失败 => ${errRemove}`)
 
   return res.json(removedItem)
