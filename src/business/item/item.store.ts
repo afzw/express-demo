@@ -6,7 +6,7 @@ const ItemStore = {
    */
   theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId'],
   /**
-   * 查询属性
+   * 可查询依据
    */
   theSearchKeys: (): ItemKey[] => ItemStore.theCreateKeys()
 }

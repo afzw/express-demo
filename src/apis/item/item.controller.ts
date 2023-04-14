@@ -1,15 +1,13 @@
-import _ from 'lodash'
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response } from 'express'
 import ItemService from '@/business/item'
-import ItemStore from '@/business/item/item.store'
 import { ItemFilter } from '@/modules/item/item'
 
 /** 新建item */
 export async function create(req: Request, res: Response) {
-  const createProps = _.pick(req.body, ItemStore.theCreateKeys())
+  const createInfo: Ctx.Body = req.body
 
-  const [errCreate, newItem] = await callAsync(ItemService.createItem(createProps))
+  const [errCreate, newItem] = await callAsync(ItemService.createItem(createInfo))
   if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
 
   return res.json(newItem)
@@ -24,20 +22,18 @@ export async function search(req: Request, res: Response) {
   if (price) filter.price = Number(price)
   if (ownerId) filter.ownerId = ownerId
 
-  const [errSearch, items] = await callAsync(ItemService.searchItems(filter))
+  const [errSearch, result] = await callAsync(ItemService.searchItems(filter))
   if (errSearch) return res.status(500).send(`查询item失败 => ${errSearch}`)
 
-  return res.json(items)
+  return res.json(result)
 }
 
 /** 更新某个item */
 export async function update(req: Request, res: Response) {
   const itemId = req.params.itemId
+  const updateInfo: Ctx.Body = req.body
 
-  const filter: ItemFilter = { _id: itemId }
-  const updateProps = _.pick(req.body, ItemStore.theCreateKeys())
-
-  const [errUpdate, newItem] = await callAsync(ItemService.updateItem(filter, updateProps))
+  const [errUpdate, newItem] = await callAsync(ItemService.updateItem(itemId, updateInfo))
   if (errUpdate) return res.status(500).send(`更新item失败 => ${errUpdate}`)
 
   return res.json(newItem)
