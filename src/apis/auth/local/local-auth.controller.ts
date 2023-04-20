@@ -10,7 +10,7 @@ import sessionInfoDao from '@/modules/sessionInfo/sessionInfo.dao'
 import { SessionInfoProps } from '@/modules/sessionInfo/sessionInfo'
 import { UserFilter, UserProps } from '@/modules/user/user'
 import UserStore from '@/modules/user/user.store'
-import LocalAuthStore from './local_auth.store'
+import LocalAuthStore from '../../../business/auth/local/local-auth.store'
 
 /**
  * 登录
@@ -26,7 +26,7 @@ export async function signIn(req: Request, res: Response): Promise<Response> {
     email: signInProfile.email,
     deleted: { $ne: true }
   }
-  const [err, user] = await callAsync(UserDao.findOnePojoByFilter(findUserFilter))
+  const [err, user] = await callAsync(UserDao.findOne(findUserFilter, null, { lean: true }))
   if (err) return res.status(500).send(`查询用户失败${err}`)
   if (!user) return res.status(401).send({ error: '邮箱或密码错误' })
 
@@ -100,7 +100,7 @@ export async function signUp(req: Request, res: Response) {
  * 登出
  */
 export async function signOut(req: Request, res: Response) {
-  const [err, session] = await callAsync(sessionInfoDao.findOneDocAndDelete({ sessionId: req.sessionID }))
+  const [err, session] = await callAsync(sessionInfoDao.findOneAndDelete({ sessionId: req.sessionID }))
   if (err) return console.log('sessionInfo销毁失败')
 
   req.session.destroy((err: any) => {

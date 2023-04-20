@@ -14,16 +14,7 @@ export const ItemSchema = new Schema<ItemProps>(
     ownerId: {
       type: Schema.Types.ObjectId,
       ref: 'user'
-    },
-    testItems: [
-      {
-        name: {
-          type: String,
-          required: true
-        },
-        age: Number
-      }
-    ]
+    }
   },
   {
     timestamps: true

@@ -15,15 +15,9 @@ export interface ItemProps {
   /** 持有人id */
   ownerId?: Types.ObjectId
   /** 数据库文档创建时间，不应与业务耦合。 */
-  createdAt: Date
+  createdAt?: Date
   /** 数据库文档更新时间，不应与业务耦合。 */
-  updatedAt: Date
-  testItems: TestItem[]
-}
-
-interface TestItem {
-  name: string
-  age?: number
+  updatedAt?: Date
 }
 
 /* --------------------------- odm (mongoose) 相关  --------------------------- */

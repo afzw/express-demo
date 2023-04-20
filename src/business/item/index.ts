@@ -26,7 +26,8 @@ class ItemService {
    * @return 查询出的item mongoose 文档
    */
   public static async searchItems(filter: ItemFilter): Promise<{ items: ItemDoc[]; total: number }> {
-    const [errSearchItems, items] = await callAsync(ItemDao.findDocsByFilter(filter))
+    // const [errSearchItems, items] = await callAsync(ItemDao2.findDocsByFilter(filter))
+    const [errSearchItems, items] = await callAsync(ItemDao.find(filter))
     if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
 
     const [errSearchTotal, total] = await callAsync(ItemDao.countDocuments(filter))
@@ -48,7 +49,7 @@ class ItemService {
     const updateProps = _.pick(updateInfo, ItemStore.theCreateKeys())
     const queryOptions = { new: true }
 
-    const [errUpdate, newItem] = await callAsync(ItemDao.findOneDocAndUpdate(filter, updateProps, queryOptions))
+    const [errUpdate, newItem] = await callAsync(ItemDao.findOneAndUpdate(filter, updateProps, queryOptions))
     if (errUpdate) throw new Error(`数据库更新操作失败 => ${errUpdate}`)
 
     return newItem
@@ -62,7 +63,7 @@ class ItemService {
   public static async deleteItem(itemId: string): Promise<ItemDoc> {
     const filter: ItemFilter = { _id: itemId }
 
-    const [errDelete, deletedItem] = await callAsync(ItemDao.findOneDocAndDelete(filter))
+    const [errDelete, deletedItem] = await callAsync(ItemDao.findOneAndDelete(filter))
     if (errDelete) throw new Error(`数据库删除操作失败 => ${errDelete}`)
 
     return deletedItem

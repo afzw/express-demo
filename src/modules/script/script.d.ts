@@ -23,11 +23,11 @@ export interface ScriptProps {
   /**
    * 数据库文档创建时间，不应与业务耦合。
    */
-  createdAt: Date
+  createdAt?: Date
   /**
    * 数据库文档更新时间，不应与业务耦合。
    */
-  updatedAt: Date
+  updatedAt?: Date
 }
 
 /**

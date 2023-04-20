@@ -1,3 +1,4 @@
+import { AuthRoutes } from '@/apis/auth/auth.route'
 import userRoutes from '@/modules/user/user.route'
 import ItemRoutes from '@/apis/item/item.route'
 
@@ -9,6 +10,7 @@ function addRoutes(routes: App.Route[]) {
   }
 }
 
+addRoutes(AuthRoutes)
 addRoutes(userRoutes)
 addRoutes(ItemRoutes)
 

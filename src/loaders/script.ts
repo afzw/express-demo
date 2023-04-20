@@ -24,7 +24,7 @@ export async function executScripts(scriptDir: string): Promise<void> {
 
     //  查询脚本执行状态
     const [queryScriptErr, script] = await callAsync(
-      ScriptDao.findOneDocAndUpdate({ name }, { name }, { upsert: true, new: false })
+      ScriptDao.findOneAndUpdate({ name }, { name }, { upsert: true, new: false })
     )
     if (queryScriptErr) {
       console.log(`查询脚本执行状态失败：${queryScriptErr}`)
@@ -48,7 +48,7 @@ export async function executScripts(scriptDir: string): Promise<void> {
       duration: Date.now() - begin,
       message: execScriptErr ? execScriptErr.message || execScriptErr : null
     }
-    await ScriptDao.findOneDocAndUpdate({ name }, update)
+    await ScriptDao.findOneAndUpdate({ name }, update)
   }
 
   logger.info(

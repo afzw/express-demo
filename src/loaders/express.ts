@@ -11,7 +11,7 @@ import MongoStore from 'connect-mongo'
 import config from '@/config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { getMongoUri } from '@/loaders/mongo/mongo'
-import { localSerialize, localDeserialize } from '@/loaders/auth/local_auth/local_auth.service'
+import { localSerialize, localDeserialize } from '@/business/auth/local/local-auth.service'
 
 /**
  * 【初始化】加载express程序

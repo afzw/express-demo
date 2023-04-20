@@ -10,12 +10,12 @@ import UserStore from './user.store'
  */
 export async function getProfile(req: Request, res: Response) {
   const [updateSessionInfoErr] = await callAsync(
-    SessionInfoDao.findOneDocAndUpdate({ sessionId: req.sessionID }, { activeAt: new Date() })
+    SessionInfoDao.findOneAndUpdate({ sessionId: req.sessionID }, { activeAt: new Date() })
   )
   if (updateSessionInfoErr) return res.status(500).send(`更新会话信息失败 => ${updateSessionInfoErr}`)
 
   const [findUserInfoErr, userInfo] = await callAsync(
-    UserDao.findOnePojoAndUpdate({ _id: req.user._id }, { activeAt: new Date() })
+    UserDao.findOne({ _id: req.user._id }, { activeAt: new Date() }, { lean: true })
   )
   if (findUserInfoErr) return res.status(500).send(`获取用户信息失败 => ${findUserInfoErr}`)
 
