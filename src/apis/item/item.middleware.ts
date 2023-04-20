@@ -1,7 +1,7 @@
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response, NextFunction } from 'express'
-import ItemService from '../../business/item'
 import { ItemFilter } from '../../modules/item/item'
+import itemDao from '@/business/item/item.dao'
 
 /**
  * 验证params中的item是否存在。
@@ -11,10 +11,10 @@ export async function validateItemInParams(req: Request, res: Response, next: Ne
 
   const filter: ItemFilter = { _id: itemId }
 
-  const [errFind, searchResult] = await callAsync(ItemService.searchItems(filter))
-  if (errFind) return res.status(500).send(`查询item失败 => ${errFind}`)
+  const [err, item] = await callAsync(itemDao.findOne(filter))
+  if (err) return res.status(500).send(`查询item失败 => ${err}`)
 
-  if (!searchResult.total) return res.status(400).send(`该item不存在！`)
+  if (!item) return res.status(400).send(`该item不存在！`)
 
   next()
 }

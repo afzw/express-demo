@@ -1,4 +1,4 @@
-import ScriptModel from './script.model'
+import ScriptModel from '../../modules/script/script.model'
 import { MongooseBase } from '@/components/mongoose'
 
 class ScriptDao extends MongooseBase {}

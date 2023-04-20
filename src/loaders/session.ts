@@ -1,4 +1,4 @@
-import sessionInfoDao from '@/modules/sessionInfo/sessionInfo.dao'
+import sessionInfoDao from '@/business/sessionInfo/sessionInfo.dao'
 
 /**
  * 定期清理过期会话
