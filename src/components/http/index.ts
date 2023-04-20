@@ -1,3 +1,3 @@
-import Axios from './client'
+import { HttpClient } from './client'
 
-export { Axios }
+export { HttpClient }

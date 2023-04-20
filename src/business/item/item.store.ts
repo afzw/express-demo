@@ -4,7 +4,7 @@ const ItemStore = {
   /**
    * 创建属性
    */
-  theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId'],
+  theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId', 'testItems'],
   /**
    * 可查询依据
    */

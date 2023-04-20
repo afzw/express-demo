@@ -18,9 +18,12 @@ export interface ItemProps {
   createdAt: Date
   /** 数据库文档更新时间，不应与业务耦合。 */
   updatedAt: Date
+  testItems: TestItem[]
+}
 
-  /** 【discount-item】折扣率 */
-  discount?: number
+interface TestItem {
+  name: string
+  age?: number
 }
 
 /* --------------------------- odm (mongoose) 相关  --------------------------- */
