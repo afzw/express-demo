@@ -2,6 +2,7 @@ import callAsync from '@/lib/utils/callAsync'
 import { Request, Response } from 'express'
 import ItemService from '@/business/item'
 import { ItemFilter } from '@/modules/item/item'
+import { Paging } from '@/components/mongoose'
 
 /** 新建item */
 export async function create(req: Request, res: Response) {
@@ -16,13 +17,14 @@ export async function create(req: Request, res: Response) {
 /** 查询items */
 export async function search(req: Request, res: Response) {
   const { name, price, ownerId } = req.query
+  const pagingOptions = Paging.extractOptions(req.query)
 
   const filter: ItemFilter = {}
   if (name) filter.name = name
   if (price) filter.price = Number(price)
   if (ownerId) filter.ownerId = ownerId
 
-  const [errSearch, result] = await callAsync(ItemService.searchItems(filter))
+  const [errSearch, result] = await callAsync(ItemService.searchItems(filter, null, pagingOptions))
   if (errSearch) return res.status(500).send(`查询item失败 => ${errSearch}`)
 
   return res.json(result)

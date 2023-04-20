@@ -3,6 +3,7 @@ import { ItemDoc, ItemFilter } from '@/modules/item/item'
 import ItemDao from '@/business/item/item.dao'
 import _ from 'lodash'
 import ItemStore from './item.store'
+import { QueryOptions } from 'mongoose'
 
 /** 【item】业务逻辑之增删改查 */
 class ItemService {
@@ -25,9 +26,13 @@ class ItemService {
    * @param searchProps
    * @return 查询出的item mongoose 文档
    */
-  public static async searchItems(filter: ItemFilter): Promise<{ items: ItemDoc[]; total: number }> {
+  public static async searchItems(
+    filter: ItemFilter,
+    projection: string | null,
+    options: QueryOptions
+  ): Promise<{ items: ItemDoc[]; total: number }> {
     // const [errSearchItems, items] = await callAsync(ItemDao2.findDocsByFilter(filter))
-    const [errSearchItems, items] = await callAsync(ItemDao.find(filter))
+    const [errSearchItems, items] = await callAsync(ItemDao.find(filter, projection, options))
     if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
 
     const [errSearchTotal, total] = await callAsync(ItemDao.countDocuments(filter))
