@@ -2,13 +2,13 @@ import mongodb from 'mongodb'
 import { Model, FilterQuery, QueryOptions, UpdateQuery, HydratedDocument } from 'mongoose'
 
 /** mongoose 基础操作 */
-class MongooseBase {
+class MongooseBase<P = unknown> {
   /** mongoose model */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private _model: Model<any>
+  private _model: Model<P>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(model: Model<any>) {
+  constructor(model: Model<P>) {
     this._model = model
   }
   /* -------------------- 新建 -------------------- */
@@ -17,7 +17,7 @@ class MongooseBase {
    * @param props 新建文档的属性
    * @returns 新建的文档
    */
-  public create<P>(props: P): Promise<HydratedDocument<P>> {
+  public create(props: P): Promise<HydratedDocument<P>> {
     return this._model.create(props)
   }
 
@@ -26,7 +26,7 @@ class MongooseBase {
    * @param props 新建文档属性（数组）
    * @returns 新建结果
    */
-  public createMany<P>(props: P[]): Promise<HydratedDocument<P>[]> {
+  public createMany(props: P[]): Promise<HydratedDocument<P>[]> {
     return this._model.insertMany(props)
   }
 
@@ -38,7 +38,7 @@ class MongooseBase {
    * @param options 查询选项
    * @returns 筛选查询后的文档
    */
-  public findOne<P>(
+  public findOne(
     filter: FilterQuery<P>,
     projection?: unknown | null,
     options?: QueryOptions
@@ -52,7 +52,7 @@ class MongooseBase {
    * @param options 查询选项
    * @returns 筛选查询后的文档数组
    */
-  public find<P>(
+  public find(
     filter: FilterQuery<P>,
     projection?: unknown | null,
     options?: QueryOptions
@@ -88,7 +88,7 @@ class MongooseBase {
    * @param options 查询选项
    * @returns 更新（前/后）的文档
    */
-  public findOneAndUpdate<P>(
+  public findOneAndUpdate(
     filter: FilterQuery<P>,
     update: UpdateQuery<P>,
     options?: QueryOptions
@@ -103,7 +103,7 @@ class MongooseBase {
    * @param options 选项
    * @returns 更新操作结果
    */
-  public updateMany<P>(
+  public updateMany(
     filter: FilterQuery<P>,
     update: UpdateQuery<P>,
     options?: QueryOptions
@@ -118,7 +118,7 @@ class MongooseBase {
    * @param options 查询选项
    * @returns 被删除的文档
    */
-  public findOneAndDelete<P>(filter: FilterQuery<P>, options?: QueryOptions): Promise<HydratedDocument<P>> {
+  public findOneAndDelete(filter: FilterQuery<P>, options?: QueryOptions): Promise<HydratedDocument<P>> {
     return this._model.findOneAndDelete(filter, options).exec()
   }
 
