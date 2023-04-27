@@ -4,6 +4,7 @@ import ItemDao from '@/business/item/item.dao'
 import _ from 'lodash'
 import ItemStore from './item.store'
 import { QueryOptions } from 'mongoose'
+import { AppError } from '@/lib/error'
 
 /** 【item】业务逻辑之增删改查 */
 class ItemService {
@@ -16,7 +17,7 @@ class ItemService {
     const createProps = _.pick(createInfo, ItemStore.theCreateKeys())
 
     const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
-    if (errCreate) throw new Error(`数据库插入操作失败 => ${errCreate}`)
+    if (errCreate) throw new AppError({ code: 500, message: `数据插入操作失败 => ${errCreate.message}` })
 
     return newItem
   }
@@ -31,7 +32,6 @@ class ItemService {
     projection: string | null,
     options: QueryOptions
   ): Promise<{ items: ItemDoc[]; total: number }> {
-    // const [errSearchItems, items] = await callAsync(ItemDao2.findDocsByFilter(filter))
     const [errSearchItems, items] = await callAsync(ItemDao.find(filter, projection, options))
     if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
 

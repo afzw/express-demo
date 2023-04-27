@@ -9,7 +9,7 @@ export async function create(req: Request, res: Response) {
   const createInfo: Ctx.Body = req.body
 
   const [errCreate, newItem] = await callAsync(ItemService.createItem(createInfo))
-  if (errCreate) return res.status(500).send(`新建item失败 => ${errCreate}`)
+  if (errCreate) return res.status(500).send({ message: errCreate.message, code: errCreate.code })
 
   return res.json(newItem)
 }

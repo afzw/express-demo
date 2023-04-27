@@ -10,7 +10,7 @@ const config = {
 
   /* 资源 */
   staticDir: path.join(__dirname, 'assets'), //  静态资源目录
-  uploadDir: path.join(__dirname, '..', 'uploads'), //  文件默认上传目录（multer上传目录）
+  uploadDir: path.join(__dirname, '../../', 'uploads'), //  文件默认上传目录（multer上传目录）
 
   /* 数据存储 */
   session: {
