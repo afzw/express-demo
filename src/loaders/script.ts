@@ -6,11 +6,14 @@ import ScriptDao from '@/business/script/script.dao'
 
 /**
  * 执行脚本
+ * @param scriptDir 脚本目录的绝对路径
  */
 export async function executScripts(scriptDir: string): Promise<void> {
   if (!scriptDir) return
 
+  /** 脚本总数 */
   let totalCount = 0
+  /** 本次执行脚本数 */
   let doingCount = 0
 
   const [readDirErr, files] = await callAsync(readdirp(scriptDir))

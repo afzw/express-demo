@@ -9,6 +9,9 @@ import { sessionCleaner } from './session'
 import { executScripts } from './script'
 import path from 'path'
 
+/** 脚本目录路径 */
+const SCRIPTPATH = path.join(__dirname, '..', 'scripts')
+
 /** 程序初始化加载器 */
 async function initLoaders(app: express.Express) {
   await loadMongoDB(config.mongo)
@@ -18,7 +21,7 @@ async function initLoaders(app: express.Express) {
   loadEventEmitter()
 
   sessionCleaner()
-  await executScripts(path.join(__dirname, '..', 'scripts')) //  执行脚本
+  await executScripts(SCRIPTPATH)
 }
 
 export default initLoaders

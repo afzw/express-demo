@@ -1,4 +1,4 @@
-require('module-alias/register') //  路径别名
+require('module-alias/register') //  路径别名，在package.json中配置。
 
 import * as http from 'http'
 import { AddressInfo } from 'node:net'
