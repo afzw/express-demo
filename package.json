@@ -23,6 +23,7 @@
     "*.{js,ts,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@types/node-schedule": "^2.1.0",
     "axios": "^1.2.2",
     "basic-ftp": "^5.0.2",
     "body-parser": "^1.20.0",
@@ -39,6 +40,7 @@
     "mongoose": "~6.9.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "node-schedule": "^2.1.1",
     "passport": "^0.6.0",
     "redis": "^4.3.0"
   },

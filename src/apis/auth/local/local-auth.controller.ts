@@ -10,7 +10,7 @@ import sessionInfoDao from '@/business/sessionInfo/sessionInfo.dao'
 import { SessionInfoProps } from '@/modules/sessionInfo/sessionInfo'
 import { UserFilter, UserProps } from '@/modules/user/user'
 import UserStore from '@/modules/user/user.store'
-import LocalAuthStore from '../../../business/auth/local/local-auth.store'
+import LocalAuthStore from '@/business/auth/local/local-auth.store'
 
 /**
  * 登录

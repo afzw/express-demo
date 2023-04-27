@@ -4,7 +4,7 @@ import ItemDao from '@/business/item/item.dao'
 import _ from 'lodash'
 import ItemStore from './item.store'
 import { QueryOptions } from 'mongoose'
-import { AppError } from '@/lib/error'
+import AppError from '@/lib/error'
 
 /** 【item】业务逻辑之增删改查 */
 class ItemService {
@@ -17,7 +17,7 @@ class ItemService {
     const createProps = _.pick(createInfo, ItemStore.theCreateKeys())
 
     const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
-    if (errCreate) throw new AppError({ code: 500, message: `数据插入操作失败 => ${errCreate.message}` })
+    if (errCreate) throw new AppError({ message: `数据插入操作失败 => ${errCreate.message}` })
 
     return newItem
   }
@@ -33,10 +33,10 @@ class ItemService {
     options: QueryOptions
   ): Promise<{ items: ItemDoc[]; total: number }> {
     const [errSearchItems, items] = await callAsync(ItemDao.find(filter, projection, options))
-    if (errSearchItems) throw new Error(`数据库查询items失败 => ${errSearchItems}`)
+    if (errSearchItems) throw new AppError({ message: `数据库查询items失败 => ${errSearchItems.message}` })
 
     const [errSearchTotal, total] = await callAsync(ItemDao.countDocuments(filter))
-    if (errSearchTotal) throw new Error(`数据库查询items总数失败 => ${errSearchTotal}`)
+    if (errSearchTotal) throw new AppError({ message: `数据库查询items总数失败 => ${errSearchTotal.message}` })
 
     const result = { items, total }
 
@@ -55,7 +55,7 @@ class ItemService {
     const queryOptions = { new: true }
 
     const [errUpdate, newItem] = await callAsync(ItemDao.findOneAndUpdate(filter, updateProps, queryOptions))
-    if (errUpdate) throw new Error(`数据库更新操作失败 => ${errUpdate}`)
+    if (errUpdate) throw new AppError({ message: `数据库更新操作失败 => ${errUpdate}` })
 
     return newItem
   }
@@ -69,7 +69,7 @@ class ItemService {
     const filter: ItemFilter = { _id: itemId }
 
     const [errDelete, deletedItem] = await callAsync(ItemDao.findOneAndDelete(filter))
-    if (errDelete) throw new Error(`数据库删除操作失败 => ${errDelete}`)
+    if (errDelete) throw new AppError({ message: `数据库删除操作失败 => ${errDelete}` })
 
     return deletedItem
   }

@@ -3,6 +3,7 @@ import __publicRoutes from '@/loaders/router/public.route'
 import __moduleRoutes from '@/loaders/router/module.route'
 import __otherRoutes from '@/loaders/router/other.route'
 import registerRouter from '@/loaders/router/register'
+import errorHandler from '../errorHandler'
 
 //  路由字典
 export const routesMap = new Map()
@@ -25,6 +26,9 @@ function loadRouters(app: express.Express) {
   const otherRouter = express.Router()
   registerRouter(otherRouter, __otherRoutes, 'public')
   app.use('/', otherRouter)
+
+  // 添加错误处理器
+  app.use(errorHandler)
 }
 
 export default loadRouters

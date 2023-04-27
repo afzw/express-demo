@@ -1,18 +1,10 @@
-/**
- * @fileOverview 程序配置文件--示例文件
- */
 import path from 'path'
 
-const config = {
-  /* 基本：web服务器 */
+const config: App.Config = {
   port: 10240,
-  frontendUrl: '',
-
-  /* 资源 */
-  staticDir: path.join(__dirname, 'assets'), //  静态资源目录
-  uploadDir: path.join(__dirname, '../../', 'uploads'), //  文件默认上传目录（multer上传目录）
-
-  /* 数据存储 */
+  staticDir: path.join(__dirname, '../../', 'assets'),
+  uploadDir: path.join(__dirname, '../../', 'uploads'),
+  logDir: path.join(__dirname, '../../', 'logs'),
   session: {
     name: 'ExpressDemo-sid',
     secret: 'Secret Password For ExpressDemo',

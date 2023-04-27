@@ -1,39 +1,40 @@
 /** 应用程序错误 - 错误体 */
 interface AppErrorBody {
-  /** 错误码 */
-  code: number
   /** 错误信息 */
   message: string
-}
-
-/** 业务错误 - 错误体 */
-interface ServiceErrorBody extends AppErrorBody {
+  /** http状态码 */
+  httpCode?: number
   /** 业务码 */
-  serviceCode: number
+  serviceCode?: string
 }
 
 /** 应用程序错误 */
 class AppError extends Error {
-  /** 错误代码 */
-  public code: number
+  private _message: string
+  private _httpCode: number
+  private _serviceCode: string
 
   constructor(body: AppErrorBody) {
     super()
-    this.code = body.code
-    this.message = body.message
+    this._message = body.message || '未知错误信息'
+    this._httpCode = body.httpCode || 500
+    this._serviceCode = body.serviceCode || '00000'
   }
-}
 
-/** 业务错误 */
-class ServiceError extends AppError {
+  /** 错误信息 */
+  get message() {
+    return this._message
+  }
+
+  /** http状态码 */
+  get httpCode() {
+    return this._httpCode
+  }
+
   /** 业务码 */
-  public serviceCode: number
-
-  constructor(body: ServiceErrorBody) {
-    super(body)
-    this.code = 500
-    this.serviceCode = body.serviceCode
+  get serviceCode() {
+    return this._serviceCode
   }
 }
 
-export { AppError, ServiceError }
+export default AppError

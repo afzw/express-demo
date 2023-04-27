@@ -27,16 +27,28 @@ declare namespace App {
   }
 
   /**
-   * 程序启动选项
-   */
-  interface LaunchOptions {
-    testing: boolean // 启动程序 for testing ?
-  }
-
-  /**
    * 程序配置
    */
   interface Config {
+    /** 监听端口 */
+    port: number
+
+    /** 静态资源目录 */
+    staticDir: string
+    /** 文件上传目录 */
+    uploadDir: string
+    /** 日志目录 */
+    logDir: string
+
+    /** session配置 */
+    session: {
+      name: string
+      secret: string
+      expireDays: number
+      maxPerUser: number
+    }
+
+    /** mongo配置 */
     mongo: {
       name: string
       username?: string

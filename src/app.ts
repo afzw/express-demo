@@ -1,26 +1,27 @@
 require('module-alias/register') //  路径别名，在package.json中配置。
 
-import * as http from 'http'
 import { AddressInfo } from 'node:net'
 import express from 'express'
+import * as http from 'http'
 
-import config from '@/config/config' //  加载软件配置文件
+import config from '@/config/config'
 import initLoaders from '@/loaders'
-import logger from '@/lib/utils/logger' //  日志打印
+import logger from '@/lib/utils/logger'
 
-async function launchApp(options?: App.LaunchOptions, cb?: (server: http.Server) => void) {
+async function launchServer(config: App.Config): Promise<http.Server> {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const app: express.Express = new express()
 
-  await initLoaders(app)
+  await initLoaders(app, config)
 
-  const server = app.listen(config.port, async () => {
+  const server = app.listen(config.port, () =>
     logger.info(`web服务器已启动，监听端口: ${(server.address() as AddressInfo).port}`, { label: 'App' })
-    if (cb) cb(server)
-  })
+  )
+
+  return server
 }
 
-launchApp()
+launchServer(config)
 
-export { launchApp }
+export { launchServer }

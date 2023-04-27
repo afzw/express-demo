@@ -8,8 +8,12 @@ package-lock.json
 # example files
 **/config.ts
 
-# uplaod dir
+# upload dir
 **/uploads
+
+# log
+**/logs
+
 
 # compile dir
 dist
