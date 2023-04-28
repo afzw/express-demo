@@ -1,5 +1,5 @@
-import { UserProps } from './user'
-import { UserModel } from './user.model'
+import { UserProps } from '../../modules/user/user'
+import { UserModel } from '../../modules/user/user.model'
 import { MongooseBase } from '@/components/mongoose'
 
 class UserDao extends MongooseBase<UserProps> {}

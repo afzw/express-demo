@@ -1,5 +1,5 @@
 import { UserDoc } from '@/modules/user/user'
-import UserDao from '@/modules/user/user.dao'
+import UserDao from '@/business/user/user.dao'
 import { callAsync } from '@/lib/utils/callAsync'
 
 /**

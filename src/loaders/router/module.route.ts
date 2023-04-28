@@ -1,5 +1,5 @@
 import { AuthRoutes } from '@/apis/auth/auth.route'
-import userRoutes from '@/modules/user/user.route'
+import userRoutes from '@/apis/user/user.route'
 import ItemRoutes from '@/apis/item/item.route'
 
 /** 业务路由 */

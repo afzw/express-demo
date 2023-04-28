@@ -2,8 +2,8 @@ import _ from 'lodash'
 import { Request, Response } from 'express'
 import SessionInfoDao from '@/business/sessionInfo/sessionInfo.dao'
 import { callAsync } from '@/lib/utils/callAsync'
-import UserDao from '@/modules/user/user.dao'
-import UserStore from './user.store'
+import UserDao from '@/business/user/user.dao'
+import UserStore from '../../business/user/user.store'
 
 /**
  * 获取用户主页信息
@@ -22,4 +22,13 @@ export async function getProfile(req: Request, res: Response) {
   const profile = _.pick(userInfo, UserStore.theProfileKeys())
 
   res.send(profile)
+}
+/**
+ * 查询用户
+ */
+export async function search(req: Request, res: Response) {
+  const [searchErr, users] = await callAsync(UserDao.find({}))
+  if (searchErr) return res.status(500).send(`查询用户失败，数据库错误 => ${searchErr}`)
+
+  return res.status(200).send(users)
 }
