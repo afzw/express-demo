@@ -11,7 +11,7 @@ const ERRORLOGFILEPATH = path.join(config.logDir, `error-${moment().format('YYYY
 /** 错误处理器 */
 // express类型限制，无法强制，err请尽量返回程序定义好的错误类型
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+function errorHandler(err: any, req: Request, res: Response, next: NextFunction): Response {
   // 未格式化的错误
   if (err instanceof AppError !== true) {
     console.error(err)

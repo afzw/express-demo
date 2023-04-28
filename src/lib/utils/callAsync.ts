@@ -5,7 +5,7 @@ import AppError from '@/lib/error'
  * @param promise Promise实例
  * @returns [错误, Promise结果值]
  */
-export function callAsync<U = AppError, T = unknown>(promise: Promise<T>): Promise<[U | null, T | null]> {
+export function callAsync<U = any, T = unknown>(promise: Promise<T>): Promise<[U | null, T | null]> {
   return promise.then<[null, T]>((data: T) => [null, data]).catch<[U, null]>((err: U) => [err, null])
 }
 
