@@ -6,19 +6,22 @@ const AuthRoutes: App.Route[] = [
   {
     path: '/auth/sign-in',
     method: 'POST',
-    middlewares: [Auth.signIn]
+    middlewares: [Auth.signIn],
+    permission: 'public'
   },
   //  注册
   {
     path: '/auth/sign-up',
     method: 'POST',
-    middlewares: [Auth.signUp]
+    middlewares: [Auth.signUp],
+    permission: 'public'
   },
   //  登出
   {
     path: '/auth/sign-out',
     method: 'POST',
-    middlewares: [Auth.signOut]
+    middlewares: [Auth.signOut],
+    permission: 'public'
   }
 ]
 
