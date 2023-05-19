@@ -19,12 +19,12 @@ const userSchema = new Schema<UserProps, UserModelType, UserMethods, UserQueryHe
     },
     password: {
       type: String,
-      select: false,
+      // select: false,
       required: true
     },
     salt: {
       type: String,
-      select: false,
+      // select: false,
       required: true
     },
     roles: [String],
