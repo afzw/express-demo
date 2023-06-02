@@ -1,4 +1,4 @@
-import { SessionInfoModel } from '@/modules/sessionInfo/sessionInfo.model'
+import { SessionInfoModel } from '@/entities/sessionInfo/sessionInfo.model'
 import { MongooseBase } from '@/components/mongoose'
 
 class SessionInfoDao extends MongooseBase {}

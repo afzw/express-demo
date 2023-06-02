@@ -1,6 +1,6 @@
-import ScriptModel from '@/modules/script/script.model'
+import ScriptModel from '@/entities/script/script.model'
 import { MongooseBase } from '@/components/mongoose'
-import { ScriptProps } from '@/modules/script/script'
+import { ScriptProps } from '@/entities/script/script'
 
 class ScriptDao extends MongooseBase<ScriptProps> {}
 

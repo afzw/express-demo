@@ -2,9 +2,10 @@ import path from 'path'
 
 const config: App.Config = {
   port: 10240,
-  staticDir: path.join(__dirname, '../../', 'assets'),
-  uploadDir: path.join(__dirname, '../../', 'uploads'),
-  logDir: path.join(__dirname, '../../', 'logs'),
+  staticDir: path.join(__dirname, '..', 'assets'),
+  uploadDir: path.join(__dirname, '..', 'uploads'),
+  logDir: path.join(__dirname, '..', 'logs'),
+  scriptDir: path.join(__dirname, '..', 'scripts'),
   session: {
     name: 'ExpressDemo-sid',
     secret: 'Secret Password For ExpressDemo',

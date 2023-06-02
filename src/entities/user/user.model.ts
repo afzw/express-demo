@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { UserMethods, UserModelType, UserProps, UserQueryHelpers, UserVirtuals } from '@/modules/user/user'
+import { UserMethods, UserModelType, UserProps, UserQueryHelpers, UserVirtuals } from '@/entities/user/user'
 
 /* --------------------------------- Mongoose实现 --------------------------------- */
 //  【Mongoose】定义用户Schema

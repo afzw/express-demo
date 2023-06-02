@@ -1,4 +1,4 @@
-import config from '@/config/config'
+import config from '@config/config'
 import callAsync from '@/lib/utils/callAsync'
 import { access, mkdir } from 'fs/promises'
 

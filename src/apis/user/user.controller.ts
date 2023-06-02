@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import { Request, Response } from 'express'
-import SessionInfoDao from '@/business/sessionInfo/sessionInfo.dao'
+import SessionInfoDao from '@/dao/sessionInfo.dao'
 import { callAsync } from '@/lib/utils/callAsync'
-import UserDao from '@/business/user/user.dao'
+import UserDao from '@/dao/user.dao'
 import UserStore from '../../business/user/user.store'
 
 /**

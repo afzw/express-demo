@@ -1,6 +1,6 @@
 import utils from '@/lib/utils/common'
-import { UserProps } from '@/modules/user/user'
-import UserDao from '@/business/user/user.dao'
+import { UserProps } from '@/entities/user/user'
+import UserDao from '@/dao/user.dao'
 
 /**
  * @fileoverview 【默认脚本】创建系统管理员

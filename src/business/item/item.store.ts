@@ -1,10 +1,10 @@
-import { ItemKey } from '@/modules/item/item'
+import { ItemKey } from '@/entities/item/item'
 
 const ItemStore = {
   /**
    * 创建属性
    */
-  theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId', 'testItems'],
+  theCreateKeys: (): ItemKey[] => ['name', 'price', 'ownerId'],
   /**
    * 可查询依据
    */

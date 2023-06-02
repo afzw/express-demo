@@ -1,7 +1,7 @@
 import callAsync from '@/lib/utils/callAsync'
 import { Request, Response, NextFunction } from 'express'
-import { ItemFilter } from '../../modules/item/item'
-import itemDao from '@/business/item/item.dao'
+import { ItemFilter } from '../../entities/item/item'
+import itemDao from '@/dao/item.dao'
 import AppError from '@/lib/error'
 
 /**

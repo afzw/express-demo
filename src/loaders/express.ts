@@ -8,7 +8,7 @@ import passport from 'passport'
 import moment from 'moment'
 import MongoStore from 'connect-mongo'
 
-import config from '@/config/config'
+import config from '@config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { getMongoUri } from '@/loaders/mongo/mongo'
 import { localSerialize, localDeserialize } from '@/business/auth/local/local-auth.service'

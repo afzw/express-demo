@@ -4,7 +4,7 @@ import { AddressInfo } from 'node:net'
 import express from 'express'
 import * as http from 'http'
 
-import config from '@/config/config'
+import config from '@config/config'
 import initLoaders from '@/loaders'
 import logger from '@/lib/utils/logger'
 

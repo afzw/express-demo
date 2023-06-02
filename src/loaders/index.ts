@@ -5,12 +5,8 @@ import initRbac from './rbac'
 import loadRouters from './router'
 import loadEventEmitter from './eventEmitter'
 import { executScripts } from './script'
-import path from 'path'
 import { makeLogDir } from './log'
 import Schedule from './schedule'
-
-/** 脚本目录路径 */
-const SCRIPTPATH = path.join(__dirname, '..', 'scripts')
 
 /**
  * 初始化服务
@@ -28,7 +24,7 @@ async function initLoaders(app: express.Express, config: App.Config) {
 
   // 业务逻辑初始化
   initRbac()
-  await executScripts(SCRIPTPATH)
+  await executScripts(config.scriptDir)
 
   // 定时任务
   const schedule = new Schedule()

@@ -17,6 +17,7 @@
   },
   "_moduleAliases": {
     "@": "src/",
+    "@config": "config/",
     "@test": "test/"
   },
   "lint-staged": {

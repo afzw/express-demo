@@ -1,4 +1,4 @@
-import config from '@/config/config'
+import config from '@config/config'
 import AppError from '@/lib/error'
 import { Request, Response, NextFunction } from 'express'
 import { appendFile } from 'fs/promises'

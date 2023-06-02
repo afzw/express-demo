@@ -39,6 +39,8 @@ declare namespace App {
     uploadDir: string
     /** 日志目录 */
     logDir: string
+    /** 脚本目录 */
+    scriptDir: string
 
     /** session配置 */
     session: {

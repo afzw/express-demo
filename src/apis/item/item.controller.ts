@@ -1,7 +1,7 @@
 import callAsync from '@/lib/utils/callAsync'
 import { NextFunction, Request, Response } from 'express'
-import ItemService from '@/business/item'
-import { ItemFilter } from '@/modules/item/item'
+import ItemService from '@/business/item/item.service'
+import { ItemFilter } from '@/entities/item/item'
 import { Paging } from '@/components/mongoose'
 
 /** 新建item */
