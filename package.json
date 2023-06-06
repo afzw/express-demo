@@ -2,6 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "web后台服务",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
   "scripts": {
     "start": "NODE_ENV='production' nodemon src/app.ts",
     "dev": "NODE_ENV='dev' nodemon  src/app.ts",
