@@ -2,7 +2,7 @@
  * @fileoverview Nope日志打印
  */
 import os from 'os'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 interface Options {
   label?: string
@@ -42,7 +42,7 @@ class Logger {
   print(level: number, message: any, options: Options = {}) {
     if (!message) return
 
-    const timestamp = moment().format('YYYY/MM/DD HH:mm:ss')
+    const timestamp = dayjs().format('YYYY/MM/DD HH:mm:ss')
     const tags = options.label || options.tags?.join(',') || ' '
 
     if (message.message) message = message.message

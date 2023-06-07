@@ -3,12 +3,12 @@ import config from '@config/config'
 import AppError from '@/lib/error'
 import { Request, Response, NextFunction } from 'express'
 import { appendFile } from 'fs/promises'
-import moment from 'moment'
 import path from 'path'
 import { ValidationError } from 'express-validation'
+import dayjs from 'dayjs'
 
 /** 错误日志路径 */
-const ERRORLOGFILEPATH = path.join(config.logDir, `error-${moment().format('YYYYMMDD')}.txt`)
+const ERRORLOGFILEPATH = path.join(config.logDir, `error-${dayjs().format('YYYYMMDD')}.txt`)
 
 /**
  * 错误处理器
@@ -19,7 +19,7 @@ function errorHandler(error: any, req: Request, res: Response, next: NextFunctio
   const formatedError = getFormatError(error)
 
   // 格式化的错误
-  const errInfo = `【${new Date()}】应用程序出现错误:
+  const formatedErrorInfo = `【${dayjs().format('YYYY-MM-DDTHH:mm:ss')}】应用程序出现错误:
   错误名: ${formatedError.name}
   http状态码: ${formatedError.statusCode}
   业务码: ${formatedError.businessCode || '未知'}
@@ -29,9 +29,11 @@ function errorHandler(error: any, req: Request, res: Response, next: NextFunctio
 
   console.error(error)
 
-  appendFile(ERRORLOGFILEPATH, errInfo).catch(writeErr => console.log(`错误日志写入文件失败 => ${writeErr}`))
+  appendFile(ERRORLOGFILEPATH, formatedErrorInfo).catch(writeErr => console.log(`错误日志写入文件失败 => ${writeErr}`))
 
-  return res.status(error.statusCode).send({ message: error.message, businessCode: error.businessCode })
+  return res
+    .status(error.statusCode)
+    .send({ name: formatedError.name, message: formatedError.message, businessCode: formatedError.businessCode })
 
   /**
    * 获取格式化后的错误

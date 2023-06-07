@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import jwt from 'jsonwebtoken'
 
 /**
@@ -13,7 +13,7 @@ export function generate24BitsKey(): string {
  * 生成数字类型唯一识别码
  */
 export function generateNumericUUID(): string {
-  return moment().format('YYYYMMDDHHmmssSSS') + Math.floor(Math.random() * 1000)
+  return dayjs().format('YYYYMMDDHHmmssSSS') + Math.floor(Math.random() * 1000)
 }
 
 /**

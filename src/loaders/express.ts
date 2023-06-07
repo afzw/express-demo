@@ -5,7 +5,7 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import passport from 'passport'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import MongoStore from 'connect-mongo'
 
 import config from '@config/config'
@@ -26,7 +26,7 @@ function loadExpress(app: express.Express) {
   /** 配置multer静态资源目录 */
   app.use(express.static(config.staticDir))
   /** HTTP request logger */
-  morgan.token('date', () => moment().format('YYYY/MM/DD HH:mm:ss'))
+  morgan.token('date', () => dayjs().format('YYYY/MM/DD HH:mm:ss'))
   app.use(morgan(':date :method :url -- [:status] :response-time ms'))
   /** 压缩response */
   app.use(compression())
