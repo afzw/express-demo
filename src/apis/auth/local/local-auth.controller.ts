@@ -21,7 +21,7 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
 
   // 验证表单
   if (!signInProfile.email || !signInProfile.password)
-    return next(new AppError({ httpCode: 400, message: '邮箱或密码未填写' }))
+    return next(new AppError({ statusCode: 400, message: '邮箱或密码未填写' }))
 
   // 查询用户
   const findUserFilter: UserFilter = {
@@ -30,22 +30,22 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
   }
   const [err, user] = await callAsync(UserDao.findOne(findUserFilter, null, { lean: true }))
   if (err) return next(err)
-  if (!user) return next(new AppError({ httpCode: 401, message: '邮箱或密码错误' }))
+  if (!user) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
 
   // 密码验证
   const salt = user.salt
   const enPass = utils.md5(salt + signInProfile.password)
-  if (enPass !== user.password) return next(new AppError({ httpCode: 401, message: '邮箱或密码错误' }))
+  if (enPass !== user.password) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
 
   if (user.disabled) {
     req.logout(function (err: any) {
       if (err) console.log('登录失败，用户已禁用')
-      return next(new AppError({ httpCode: 400, message: '登录失败，用户已禁用' }))
+      return next(new AppError({ statusCode: 400, message: '登录失败，用户已禁用' }))
     })
   }
 
   req.login(user, async (error: any) => {
-    if (error) return next(new AppError({ httpCode: 500, message: `登录失败 => ${err}` }))
+    if (error) return next(new AppError({ statusCode: 500, message: `登录失败 => ${err}` }))
 
     //  记录sessionInfo
     const SessionInfoProps: SessionInfoProps = {
@@ -74,7 +74,7 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
 export async function signUp(req: Request, res: Response, next: NextFunction) {
   const signUpProfile = _.pick(req.body, 'email', 'password', 'username', 'nickname')
   if (!signUpProfile.email || !signUpProfile.password || !signUpProfile.username)
-    return next(new AppError({ httpCode: 400, message: '信息填写不全' }))
+    return next(new AppError({ statusCode: 400, message: '信息填写不全' }))
 
   const salt = utils.genRandom()
   const password = utils.md5(salt + signUpProfile.password)

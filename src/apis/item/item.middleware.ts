@@ -14,7 +14,7 @@ export async function validateItemInParams(req: Request, res: Response, next: Ne
 
   const [err, item] = await callAsync(itemDao.findOne(filter))
   if (err) return next(err)
-  if (!item) return next(new AppError({ message: '没有找到item', httpCode: 404 }))
+  if (!item) return next(new AppError({ message: '没有找到item', statusCode: 404 }))
 
   next()
 }

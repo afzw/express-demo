@@ -1,12 +1,14 @@
 import * as ItemController from '@/apis/item/item.controller'
 import * as ItemMiddleware from '@/apis/item/item.middleware'
+import ItemValidation from './item.validation'
+import { validate } from 'express-validation'
 
 /** item路由 */
 const ItemRoutes: App.Route[] = [
   {
     path: '/items',
     method: 'POST',
-    middlewares: [ItemController.create],
+    middlewares: [validate(ItemValidation.createItem), ItemController.create],
     permission: 'public'
   },
   {
