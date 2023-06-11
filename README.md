@@ -35,7 +35,7 @@ npm run dev
 
 ## 项目参数
 
-- Node.js >= v14
+- Node.js >= v16
 - MongoDB >= v4.2
 
 ## 功能介绍
