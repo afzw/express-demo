@@ -14,7 +14,10 @@
   "nodemonConfig": {
     "verbose": true,
     "ignore": [
+      "assets",
       "dist",
+      "logs",
+      "scripts",
       "uploads"
     ],
     "exec": "ts-node"
