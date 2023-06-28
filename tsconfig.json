@@ -4,20 +4,14 @@
     "files": true //  使 ts-node 识别 tsconfig.json 的 files, include or exclude 配置
   },
   "compilerOptions": {
-    "outDir": "dist",
-    "lib": ["DOM", "ES2020"],
-    "allowJs": false,
-    "module": "CommonJS", //  Nodejs项目建议都设置为CommonJS
+    "outDir": "tsc-dist",
+    "module": "CommonJS",
     "target": "ES6",
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    // "declaration": true,
+    "sourceMap": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "sourceMap": false,
     "composite": true,
-    /*  if you are working with node.js or some environment that doesn't use a module bundler like webpack
-        you will additionally need the npmjs.com/package/module-alias module：https://www.npmjs.com/package/module-alias */
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

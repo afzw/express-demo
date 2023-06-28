@@ -1,5 +1,3 @@
-require('module-alias/register') //  路径别名，在package.json中配置。
-
 import { AddressInfo } from 'node:net'
 import express from 'express'
 import * as http from 'http'
