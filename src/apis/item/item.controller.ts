@@ -6,7 +6,7 @@ import { Paging } from '@/components/mongoose'
 
 /** 新建item */
 export async function create(req: Request, res: Response, next: NextFunction) {
-  const createInfo: Api.Body = req.body
+  const createInfo = req.body
 
   const [errCreate, newItem] = await callAsync(ItemService.createItem(createInfo))
   if (errCreate) return next(errCreate)
@@ -33,7 +33,7 @@ export async function search(req: Request, res: Response, next: NextFunction) {
 /** 更新某个item */
 export async function update(req: Request, res: Response, next: NextFunction) {
   const itemId = req.params.itemId
-  const updateInfo: Api.Body = req.body
+  const updateInfo = req.body
 
   const [errUpdate, newItem] = await callAsync(ItemService.updateItem(itemId, updateInfo))
   if (errUpdate) return next(errUpdate)

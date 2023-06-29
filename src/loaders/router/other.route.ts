@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import path from 'path'
 
 /** 其他路由 */
 const __otherRoutes: App.Route[] = [
@@ -9,7 +8,7 @@ const __otherRoutes: App.Route[] = [
     method: 'GET',
     middlewares: [
       (req: Request, res: Response) => {
-        res.sendFile(path.join(__dirname, '../../../', 'public', 'index.html'))
+        res.status(200).send(`欢迎访问!`)
       }
     ]
   },
