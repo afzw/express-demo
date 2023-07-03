@@ -77,7 +77,6 @@
     "lint-staged": "^13.1.0",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.19",
-    "pnpm": "^8.6.5",
     "prettier": "2.8.3",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
