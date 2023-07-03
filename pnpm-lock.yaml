@@ -154,6 +154,9 @@ devDependencies:
   nodemon:
     specifier: ^2.0.19
     version: 2.0.19
+  pnpm:
+    specifier: ^8.6.5
+    version: 8.6.5
   prettier:
     specifier: 2.8.3
     version: 2.8.3
@@ -4453,6 +4456,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /pnpm@8.6.5:
+    resolution: {integrity: sha512-mztfvneJl4o9gCWfQlFKio6gVYhJbFazWUVBcomJ9u/yspwScHUxMyWvxOed1a543roo+aeIjp5VQkHOoTWFAg==}
+    engines: {node: '>=16.14'}
+    hasBin: true
     dev: true
 
   /prelude-ls@1.2.1:
