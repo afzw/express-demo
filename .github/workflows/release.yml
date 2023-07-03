@@ -16,6 +16,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Configuration
+      run: cp config/config.example.ts config/config.ts
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
