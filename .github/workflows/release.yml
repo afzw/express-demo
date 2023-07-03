@@ -39,7 +39,10 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Build
+    - name: Init Project
       run: |
+        cp config/config.example.ts config/config.ts
         npm install
-        npm run build
+
+    - name: Build
+      run: npm run build
