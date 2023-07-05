@@ -8,10 +8,10 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build": "build.sh",
+    "build": "./build.sh",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
     "bundle": "NODE_ENV=production webpack",
-    "release": "release.sh"
+    "release": "./release.sh"
   },
   "nodemonConfig": {
     "verbose": true,
