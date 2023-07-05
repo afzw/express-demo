@@ -10,8 +10,7 @@
     "prepare": "husky install",
     "build": "chmod +x ./build.sh ./build.sh",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "bundle": "NODE_ENV=production webpack",
-    "release": "chmod +x ./release.sh ./release.sh"
+    "bundle": "NODE_ENV=production webpack"
   },
   "nodemonConfig": {
     "verbose": true,
