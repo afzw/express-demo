@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "express-demo",
   "version": "1.0.0",
   "description": "web后台服务",
   "engines": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build": "chmod +x ./build.sh ./build.sh",
+    "build": "chmod +x ./build.sh | ./build.sh",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
     "bundle": "NODE_ENV=production webpack"
   },

@@ -18,8 +18,10 @@ if [! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS"]; then
     echo "制作并发布镜像$DOCKER_REPO:$TAG"
     docker build -t "$DOCKER_REPO:$TAG"
     docker push "$DOCKER_REPO:$TAG"
+  fi
 
 else
   echo "未配置镜像仓库身份认证信息, 无法发布镜像。"
+fi
 
 exit 0

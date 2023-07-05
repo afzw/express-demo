@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     # strategy:
@@ -36,7 +36,7 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Biuld Project
+    - name: Build Project
       run: npm run build
 
     - name: Bundle Project
@@ -44,5 +44,5 @@ jobs:
 
     - name: Release Docker Image
       run: |
-        chmod +x ./release.sh DOCKER_REPO=${{ secrets.DOCKER_REPO }} DOCKER_USER=${{ secrets.DOCKER_USER }} DOCKER_PASS=${{ secrets.DOCKER_PASS }}
+        chmod +x ./release.sh | DOCKER_REPO=${{ secrets.DOCKER_REPO }} DOCKER_USER=${{ secrets.DOCKER_USER }} DOCKER_PASS=${{ secrets.DOCKER_PASS }}
 
