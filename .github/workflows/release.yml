@@ -39,10 +39,11 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Init Project
-      run: |
-        cp config/config.example.ts config/config.ts
-        npm install
-
-    - name: Build
+    - name: Biuld Project
       run: npm run build
+
+    - name: Bundle Project
+      run: npm run bundle
+
+    - name: Release Docker Image
+      run: npm run release
