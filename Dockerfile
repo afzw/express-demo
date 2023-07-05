@@ -8,4 +8,4 @@ COPY ./dist/main.js ${WORKDIR}
 
 EXPOSE 10240
 
-CMD ["node", ${WORKDIR}/main.js]
+CMD ["node", "${WORKDIR}/main.js"]
