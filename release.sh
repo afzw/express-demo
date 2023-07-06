@@ -7,7 +7,7 @@ set -e
 VERSION=1.0.0
 COMMITS=`git log | grep ^commit | wc -l | xargs`
 
-if [! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS"]; then
+if [ ! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS" ]; then
   echo "登录docker hub"
   docker login "$DOCKER_REPO" -u "$DOCKER_USER" -p "$DOCKER_PASS"
 
