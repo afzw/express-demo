@@ -14,7 +14,7 @@ if [ ! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS" ]; then
   BRANCH=`git branch | grep ^\* | cut -d ' ' -f 2`
   TAG="$VERSION.$COMMITS"
 
-  if [$BRANCH = "master"]; then
+  if [ $BRANCH = "master" ]; then
     echo "制作并发布镜像$DOCKER_REPO:$TAG"
     docker build -t "$DOCKER_REPO:$TAG"
     docker push "$DOCKER_REPO:$TAG"
