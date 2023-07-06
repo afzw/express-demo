@@ -9,7 +9,7 @@ COMMITS=`git log | grep ^commit | wc -l | xargs`
 
 if [ ! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS" ]; then
   echo "登录docker hub"
-  docker login "$DOCKER_REPO" -u "$DOCKER_USER" -p "$DOCKER_PASS"
+  docker login "$DOCKER_REPO" -u "$DOCKER_USER" --password-stdin "$DOCKER_PASS"
 
   BRANCH=`git branch | grep ^\* | cut -d ' ' -f 2`
   TAG="$VERSION.$COMMITS"
