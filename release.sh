@@ -4,7 +4,7 @@
 set -e
 
 # 获取软件版本号（手动更新） & 提交记录（自动获取）
-VERSION=1.0.1
+VERSION=1.0.2
 COMMITS=`git log | grep ^commit | wc -l | xargs`
 
 if [ ! -z "$DOCKER_REPO" -a ! -z "$DOCKER_USER" -a ! -z "$DOCKER_PASS" ]; then
