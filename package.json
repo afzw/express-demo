@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "web后台服务",
   "engines": {
-    "node": ">=18",
+    "node": ">=16",
     "pnpm": ">=8"
   },
   "scripts": {
