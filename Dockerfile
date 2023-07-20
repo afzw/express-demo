@@ -5,7 +5,7 @@ ARG WORKDIR=/app/express-demo
 WORKDIR ${WORKDIR}
 
 COPY ./dist/main.js ${WORKDIR}
-COPY ./tsc-dist/scripts/ ${WORKDIR}/scripts/
+COPY ./dist/scripts/ ${WORKDIR}/scripts/
 
 EXPOSE 10240
 
