@@ -1,9 +1,9 @@
 /** 应用程序错误 - 错误体 */
 interface AppErrorBody {
   /** 错误信息 */
-  message: string
+  message?: string
   /** http状态码 */
-  statusCode: number
+  statusCode?: number
   /** 业务码 */
   businessCode?: string
 }

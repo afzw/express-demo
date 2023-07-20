@@ -1,5 +1,5 @@
 import SessionInfoDao from '@/dao/sessionInfo.dao'
-import config from '@config/config'
+import config from '@/_config/config'
 import { exec } from 'child_process'
 import schedule from 'node-schedule'
 

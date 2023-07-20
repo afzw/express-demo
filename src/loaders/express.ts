@@ -8,7 +8,7 @@ import passport from 'passport'
 import dayjs from 'dayjs'
 import MongoStore from 'connect-mongo'
 
-import config from '@config/config'
+import config from '@/_config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { getMongoUri } from '@/loaders/mongo/mongo'
 import { localSerialize, localDeserialize } from '@/business/auth/local/local-auth.service'
@@ -24,7 +24,7 @@ function loadExpress(app: express.Express) {
   /** 配置multer上传文件目录 */
   app.use(multer({ dest: config.uploadDir }).any())
   /** 配置multer静态资源目录 */
-  app.use(express.static(config.staticDir))
+  app.use(express.static(config.publicDir))
   /** HTTP request logger */
   morgan.token('date', () => dayjs().format('YYYY/MM/DD HH:mm:ss'))
   app.use(morgan(':date :method :url -- [:status] :response-time ms'))

@@ -51,7 +51,7 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
     const SessionInfoProps: SessionInfoProps = {
       sessionId: req.sessionID,
       userId: req.user._id,
-      expireAt: req.session.cookie._expires,
+      expireAt: req.session.cookie.expires,
       ipAddress: req.ip,
       userAgent: req.headers['user-agent']
     }

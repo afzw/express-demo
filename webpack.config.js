@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -33,6 +34,14 @@ module.exports = {
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, './tsconfig.json')
+      }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, 'tsc-dist/scripts/createAdmin.js'),
+            to: path.resolve(__dirname, 'dist/scripts/')
+          }
+        ]
       })
     ]
   }

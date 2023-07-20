@@ -15,10 +15,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@config/*": ["config/*"],
       "@test/*": ["test/*"]
     }
   },
-  "include": ["src/**/*.ts", "config/**/*.ts", "scripts/**/*.ts"],
+  "include": ["src/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["**/node_modules/*"]
 }

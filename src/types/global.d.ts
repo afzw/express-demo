@@ -11,8 +11,10 @@ declare global {
       /** 监听端口 */
       port: number
 
+      /** 公开资源（express静态托管）目录 */
+      publicDir: string
       /** 静态资源目录 */
-      staticDir: string
+      assetsDir: string
       /** 文件上传目录 */
       uploadDir: string
       /** 日志目录 */
@@ -64,9 +66,10 @@ declare global {
     }
   }
 
-  namespace express {
+  namespace Express {
+    interface User extends UserDocPojo {}
     interface Request {
-      user?: UserDocPojo
+      user?: User
       hasPermission(permission: string): boolean
       logIn(user: UserProps, done: (err: unknown) => void): void
     }

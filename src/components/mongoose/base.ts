@@ -5,7 +5,7 @@ import { Model, FilterQuery, QueryOptions, UpdateQuery, HydratedDocument } from 
 class MongooseBase<P = unknown> {
   /** mongoose model */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private _model: Model<P>
+  protected _model: Model<P>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(model: Model<P>) {

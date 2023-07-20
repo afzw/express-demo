@@ -14,22 +14,11 @@
 
 ## 项目启动
 
-1. 基于模板生成项目配置文件
-
 ```sh
 # 在项目根目录执行以下命令：
-cp src/config/config.example.ts src/config/config.ts
-```
+./build.sh
 
-2. 项目依赖安装
-
-```sh
-npm i
-```
-
-3. 项目启动
-
-```sh
+# 启动开发环境
 npm run dev
 ```
 
