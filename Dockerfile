@@ -4,9 +4,8 @@ ARG WORKDIR=/app/express-demo
 
 WORKDIR ${WORKDIR}
 
-COPY ./dist/main.js ${WORKDIR}
-COPY ./dist/scripts ${WORKDIR}/scripts
+COPY ./dist/ ${WORKDIR}/app
 
 EXPOSE 10240
 
-CMD ["node", "main.js"]
+CMD ["node -r tsconfig-paths/register", "main.js"]

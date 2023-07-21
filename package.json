@@ -8,9 +8,9 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build": "chmod +x ./build.sh | ./build.sh",
+    "init": "chmod +x ./init.sh | ./init.sh",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "bundle": "webpack"
+    "build": "gulp"
   },
   "nodemonConfig": {
     "verbose": true,
@@ -43,6 +43,7 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "mongodb": "^4.1.4",
     "mongoose": "~6.9.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
@@ -72,8 +73,15 @@
     "@typescript-eslint/parser": "^5.49.0",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
+    "del": "~6.0.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
+    "gulp": "^4.0.2",
+    "gulp-if": "^3.0.0",
+    "gulp-ignore": "^3.0.0",
+    "gulp-load-plugins": "^2.0.8",
+    "gulp-terser": "^2.1.0",
+    "gulp-typescript": "6.0.0-alpha.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "mocha": "^10.1.0",
@@ -82,9 +90,6 @@
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
-    "tsconfig-paths-webpack-plugin": "^4.0.1",
-    "typescript": "^4.7.4",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^4.7.4"
   }
 }

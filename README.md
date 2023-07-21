@@ -16,7 +16,7 @@
 
 ```sh
 # 在项目根目录执行以下命令：
-./build.sh
+./init.sh
 
 # 启动开发环境
 npm run dev

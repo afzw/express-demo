@@ -16,5 +16,4 @@ package-lock.json
 
 
 # compile dir
-dist
-tsc-dist
+dist*
