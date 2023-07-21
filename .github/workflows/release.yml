@@ -38,11 +38,11 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
+    - name: Init Project
+      run: npm run init
+
     - name: Build Project
       run: npm run build
-
-    - name: Bundle Project
-      run: npm run bundle
 
     - name: Release Docker Image
       run: |
