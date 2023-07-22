@@ -2,8 +2,8 @@ const gulp = require('gulp')
 const del = require('del')
 const $ = require('gulp-load-plugins')()
 
-// ts编译
-gulp.task('ts-compile', function () {
+// 编译源代码
+gulp.task('compile-src', function () {
   const project = $.typescript.createProject('tsconfig.json')
   return gulp
     .src(['src/**/*.ts'])
@@ -12,20 +12,30 @@ gulp.task('ts-compile', function () {
     .pipe(gulp.dest('dist-compile'))
 })
 
-// 拷贝资源文件
-gulp.task('copyAssets', function () {
+// 拷贝js源代码
+gulp.task('copy-src', function () {
   return gulp
-    .src(['**/*.js', 'assets/**/*', 'public/**/*', '.npmrc', 'package*.json'], {
+    .src(['dist-compile/**/*.js'], {
       base: 'dist-compile',
+      dot: true
+    })
+    .pipe(gulp.dest('dist/src'))
+})
+
+// 拷贝资源文件
+gulp.task('copy-assets', function () {
+  return gulp
+    .src(['assets/**/*', 'public/**/*'], {
+      base: '.',
       dot: true,
       allowEmpty: true
     })
-    .pipe(gulp.dest('dist-build/'))
+    .pipe(gulp.dest('dist/'))
 })
 
-gulp.task('build', gulp.series('ts-compile', 'copyAssets'))
+gulp.task('build', gulp.series('compile-src', 'copy-src', 'copy-assets'))
 
 // 清理之前的dist
-gulp.task('clean', del.bind(null, ['dist-compile', 'dist-build']))
+gulp.task('clean', del.bind(null, ['dist-compile', 'dist']))
 
 gulp.task('default', gulp.series('clean', 'build'))

@@ -1,3 +1,8 @@
+// ts编译之后不会处理ts文件中的路径映射，需要借助module-alias解析编译后js文件中的路径别名。
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const moduleAlias = require('module-alias')
+moduleAlias.addAlias('@', './src/')
+
 import utils from '@/lib/utils/common'
 import { UserProps } from '@/entities/user/user'
 import UserDao from '@/dao/user.dao'
