@@ -4,7 +4,7 @@ const moduleAlias = require('module-alias')
 moduleAlias.addAlias('@', './src/')
 
 import utils from '@/lib/utils/common'
-import { UserProps } from '@/entities/user/user'
+import { UserProps } from '@/entities/user.model'
 import UserDao from '@/dao/user.dao'
 
 /**

@@ -1,4 +1,4 @@
-import { UserDoc } from '@/entities/user/user'
+import { UserDoc } from '@/entities/user.model'
 import UserDao from '@/dao/user.dao'
 import { callAsync } from '@/lib/utils/callAsync'
 

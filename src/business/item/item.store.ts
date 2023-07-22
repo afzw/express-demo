@@ -1,4 +1,4 @@
-import { ItemKey } from '@/entities/item/item'
+import { ItemKey } from '@/entities/item.model'
 
 const ItemStore = {
   /**

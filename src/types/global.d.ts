@@ -1,4 +1,5 @@
-import { UserDocPojo, UserProps } from '@/entities/user/user'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { UserDocPojo, UserProps } from '@/entities/user.model'
 
 /** 定义/继承环境声明 */
 declare global {
@@ -67,6 +68,7 @@ declare global {
   }
 
   namespace Express {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface User extends UserDocPojo {}
     interface Request {
       user?: User

@@ -1,5 +1,5 @@
 import callAsync from '@/lib/utils/callAsync'
-import { ItemDoc, ItemFilter } from '@/entities/item/item'
+import { ItemDoc, ItemFilter } from '@/entities/item.model'
 import ItemDao from '@/dao/item.dao'
 import _ from 'lodash'
 import ItemStore from './item.store'

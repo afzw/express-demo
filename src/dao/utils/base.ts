@@ -4,10 +4,8 @@ import { Model, FilterQuery, QueryOptions, UpdateQuery, HydratedDocument } from 
 /** mongoose 基础操作 */
 class MongooseBase<P = unknown> {
   /** mongoose model */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected _model: Model<P>
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(model: Model<P>) {
     this._model = model
   }
