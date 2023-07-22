@@ -16,5 +16,5 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {},
-  "ignorePatterns": ["*.eslintrc.js", "gulpfile.js", "commitlint.config.js"]
+  "ignorePatterns": ["*.eslintrc.js", "gulpfile.js", "commitlint.config.js", "webpack.config.js"]
 }
