@@ -1,4 +1,4 @@
-import { FilterQuery, HydratedDocument, LeanDocument, Types, UpdateQuery } from 'mongoose'
+import { Schema, model, FilterQuery, HydratedDocument, LeanDocument, Types, UpdateQuery } from 'mongoose'
 
 /**
  * Session信息属性
@@ -67,3 +67,38 @@ export type SessionInfoFilter = FilterQuery<SessionInfoProps>
  * mongoose 更新对象
  */
 export type SessionInfoUpdate = UpdateQuery<SessionInfoProps>
+
+export const sessionInfoSchema = new Schema<SessionInfoProps>(
+  {
+    sessionId: {
+      type: String,
+      required: true,
+      index: true
+    },
+    sessionGroupId: {
+      type: String,
+      index: true
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      index: true
+    },
+    activeAt: {
+      type: Date,
+      default: Date.now
+    },
+    expireAt: {
+      type: Date,
+      required: true,
+      index: true
+    },
+    ipAddress: String,
+    userAgent: String
+  },
+  {
+    timestamps: true
+  }
+)
+
+export const SessionInfoModel = model<SessionInfoProps>('sessionInfo', sessionInfoSchema)

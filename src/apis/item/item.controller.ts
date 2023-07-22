@@ -2,7 +2,7 @@ import callAsync from '@/lib/utils/callAsync'
 import { NextFunction, Request, Response } from 'express'
 import ItemService from '@/business/item/item.service'
 import { ItemFilter } from '@/entities/item/item'
-import { Paging } from '@/components/mongoose'
+import { Paging } from '@/dao/utils'
 
 /** 新建item */
 export async function create(req: Request, res: Response, next: NextFunction) {

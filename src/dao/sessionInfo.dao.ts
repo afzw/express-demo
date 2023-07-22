@@ -1,5 +1,5 @@
-import { SessionInfoModel } from '@/entities/sessionInfo/sessionInfo.model'
-import { MongooseBase } from '@/components/mongoose'
+import { SessionInfoModel } from '@/entities/sessionInfo.model'
+import { MongooseBase } from '@/dao/utils'
 
 class SessionInfoDao extends MongooseBase {}
 

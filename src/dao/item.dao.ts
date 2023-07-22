@@ -1,6 +1,6 @@
-import ItemModel from '@/entities/item/item.model'
-import { MongooseBase } from '@/components/mongoose'
-import { ItemProps } from '@/entities/item/item'
+import ItemModel from '@/entities/item.model'
+import { MongooseBase } from '@/dao/utils'
+import { ItemProps } from '@/entities/item.model'
 
 class ItemDao extends MongooseBase<ItemProps> {}
 

@@ -1,4 +1,4 @@
-import { FilterQuery, HydratedDocument, LeanDocument, Types, UpdateQuery } from 'mongoose'
+import { Schema, model, FilterQuery, HydratedDocument, LeanDocument, UpdateQuery } from 'mongoose'
 
 /**
  * 脚本属性
@@ -55,3 +55,28 @@ export type ScriptFilter = FilterQuery<ScriptProps>
  * mongoose 更新对象
  */
 export type ScriptUpdate = UpdateQuery<ScriptProps>
+
+const scriptSchema = new Schema<ScriptProps>(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    status: {
+      type: String,
+      enum: ['done', 'error'],
+      required: true,
+      index: true
+    },
+    duration: Number,
+    message: String
+  },
+  {
+    timestamps: true
+  }
+)
+
+const ScriptModel = model<ScriptProps>('migration', scriptSchema)
+
+export default ScriptModel
