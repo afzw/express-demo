@@ -25,7 +25,7 @@ gulp.task('copy-src', function () {
 // 拷贝资源文件
 gulp.task('copy-assets', function () {
   return gulp
-    .src(['assets/**/*', 'public/**/*'], {
+    .src(['node_modules/**/*', 'assets/**/*', 'public/**/*'], {
       base: '.',
       dot: true,
       allowEmpty: true
