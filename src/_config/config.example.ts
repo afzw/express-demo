@@ -1,7 +1,7 @@
 import path from 'path'
 
 const config: App.Config = {
-  port: 10240,
+  port: 9000,
   publicDir: path.join(__dirname, '../..', 'public'),
   assetsDir: path.join(__dirname, '../../', 'assets'),
   uploadDir: path.join(__dirname, '../..', 'uploads'),

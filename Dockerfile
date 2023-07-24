@@ -6,6 +6,6 @@ WORKDIR ${WORKDIR}
 
 COPY ./dist/ ${WORKDIR}/
 
-EXPOSE 10240
+EXPOSE 9000
 
 CMD ["node", "src/index.js"]
