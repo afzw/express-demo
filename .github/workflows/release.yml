@@ -47,4 +47,4 @@ jobs:
     - name: Release Docker Image
       run: |
         chmod +x ./release.sh
-        DOCKER_REPO=${{ secrets.DOCKER_REPO }} DOCKER_USER=${{ secrets.DOCKER_USER }} DOCKER_PASS=${{ secrets.DOCKER_PASS }} ./release.sh
+        DOCKER_REPO=${{ vars.DOCKER_REPO }} DOCKER_USER=${{ secrets.DOCKER_USER }} DOCKER_PASS=${{ secrets.DOCKER_PASS }} ./release.sh
