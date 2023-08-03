@@ -1,6 +1,5 @@
 import config from '@/_config/config'
 import { Request, Response } from 'express'
-import path from 'path'
 
 /** 其他路由 */
 const __otherRoutes: App.Route[] = [
@@ -10,7 +9,7 @@ const __otherRoutes: App.Route[] = [
     method: 'GET',
     middlewares: [
       (req: Request, res: Response) => {
-        res.redirect(path.join(config.publicDir, 'index.html'))
+        res.send('<p>欢迎访问</p>')
       }
     ]
   }
