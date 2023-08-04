@@ -1,6 +1,6 @@
 FROM node:18
 
-ARG WORKDIR=/app/express-demo
+ARG WORKDIR=/app/express-server
 
 WORKDIR ${WORKDIR}
 
