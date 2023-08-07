@@ -73,7 +73,7 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
  */
 export async function signUp(req: Request, res: Response, next: NextFunction) {
   const signUpProfile = _.pick(req.body, 'email', 'password', 'username', 'nickname')
-  if (!signUpProfile.email || !signUpProfile.password || !signUpProfile.username)
+  if (!signUpProfile.email || !signUpProfile.password)
     return next(new AppError({ statusCode: 400, message: '信息填写不全' }))
 
   const salt = utils.genRandom()
@@ -83,8 +83,8 @@ export async function signUp(req: Request, res: Response, next: NextFunction) {
     password,
     salt,
     email: signUpProfile.email,
-    username: signUpProfile.username,
-    nickname: signUpProfile.nickname,
+    username: signUpProfile.username || signUpProfile.email,
+    nickname: signUpProfile.nickname || null,
     roles: ['user']
   }
 

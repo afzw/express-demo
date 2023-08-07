@@ -8,6 +8,6 @@ set -euxo pipefail
 cp src/_config/config.example.ts src/_config/config.ts
 
 # 安装项目依赖
-npm i
+npm install
 
 exit 0

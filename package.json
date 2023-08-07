@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "init": "chmod +x ./init.sh | ./init.sh",
+    "initial": "chmod +x ./init.sh | ./init.sh",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
     "build": "gulp",
     "start": "node dist/src/index.js"

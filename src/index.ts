@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // ts编译之后不会处理ts文件中的路径映射，需要借助module-alias解析编译后js文件中的路径别名。
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+import path from 'path'
+process.env.NODE_PATH = path.resolve(__dirname, 'node_modules')
 const moduleAlias = require('module-alias')
 moduleAlias.addAlias('@', __dirname)
 
