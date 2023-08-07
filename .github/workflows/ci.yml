@@ -39,7 +39,7 @@ jobs:
           ${{ runner.os }}-
 
     - name: Init Project
-      run: npm run init
+      run: npm run initial
 
     - name: Build Project
       run: npm run build
