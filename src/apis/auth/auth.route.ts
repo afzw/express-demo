@@ -4,21 +4,21 @@ import * as Auth from '@/apis/auth/local/local-auth.controller'
 const AuthRoutes: App.Route[] = [
   //  登录
   {
-    path: '/auth/sign-in',
+    path: '/login',
     method: 'POST',
     middlewares: [Auth.signIn],
     permission: 'public'
   },
   //  注册
   {
-    path: '/auth/sign-up',
+    path: '/register',
     method: 'POST',
     middlewares: [Auth.signUp],
     permission: 'public'
   },
   //  登出
   {
-    path: '/auth/sign-out',
+    path: '/logout',
     method: 'POST',
     middlewares: [Auth.signOut],
     permission: 'public'
