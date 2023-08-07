@@ -24,7 +24,7 @@ async function initLoaders(app: express.Express, config: App.Config) {
 
   // 业务逻辑初始化
   initRbac()
-  await executScripts(config.scriptDir)
+  await executScripts(config.migrateDir)
 
   // 定时任务
   const schedule = new Schedule()

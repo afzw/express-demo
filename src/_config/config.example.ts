@@ -6,7 +6,7 @@ const config: App.Config = {
   assetsDir: path.join(__dirname, '../../', 'assets'),
   uploadDir: path.join(__dirname, '../..', 'uploads'),
   logDir: path.join(__dirname, '../..', 'logs'),
-  scriptDir: path.join(__dirname, '..', 'migrates'),
+  migrateDir: path.join(__dirname, '..', 'migrates'),
   session: {
     name: 'ExpressDemo-sid',
     secret: 'Secret Password For ExpressDemo',

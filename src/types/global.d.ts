@@ -20,8 +20,8 @@ declare global {
       uploadDir: string
       /** 日志目录 */
       logDir: string
-      /** 脚本目录 */
-      scriptDir: string
+      /** 迁移脚本目录 */
+      migrateDir: string
 
       /** session配置 */
       session: {
