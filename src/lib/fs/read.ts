@@ -9,5 +9,5 @@ export async function readdirp(
   dirPath: fsc.PathLike,
   options?: (fsc.ObjectEncodingOptions & { withFileTypes?: false }) | BufferEncoding
 ) {
-  return fsp.readdir(dirPath)
+  return fsp.readdir(dirPath, options)
 }

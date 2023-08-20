@@ -1,5 +1,3 @@
-import AppError from '@/lib/error'
-
 /**
  * 单行语句获取Promise结果值和错误原因
  * @param promise Promise实例

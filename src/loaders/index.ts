@@ -12,7 +12,7 @@ import Schedule from './schedule'
  * 初始化服务
  * @param app 应用程序
  */
-async function initLoaders(app: express.Express, config: App.Config) {
+async function initApp(app: express.Express, config: App.Config) {
   // 资源初始化
   await makeLogDir()
 
@@ -32,4 +32,4 @@ async function initLoaders(app: express.Express, config: App.Config) {
   schedule.cleanLog()
 }
 
-export default initLoaders
+export { initApp }

@@ -1,4 +1,3 @@
-import config from '@/_config/config'
 import { Request, Response } from 'express'
 
 /** 其他路由 */
