@@ -1,4 +1,4 @@
-import * as Auth from '@/apis/auth/local/local-auth.controller'
+import * as Auth from '@/apis/auth/local-auth.controller'
 
 /** 公共路由 */
 const AuthRoutes: App.Route[] = [
