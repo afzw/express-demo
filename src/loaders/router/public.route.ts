@@ -1,4 +1,7 @@
+import path from 'path'
+import { Request, Response } from 'express'
 import * as Auth from '@/apis/auth/local/local-auth.controller'
+import config from '@/_config/config'
 
 /** 公共路由 */
 const __publicRoutes: App.Route[] = [
@@ -6,7 +9,21 @@ const __publicRoutes: App.Route[] = [
   {
     path: '/VERSION',
     method: 'GET',
-    middlewares: [Auth.getVersionInfo]
+    middlewares: [
+      (req: Request, res: Response) => {
+        res.sendFile(path.join(config.publicDir, 'VERSION'))
+      }
+    ]
+  },
+  /** 捕获所有其他路径 */
+  {
+    path: '/*',
+    method: 'GET',
+    middlewares: [
+      (req: Request, res: Response) => {
+        res.sendFile(path.join(config.publicDir, 'index.html'))
+      }
+    ]
   }
 ]
 
