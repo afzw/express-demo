@@ -21,7 +21,7 @@ declare global {
       /** 日志目录 */
       logDir: string
       /** 迁移脚本目录 */
-      migrateDir: string
+      scriptDir: string
 
       /** session配置 */
       session: {

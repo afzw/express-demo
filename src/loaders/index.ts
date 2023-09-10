@@ -24,7 +24,7 @@ async function initApp(app: express.Express, config: App.Config) {
 
   // 业务逻辑初始化
   initRbac()
-  await executScripts(config.migrateDir)
+  await executScripts(config.scriptDir)
 
   // 定时任务
   const schedule = new Schedule()
