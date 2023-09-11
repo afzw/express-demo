@@ -10,7 +10,7 @@ import AppError from '@/lib/error'
 class ItemService {
   /**
    * 新建一个item
-   * @param 创建item的属性信息
+   * @param createInfo 创建item的属性信息
    * @return 新建的item
    */
   public static async createItem(createInfo: Pojo): Promise<ItemDoc> {
@@ -24,7 +24,9 @@ class ItemService {
 
   /**
    * 查询item
-   * @param searchProps
+   * @param filter 筛选条件
+   * @param projection 映射字段
+   * @param options 查询选项
    * @return 查询出的item mongoose 文档
    */
   public static async searchItems(
@@ -46,7 +48,7 @@ class ItemService {
   /**
    * 更新某个item
    * @param itemId item id
-   * @param updateProps 更新的属性
+   * @param updateInfo 更新属性信息
    * @return 更新后的item
    */
   public static async updateItem(itemId: string, updateInfo: Pojo): Promise<ItemDoc> {
@@ -63,7 +65,7 @@ class ItemService {
   /**
    * 删除某个item
    * @param itemId item id
-   * @param 删除的item mongoose 文档
+   * @returns 删除的item mongoose 文档
    */
   public static async deleteItem(itemId: string): Promise<ItemDoc> {
     const filter: ItemFilter = { _id: itemId }

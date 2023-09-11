@@ -2,6 +2,7 @@ import path from 'path'
 import callAsync from '@/lib/utils/callAsync'
 import { moveFile, createDirRecursively, deleteFile } from '@/lib/fs/base'
 import { makeUniqFileName, getFileNameByPath } from '@/lib/fs/utils'
+import AppError from '../error'
 
 /**
  * 保存文件
@@ -12,14 +13,14 @@ import { makeUniqFileName, getFileNameByPath } from '@/lib/fs/utils'
  */
 export async function saveFile(sourcePath: string, destDir: string): Promise<string> {
   const [createDirErr] = await callAsync(createDirRecursively(destDir))
-  if (createDirErr) throw new Error(`生成目标目录失败 => ${createDirErr}`)
+  if (createDirErr) throw new AppError({ message: `生成目标目录失败 => ${createDirErr}` })
 
   const savedfileName = makeUniqFileName(getFileNameByPath(sourcePath))
   const destPath = path.join(destDir, savedfileName)
   const [moveFileErr] = await callAsync(moveFile(sourcePath, destPath))
   if (moveFileErr) {
     deleteFile(sourcePath).catch(err => console.log(`移动文件失败后，删除源文件失败 => ${err}`))
-    throw new Error(`移动源文件到目标目录下失败 => ${moveFileErr}`)
+    throw new AppError({ message: `移动源文件到目标目录下失败 => ${moveFileErr}` })
   }
 
   return destPath

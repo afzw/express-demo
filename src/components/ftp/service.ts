@@ -1,6 +1,7 @@
 import * as ftp from 'basic-ftp'
 import callAsync from '@/lib/utils/callAsync'
 import { Readable, Writable } from 'stream'
+import AppError from '@/lib/error'
 
 class FTPService {
   /**
@@ -12,7 +13,7 @@ class FTPService {
     client.ftp.verbose = true
 
     const [connectErr] = await callAsync(client.access(accessOptions))
-    if (connectErr) throw new Error(`ftp客户端连接ftp服务端失败 => ${connectErr.message}`)
+    if (connectErr) throw new AppError({ message: `ftp客户端连接ftp服务端失败 => ${connectErr.message}` })
 
     /** 该客户端已连接至FTP服务器 */
     return client
@@ -39,10 +40,10 @@ class FTPService {
     target: string
   ): Promise<void> {
     const [connectErr, client] = await callAsync(this._establishAnFTPConnection(serverInfo))
-    if (connectErr) throw new Error(`建立FTP连接失败 => ${connectErr}`)
+    if (connectErr) throw new AppError({ message: `建立FTP连接失败 => ${connectErr}` })
 
     const [uploadErr] = await callAsync(client.uploadFrom(source, target))
-    if (uploadErr) throw new Error(`上传文件到FTP服务器失败 => ${uploadErr}`)
+    if (uploadErr) throw new AppError({ message: `上传文件到FTP服务器失败 => ${uploadErr}` })
 
     this._closeAnFTPConnection(client)
   }
@@ -60,10 +61,10 @@ class FTPService {
     target: string | Writable
   ): Promise<void> {
     const [connectErr, client] = await callAsync(this._establishAnFTPConnection(serverInfo))
-    if (connectErr) throw new Error(`建立FTP连接失败 => ${connectErr}`)
+    if (connectErr) throw new AppError({ message: `建立FTP连接失败 => ${connectErr}` })
 
-    const [uploadErr] = await callAsync(client.downloadTo(target, source))
-    if (uploadErr) throw new Error(`下载文件到FTP服务器失败 => ${uploadErr}`)
+    const [downloadErr] = await callAsync(client.downloadTo(target, source))
+    if (downloadErr) throw new AppError({ message: `下载文件到FTP服务器失败 => ${downloadErr}` })
 
     this._closeAnFTPConnection(client)
   }
