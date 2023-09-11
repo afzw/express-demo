@@ -117,10 +117,3 @@ export async function signOut(req: Request, res: Response) {
     res.sendStatus(200)
   })
 }
-
-/**
- * 获取版本信息
- */
-export function getVersionInfo(req: Request, res: Response) {
-  return res.send('0.0.1 (dev)')
-}

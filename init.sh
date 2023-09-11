@@ -10,4 +10,7 @@ cp src/_config/config.example.ts src/_config/config.ts
 # 安装项目依赖
 npm install
 
+# 记录版本号(开发)
+echo "v0.0.1(dev)" >./public/VERSION
+
 exit 0
