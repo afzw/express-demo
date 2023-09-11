@@ -17,15 +17,3 @@ export function getDirByPath(path: string): string {
   const result = path.slice(0, path.lastIndexOf('/'))
   return result
 }
-
-/**
- * 生成唯一的文件名称
- * @param originName 原文件名
- * @returns 唯一的文件名
- */
-export function makeUniqFileName(originName: string): string {
-  const barray = originName.split('.')
-  barray.splice(-1, 0, String(Math.ceil(Math.random() * 10000)), String(Math.ceil(Math.random() * 1000)))
-  const uniqName = barray.join('.').replace(/(\(|\)|\[|\]| )/g, '_')
-  return uniqName
-}

@@ -65,8 +65,9 @@ class ItemController {
     const attachment = req.file
 
     // 保存文件
+    const sourcePath = path.join(config.uploadDir, attachment.filename)
     const destDir = path.join(config.uploadDir, 'item', itemId)
-    const [saveFileErr, savedPath] = await callAsync(saveFile(attachment.path, destDir))
+    const [saveFileErr, savedPath] = await callAsync(saveFile(sourcePath, destDir))
     if (saveFileErr) return next(saveFileErr)
 
     // 创建文件记录
