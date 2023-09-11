@@ -1,6 +1,3 @@
-/**
- * @file 公共路由控制器
- */
 import _ from 'lodash'
 import utils from '@/lib/utils/common'
 import { callAsync } from '@/lib/utils/callAsync'

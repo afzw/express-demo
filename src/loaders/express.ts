@@ -11,7 +11,7 @@ import MongoStore from 'connect-mongo'
 import config from '@/_config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { getMongoUri } from '@/loaders/mongo/mongo'
-import { localSerialize, localDeserialize } from '@/business/auth/local/local-auth.service'
+import { localSerialize, localDeserialize } from '@/loaders/auth/local-auth.service'
 
 /**
  * 【初始化】加载express程序
@@ -21,9 +21,7 @@ function loadExpress(app: express.Express) {
   app.set('x-powered-by', false)
   app.set('trust proxy', ['1', 'true'].includes(process.env.TRUST_PROXY))
 
-  /** 配置multer上传文件目录 */
-  app.use(multer({ dest: config.uploadDir }).any())
-  /** 配置multer静态资源目录 */
+  /** 配置express静态资源目录 */
   app.use(express.static(config.publicDir))
   /** HTTP request logger */
   morgan.token('date', () => dayjs().format('YYYY/MM/DD HH:mm:ss'))
