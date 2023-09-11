@@ -16,7 +16,8 @@ const ERRORLOGFILEPATH = path.join(config.logDir, `error-${dayjs().format('YYYYM
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 function errorHandler(error: any, req: Request, res: Response, next: NextFunction): Response {
-  const formatedError = getFormatError(error)
+  /** 格式化的错误信息 */
+  const formatedError: FormatError = getFormatError(error)
 
   // 格式化的错误
   const formatedErrorInfo = `【${dayjs().format('YYYY-MM-DDTHH:mm:ss')}】应用程序出现错误:

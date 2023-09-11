@@ -16,7 +16,7 @@ declare global {
       publicDir: string
       /** 静态资源目录 */
       assetsDir: string
-      /** 文件上传目录 */
+      /** 系统文件上传目录 */
       uploadDir: string
       /** 日志目录 */
       logDir: string

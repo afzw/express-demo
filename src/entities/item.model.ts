@@ -11,6 +11,8 @@ export interface ItemProps {
   price: number
   /** 持有人id */
   ownerId?: Types.ObjectId
+  /** 附件id */
+  attachmentId?: Types.ObjectId
   /** 数据库文档创建时间，不应与业务耦合。 */
   createdAt?: Date
   /** 数据库文档更新时间，不应与业务耦合。 */
@@ -57,6 +59,10 @@ export const ItemSchema = new Schema<ItemProps>(
     ownerId: {
       type: Schema.Types.ObjectId,
       ref: 'user'
+    },
+    attachmentId: {
+      type: Schema.Types.ObjectId,
+      ref: 'file'
     }
   },
   {
