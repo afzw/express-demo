@@ -2,6 +2,8 @@ const gulp = require('gulp')
 const del = require('del')
 const $ = require('gulp-load-plugins')()
 
+// for project building
+
 // 编译源代码
 gulp.task('compile-src', function () {
   const project = $.typescript.createProject('tsconfig.json')
