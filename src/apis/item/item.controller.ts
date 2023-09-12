@@ -1,15 +1,16 @@
 import callAsync from '@/lib/utils/callAsync'
 import { NextFunction, Request, Response } from 'express'
 import ItemService from '@/business/item/item.service'
-import { ItemFilter, ItemUpdate } from '@/entities/item.model'
+import { ItemDoc, ItemFilter, ItemUpdate } from '@/entities/item.model'
 import { Paging } from '@/dao/utils'
 import fileDao from '@/dao/file.dao'
-import { FileProps } from '@/entities/file.model'
+import { FileDoc, FileFilter, FileProps } from '@/entities/file.model'
 import itemDao from '@/dao/item.dao'
 import { saveFile } from '@/lib/fs/service'
 import config from '@/_config/config'
 import path from 'path'
 import { deleteFile } from '@/lib/fs/base'
+import AppError from '@/lib/error'
 
 /** 新建item */
 class ItemController {
@@ -86,6 +87,33 @@ class ItemController {
     if (updateItemErr) return next(updateItemErr)
 
     return res.send(newFile)
+  }
+
+  /** 下载item的附件 */
+  public static async downloadAttachment(req: Request, res: Response, next: NextFunction) {
+    const attachment: FileDoc = res.locals.attachment
+
+    res.sendFile(attachment.path)
+  }
+
+  /** 删除item的附件 */
+  public static async deleteAttachment(req: Request, res: Response, next: NextFunction) {
+    const item: ItemDoc = res.locals.item
+    const attachment: FileDoc = res.locals.attachment
+
+    const [deleteAttachmentErr] = await callAsync(deleteFile(attachment.path))
+    if (deleteAttachmentErr) return next(new AppError({ message: `删除附件失败 => ${deleteAttachmentErr}` }))
+
+    const fileFilter: FileFilter = { _id: attachment._id }
+    const [deleteFileErr, deletedFile] = await callAsync(fileDao.findOneAndDelete(fileFilter))
+    if (deleteFileErr) return next(new AppError({ message: `删除附件记录失败 => ${deleteFileErr}` }))
+
+    const itemFilter: ItemFilter = { _id: item._id }
+    const updateInfo: ItemUpdate = { attachmentId: null }
+    const [updateItemErr] = await callAsync(itemDao.findOneAndUpdate(itemFilter, updateInfo))
+    if (updateItemErr) return next(new AppError({ message: `更新item附件信息失败 => ${updateItemErr}` }))
+
+    return res.send(deletedFile)
   }
 }
 

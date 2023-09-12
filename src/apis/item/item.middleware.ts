@@ -18,6 +18,8 @@ export async function validateItemInParams(req: Request, res: Response, next: Ne
   if (err) return next(err)
   if (!item) return next(new AppError({ message: '没有找到item', statusCode: 404 }))
 
+  res.locals.item = item
+
   next()
 }
 
@@ -29,6 +31,8 @@ export async function validateAttachmentInParams(req: Request, res: Response, ne
   const [err, attachment] = await callAsync(fileDao.findOne(filter))
   if (err) return next(err)
   if (!attachment) return next(new AppError({ message: '没有找到附件', statusCode: 404 }))
+
+  res.locals.attachment = attachment
 
   next()
 }

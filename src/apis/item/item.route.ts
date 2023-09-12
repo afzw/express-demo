@@ -40,6 +40,28 @@ const ItemRoutes: App.Route[] = [
     method: 'POST',
     middlewares: [uploadSingleFile('attachment'), ItemMiddleware.validateItemInParams, ItemController.uploadAttachment],
     permission: 'public'
+  },
+  // 下载某item的附件
+  {
+    path: '/items/:itemId/attachment/:attachmentId',
+    method: 'GET',
+    middlewares: [
+      ItemMiddleware.validateItemInParams,
+      ItemMiddleware.validateAttachmentInParams,
+      ItemController.downloadAttachment
+    ],
+    permission: 'public'
+  },
+  // 删除某item的附件
+  {
+    path: '/items/:itemId/attachment/:attachmentId',
+    method: 'DELETE',
+    middlewares: [
+      ItemMiddleware.validateItemInParams,
+      ItemMiddleware.validateAttachmentInParams,
+      ItemController.deleteAttachment
+    ],
+    permission: 'public'
   }
 ]
 
