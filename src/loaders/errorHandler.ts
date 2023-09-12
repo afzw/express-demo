@@ -1,10 +1,8 @@
 import _ from 'lodash'
 import config from '@/_config/config'
-import AppError from '@/lib/error'
 import { Request, Response, NextFunction } from 'express'
 import { appendFile } from 'fs/promises'
 import path from 'path'
-import { ValidationError } from 'express-validation'
 import dayjs from 'dayjs'
 
 /** 错误日志路径 */
@@ -23,7 +21,7 @@ function errorHandler(error: any, req: Request, res: Response, next: NextFunctio
   const formatedErrorInfo = `【${dayjs().format('YYYY-MM-DDTHH:mm:ss')}】应用程序出现错误:
   错误名: ${formatedError.name}
   http状态码: ${formatedError.statusCode}
-  业务码: ${formatedError.businessCode || '未知'}
+  业务码: ${formatedError.businessCode || 'null'}
   错误信息: ${formatedError.message}
   错误栈: ${formatedError.stack}\n
   `
@@ -44,18 +42,11 @@ function errorHandler(error: any, req: Request, res: Response, next: NextFunctio
   function getFormatError(error: any): FormatError {
     let formatedError: FormatError
 
-    if (error instanceof ValidationError) {
-      // 参数校验错误
-      formatedError = _.pick(error, 'name', 'statusCode', 'message', 'stack')
-    } else if (error instanceof AppError) {
-      // 应用程序错误
-      formatedError = _.pick(error, 'name', 'statusCode', 'message', 'stack')
-    } else {
-      // 未知错误
-      ;(formatedError.name = error.name || 'unknown error'),
-        (formatedError.statusCode = error.statusCode || 500),
-        (formatedError.message = error.message || 'unknown error')
-    }
+    formatedError.name = error.name || 'unknown error'
+    formatedError.statusCode = error.statusCode || 500
+    formatedError.businessCode = error.businessCode || 'null'
+    formatedError.message = error.message || 'unknown error'
+    formatedError.stack = error.stack || null
 
     return formatedError
   }
