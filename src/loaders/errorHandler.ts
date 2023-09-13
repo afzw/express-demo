@@ -40,13 +40,13 @@ function errorHandler(error: any, req: Request, res: Response, next: NextFunctio
    * @return 格式化后的错误
    */
   function getFormatError(error: any): FormatError {
-    let formatedError: FormatError
-
-    formatedError.name = error.name || 'unknown error'
-    formatedError.statusCode = error.statusCode || 500
-    formatedError.businessCode = error.businessCode || 'null'
-    formatedError.message = error.message || 'unknown error'
-    formatedError.stack = error.stack || null
+    const formatedError: FormatError = {
+      name: error.name || 'unknown error',
+      statusCode: error.statusCode || 500,
+      businessCode: error.businessCode || 'null',
+      message: error.message || 'unknown error',
+      stack: error.stack || null
+    }
 
     return formatedError
   }
