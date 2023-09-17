@@ -8,4 +8,4 @@ COPY ./dist/ ${WORKDIR}/
 
 EXPOSE 9000
 
-CMD ["node", "src/index.js"]
+CMD ["node", "src/main.js"]
