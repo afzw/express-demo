@@ -90,7 +90,7 @@ class ItemController {
   }
 
   /** 下载item的附件 */
-  public static async downloadAttachment(req: Request, res: Response, next: NextFunction) {
+  public static async downloadAttachment(req: Request, res: Response) {
     const attachment: FileDoc = res.locals.attachment
 
     res.sendFile(attachment.path)

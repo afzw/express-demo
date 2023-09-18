@@ -1,6 +1,5 @@
 import path from 'path'
 import { Request, Response } from 'express'
-import * as Auth from '@/apis/auth/local-auth.controller'
 import config from '@/_config/config'
 
 /** 公共路由 */
