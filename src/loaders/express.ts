@@ -1,8 +1,8 @@
 import express from 'express'
-import multer from 'multer'
 import morgan from 'morgan'
 import compression from 'compression'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import dayjs from 'dayjs'
@@ -28,9 +28,11 @@ function loadExpress(app: express.Express) {
   app.use(morgan(':date :method :url -- [:status] :response-time ms'))
   /** 压缩response */
   app.use(compression())
-  /** 请求体解析 */
-  app.use(bodyParser.json({ limit: '10mb' }))
-  app.use(bodyParser.urlencoded({ limit: '2mb', extended: true }))
+  /** 跨域资源共享 */
+  app.use(cors())
+  /** 请求体解析 - 非form-data （form-data使用`multer`解析） */
+  app.use(bodyParser.json({ limit: '10mb' })) // 解析application/json
+  app.use(bodyParser.urlencoded({ limit: '2mb', extended: true })) // 解析application/x-www-form-urlencoded
   /** 使用mongo存储session */
   app.use(
     session({
