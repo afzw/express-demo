@@ -11,9 +11,6 @@ interface SaveOptions {
   name: string
 }
 
-/** 合并文件的选项 */
-interface MergeOptions {}
-
 /**
  * 保存文件
  * @description 保存源文件到目标目录下。（源文件的名称会添加后缀成为唯一命名）
