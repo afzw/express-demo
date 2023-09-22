@@ -1,7 +1,6 @@
 import path from 'path'
 import callAsync from '@/lib/utils/callAsync'
-import { moveFile, createDirRecursively, deleteFile } from '@/lib/fs/base'
-import fsp from 'fs/promises'
+import { moveFile, createDirRecursively, deleteFile, readFile, appendFile } from '@/lib/fs/base'
 import { getFileNameByPath } from '@/lib/fs/utils'
 import AppError from '../error'
 
@@ -42,10 +41,10 @@ export async function saveFile(sourcePath: string, destDir: string, options?: Sa
  * @param {string} targetPath 目标文件
  */
 export async function mergeFile(sourcePath: string, targetPath: string): Promise<void> {
-  const [readErr, fileData] = await callAsync(fsp.readFile(sourcePath))
+  const [readErr, fileData] = await callAsync(readFile(sourcePath))
   if (readErr) throw new AppError({ message: `合并文件时，读取源文件内容失败 => ${readErr}` })
 
-  const [appendErr] = await callAsync(fsp.appendFile(targetPath, fileData))
+  const [appendErr] = await callAsync(appendFile(targetPath, fileData))
   if (appendErr) throw new AppError({ message: `合并文件内容失败 => ${appendErr}` })
 
   const [deleteErr] = await callAsync(deleteFile(sourcePath))
