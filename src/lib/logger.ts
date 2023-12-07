@@ -10,8 +10,8 @@ interface Options {
 }
 
 class Logger {
-  private _prefix: string = 'Express Demo' //  日志信息前缀，标识符
-  private _connected: boolean = false
+  private _prefix = 'Express Demo' //  日志信息前缀，标识符
+  private _connected = false
   private _ipAddr: string
   private levelMap = new Map([
     [0, ['Fatal', '灾难', '\x1B[41m']],
@@ -113,4 +113,6 @@ class Logger {
   }
 }
 
-export default new Logger()
+const logger = new Logger()
+
+export { logger }

@@ -1,6 +1,6 @@
-import { UserDoc } from '@/entities/user.model'
+import { UserDoc } from '@/entities/auth/user.model'
 import UserDao from '@/dao/user.dao'
-import { callAsync } from '@/lib/utils/callAsync'
+import { callAsync } from '@/lib/callAsync'
 
 /**
  * 序列化用户（记录用户id）

@@ -1,5 +1,5 @@
 import path from 'path'
-import callAsync from '@/lib/utils/callAsync'
+import callAsync from '@/lib/callAsync'
 import { moveFile, createDirRecursively, deleteFile, readFile, appendFile } from '@/lib/fs/base'
 import { getFileNameByPath } from '@/lib/fs/utils'
 import AppError from '../error'

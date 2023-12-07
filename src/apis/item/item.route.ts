@@ -1,7 +1,7 @@
 import { ItemController } from '@/apis/item/item.controller'
 import * as ItemMiddleware from '@/apis/item/item.middleware'
 import ItemValidation from './item.validation'
-import { uploadSingleFile } from '@/loaders/middleware/multer'
+import { uploadSingleFile } from '@/components/multer'
 import { validate } from 'express-validation'
 
 /** item路由 */

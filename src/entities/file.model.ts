@@ -1,4 +1,3 @@
-import path from 'path'
 import { Schema, model, FilterQuery, HydratedDocument, LeanDocument, UpdateQuery } from 'mongoose'
 
 /* --------------------------- 业务属性  --------------------------- */

@@ -1,5 +1,5 @@
-import config from '@/_config/config'
-import callAsync from '@/lib/utils/callAsync'
+import { config } from '@/_config/config'
+import callAsync from '@/lib/callAsync'
 import { access, mkdir } from 'fs/promises'
 
 /** 生成日志目录 */

@@ -7,11 +7,12 @@ import { __roles } from './roles'
 export function permissionValidatorRegister(req: Request, res: Response, next: NextFunction) {
   /** 权限校验器 */
   req.hasPermission = (permission: string) => {
-    const roles = req.user?.roles || ['anon']
-    for (const role of roles) {
-      if (role === 'admin') return true
-      if (__roles[role]['permissions'].includes(permission)) return true
-    }
+    const role = req.user?.role
+    if (!role) return false
+
+    if (role === 'admin') return true
+    if (__roles[role]['permissions'].includes(permission)) return true
+
     return false
   }
   next()

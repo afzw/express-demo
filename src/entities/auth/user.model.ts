@@ -1,6 +1,6 @@
 import { Schema, model, FilterQuery, HydratedDocument, UpdateQuery, Model, Query, LeanDocument } from 'mongoose'
 
-export interface UserProps {
+export interface UserProps extends App.User {
   /**
    * 邮箱
    */
@@ -10,26 +10,6 @@ export interface UserProps {
    */
   username: string
   /**
-   * 密码
-   */
-  password: string
-  /**
-   * 盐
-   */
-  salt?: string
-  /**
-   * 角色名数组
-   */
-  roles?: string[]
-  /**
-   * 是否禁用
-   */
-  disabled?: boolean
-  /**
-   * 是否删除
-   */
-  deleted?: boolean
-  /**
    * 用户昵称
    */
   nickname?: string
@@ -38,13 +18,13 @@ export interface UserProps {
    */
   avatar?: string
   /**
-   * 上次活跃时间
+   * 密码
    */
-  activedAt?: Date
+  password: string
   /**
-   * 删除时间
+   * 盐
    */
-  deletedAt?: Date
+  salt: string
   /**
    * 数据库文档创建时间，不应与业务耦合。
    */
@@ -97,7 +77,7 @@ interface UserMethods {
   hasRoles(roleNames: string[], only?: boolean): boolean
 }
 
-type UserModelQuery = Query<any, HydratedDocument<UserProps>, UserQueryHelpers> & UserQueryHelpers
+type UserModelQuery = Query<unknown, HydratedDocument<UserProps>, UserQueryHelpers> & UserQueryHelpers
 
 interface UserQueryHelpers {
   oneById(this: UserModelQuery, id: string): UserModelQuery
@@ -135,39 +115,35 @@ const userSchema = new Schema<UserProps, UserModelType, UserMethods, UserQueryHe
       required: true,
       unique: true
     },
+    nickname: String,
+    avatar: String,
     password: {
       type: String,
-      // select: false,
       required: true
     },
     salt: {
       type: String,
-      // select: false,
       required: true
     },
-    roles: [String],
-    disabled: {
-      type: Boolean,
-      default: false
+    role: {
+      type: String,
+      default: 'user'
     },
-    deleted: {
-      type: Boolean,
-      default: false
+    status: {
+      type: Number,
+      default: 1
     },
-    nickname: String,
-    avatar: String,
-    activedAt: String,
-    deletedAt: Date
+    activeAt: {
+      type: Date,
+      default: Date.now()
+    }
   },
   {
     timestamps: true
   }
 )
 
-//  定义Schema虚拟值
-userSchema.virtual('normal').get(function () {
-  return !this.disabled && !this.deleted
-})
+// 虚拟值
 userSchema.virtual('symbol').get(function () {
   return `${this.username}-${this.email}`
 })

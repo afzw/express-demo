@@ -8,9 +8,9 @@ const moduleAlias = require('module-alias')
 moduleAlias.addAlias('@', __dirname)
 
 import express from 'express'
-import config from '@/_config/config'
+import { config } from '@/_config/config'
 import { initApp } from '@/loaders'
-import logger from '@/lib/utils/logger'
+import { logger } from '@/lib/logger'
 
 /**
  * 监听端口，启动服务

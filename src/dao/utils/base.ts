@@ -15,7 +15,7 @@ class MongooseBase<P = unknown> {
    * @param props 新建文档的属性
    * @returns 新建的文档
    */
-  public create(props: P): Promise<HydratedDocument<P>> {
+  public create(props: Partial<P>): Promise<HydratedDocument<P>> {
     return this._model.create(props)
   }
 

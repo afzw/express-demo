@@ -5,7 +5,7 @@ import { Schema, model, FilterQuery, HydratedDocument, LeanDocument, Types, Upda
  */
 export interface SessionInfoProps {
   /**
-   * session ID
+   * express-session ID
    */
   sessionId?: string
   /**

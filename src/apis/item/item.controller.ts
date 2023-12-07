@@ -1,4 +1,4 @@
-import callAsync from '@/lib/utils/callAsync'
+import callAsync from '@/lib/callAsync'
 import { NextFunction, Request, Response } from 'express'
 import ItemService from '@/business/item/item.service'
 import { ItemDoc, ItemFilter, ItemUpdate } from '@/entities/item.model'
@@ -7,10 +7,10 @@ import fileDao from '@/dao/file.dao'
 import { FileDoc, FileFilter, FileProps } from '@/entities/file.model'
 import itemDao from '@/dao/item.dao'
 import { saveFile } from '@/lib/fs/service'
-import config from '@/_config/config'
+import { config } from '@/_config/config'
 import path from 'path'
 import { deleteFile } from '@/lib/fs/base'
-import AppError from '@/lib/error'
+import { AppError } from '@/lib/error'
 
 /** 新建item */
 class ItemController {

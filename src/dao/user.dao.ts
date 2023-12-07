@@ -1,4 +1,4 @@
-import { UserProps, UserModel } from '@/entities/user.model'
+import { UserProps, UserModel } from '@/entities/auth/user.model'
 import { MongooseBase } from '@/dao/utils'
 
 class UserDao extends MongooseBase<UserProps> {}

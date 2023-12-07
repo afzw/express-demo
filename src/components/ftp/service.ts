@@ -1,7 +1,7 @@
 import * as ftp from 'basic-ftp'
-import callAsync from '@/lib/utils/callAsync'
+import callAsync from '@/lib/callAsync'
 import { Readable, Writable } from 'stream'
-import AppError from '@/lib/error'
+import { AppError } from '@/lib/error'
 
 class FTPService {
   /**

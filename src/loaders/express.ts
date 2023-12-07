@@ -6,12 +6,12 @@ import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import dayjs from 'dayjs'
-import MongoStore from 'connect-mongo'
+import { Redis } from 'ioredis'
+import RedisStore from 'connect-redis'
 
-import config from '@/_config/config'
+import { config } from '@/_config/config'
 import { permissionValidatorRegister } from '@/loaders/rbac/validator'
-import { getMongoUri } from '@/loaders/mongo/mongo'
-import { localSerialize, localDeserialize } from '@/loaders/auth/local-auth.service'
+import { localSerialize, localDeserialize } from '@/loaders/auth/local-auth'
 
 /**
  * 【初始化】加载express程序
@@ -25,23 +25,31 @@ function loadExpress(app: express.Express) {
   app.use(express.static(config.publicDir))
   /** HTTP request logger */
   morgan.token('date', () => dayjs().format('YYYY/MM/DD HH:mm:ss'))
+  /** 日志记录 */
   app.use(morgan(':date :method :url -- [:status] :response-time ms'))
-  /** 压缩response */
+  /** response压缩 */
   app.use(compression())
   /** 跨域资源共享 */
   app.use(cors())
-  /** 请求体解析 - 非form-data （form-data使用`multer`解析） */
+  /** 请求体解析（form-data使用`multer`解析） */
   app.use(bodyParser.json({ limit: '10mb' })) // 解析application/json
   app.use(bodyParser.urlencoded({ limit: '2mb', extended: true })) // 解析application/x-www-form-urlencoded
-  /** 使用mongo存储session */
+  const redisClient = new Redis(config.redis)
+  const redisStore = new RedisStore({
+    client: redisClient,
+    prefix: 'express-demo:'
+  })
+  /** 使用redis存储session */
   app.use(
     session({
       name: config.session.name,
-      secret: config.session.name,
+      secret: config.session.secret,
+      store: redisStore,
+      cookie: {
+        maxAge: config.session.expireDays * 24 * 60 * 60 * 1000
+      },
       resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({ mongoUrl: getMongoUri(config.mongo) }),
-      cookie: { maxAge: config.session.expireDays * 24 * 60 * 60 * 1000 }
+      saveUninitialized: false
     })
   )
   /** 使用passport进行身份认证 */

@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { UserDocPojo, UserProps } from '@/entities/user.model'
-
-/** 定义/继承环境声明 */
+/** 自定义全局类型声明 */
 declare global {
   /** 应用程序 */
   namespace App {
@@ -41,50 +38,69 @@ declare global {
         debug: boolean
         uri?: string
       }
+
+      /** redis配置 */
+      redis: {
+        host: string
+        port: number
+        username?: string
+        password?: string
+      }
     }
-    /**
-     * 角色
-     */
+    /** 用户 */
+    interface User {
+      /** 用户id */
+      _id: string
+      /** 用户状态 */
+      status: number
+      /** 用户角色(用户类型) */
+      role: string
+      /** 上次活跃时间 */
+      activeAt: Date
+    }
+    /** 角色（用户类型） */
     interface Role {
       permissions: string[]
     }
-    /**
-     * 角色字典
-     */
+    /** 角色字典 */
     interface RolesMap {
       [roleName: string]: Role
     }
-    /**
-     * 路由
-     */
+    /** 路由 */
     interface Route {
       path: string
       method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-      middlewares?: any[]
+      middlewares?: unknown[]
       permission?: string
-      threshold?: any
+      threshold?: unknown
       csrf?: boolean
+    }
+    /** 程序错误 */
+    interface Error extends globalThis.Error {
+      /** http状态码 */
+      statusCode?: number
+      /** 业务码 */
+      businessCode?: string
     }
   }
 
+  /** 失败响应信息 */
+  interface FailedResponseInfo {
+    /** 错误信息 */
+    message: string
+    /** 业务码 */
+    businessCode: string
+  }
+
+  // 修改Express原声明
   namespace Express {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface User extends UserDocPojo {}
+    interface User extends App.User {}
     interface Request {
       user?: User
       hasPermission(permission: string): boolean
-      logIn(user: UserProps, done: (err: unknown) => void): void
+      logIn(user: User, done: (err: unknown) => void): void
     }
-  }
-
-  type Pojo = { [prop: string]: any }
-
-  /** 格式化的错误 */
-  interface FormatError extends Error {
-    /** http状态码 */
-    statusCode: number
-    /** 业务码 */
-    businessCode?: string
   }
 }
 

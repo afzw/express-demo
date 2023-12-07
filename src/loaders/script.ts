@@ -1,6 +1,6 @@
 import path from 'path'
-import { callAsync } from '@/lib/utils/callAsync'
-import logger from '@/lib/utils/logger'
+import { callAsync } from '@/lib/callAsync'
+import { logger } from '@/lib/logger'
 import { readdirp } from '@/lib/fs/read'
 import ScriptDao from '@/dao/script.dao'
 

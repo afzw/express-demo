@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { routesMap } from '.'
-import logger from '@/lib/utils/logger'
+import { logger } from '@/lib/logger'
 
 /**
  * 路由校验器
@@ -12,8 +12,7 @@ export function routeValidator(req: Request, res: Response, next: NextFunction) 
   if (!route) return res.status(500).send({ error: 'route not found: ' + req.route.path })
 
   //  校验路由权限
-  if (route.permission !== 'public')
-    if (req.user?.disabled || req.user?.deleted) return res.status(403).send({ error: '账号非法！' })
+  if (route.permission !== 'public') if (req.user?.status !== 1) return res.status(403).send({ error: '账号非法！' })
 
   let pass = false
   if (route.permission instanceof Array) {

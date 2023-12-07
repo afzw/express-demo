@@ -3,7 +3,6 @@ import loadMongoDB from './mongo'
 import loadExpress from './express'
 import initRbac from './rbac'
 import loadRouters from './router'
-import loadEventEmitter from './eventEmitter'
 import { executScripts } from './script'
 import { makeLogDir } from './log'
 import Schedule from './schedule'
@@ -20,7 +19,6 @@ async function initApp(app: express.Express, config: App.Config) {
   await loadMongoDB(config.mongo)
   loadExpress(app)
   loadRouters(app)
-  loadEventEmitter()
 
   // 业务逻辑初始化
   initRbac()

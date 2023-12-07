@@ -21,6 +21,12 @@ const config: App.Config = {
     // username: '',
     // password: '',
     //  uri: '',
+  },
+  redis: {
+    host: '127.0.0.1',
+    port: 6379
+    // username: '',
+    // password: ''
   }
 }
 
@@ -38,4 +44,4 @@ if (process.env.MONGO_USERNAME) config.mongo.username = process.env.MONGO_USERNA
 if (process.env.MONGO_PASSWORD) config.mongo.password = process.env.MONGO_PASSWORD
 if (process.env.MONGO_URI) config.mongo.uri = process.env.MONGO_URI
 
-export default config
+export default { config }

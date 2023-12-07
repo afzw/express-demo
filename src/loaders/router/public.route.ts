@@ -1,6 +1,6 @@
 import path from 'path'
 import { Request, Response } from 'express'
-import config from '@/_config/config'
+import { config } from '@/_config/config'
 
 /** 公共路由 */
 const __publicRoutes: App.Route[] = [

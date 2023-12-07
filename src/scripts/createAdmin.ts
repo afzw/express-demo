@@ -3,24 +3,26 @@
 const moduleAlias = require('module-alias')
 moduleAlias.addAlias('@', '..')
 
-import utils from '@/lib/utils/common'
-import { UserProps } from '@/entities/user.model'
+import { UserProps } from '@/entities/auth/user.model'
 import UserDao from '@/dao/user.dao'
+import { genRandom32BitsHexString, genPBK, encryptStringUsingSH512 } from '@/lib/encryption/crypto'
 
 /**
  * @fileoverview 【默认脚本】创建系统管理员
  */
 exports.start = async function start() {
   const initPassword = '123456' //  管理员初始密码
-  const salt = utils.genRandom()
+  const encryptedPwd = encryptStringUsingSH512(initPassword)
+  const salt = genRandom32BitsHexString()
+  const password = genPBK(encryptedPwd, salt)
 
   const adminDoc: Partial<UserProps> = {
     email: 'admin@example.com',
     username: 'admin',
-    salt,
-    password: utils.md5(salt + initPassword),
     nickname: '系统管理员',
-    roles: ['admin', 'user']
+    role: 'admin',
+    salt,
+    password
   }
 
   return UserDao.findOneAndUpdate({ username: 'admin' }, adminDoc, {

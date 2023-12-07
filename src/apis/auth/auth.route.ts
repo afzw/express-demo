@@ -1,4 +1,4 @@
-import * as Auth from '@/apis/auth/local-auth.controller'
+import { LocalAuthController } from '@/apis/auth/local-auth.controller'
 
 /** 公共路由 */
 const AuthRoutes: App.Route[] = [
@@ -6,21 +6,21 @@ const AuthRoutes: App.Route[] = [
   {
     path: '/login',
     method: 'POST',
-    middlewares: [Auth.signIn],
+    middlewares: [LocalAuthController.login],
     permission: 'public'
   },
   //  注册
   {
     path: '/register',
     method: 'POST',
-    middlewares: [Auth.signUp],
+    middlewares: [LocalAuthController.register],
     permission: 'public'
   },
   //  登出
   {
     path: '/logout',
     method: 'POST',
-    middlewares: [Auth.signOut],
+    middlewares: [LocalAuthController.register],
     permission: 'public'
   }
 ]

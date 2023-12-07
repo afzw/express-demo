@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import callAsync from '@/lib/utils/callAsync'
-import logger from '@/lib/utils/logger'
+import callAsync from '@/lib/callAsync'
+import { logger } from '@/lib/logger'
 import { getMongoUri, listenMongoEvent, sleep } from './mongo'
 
 async function loadMongoDB(mongoConifg: App.Config['mongo']) {
