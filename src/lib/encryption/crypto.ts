@@ -4,14 +4,14 @@ import crypto from 'crypto'
  * SH512加密
  */
 export function encryptStringUsingSH512(str: string) {
-  return crypto.createHash('sh512').update(str).digest('hex')
+  return crypto.createHash('sha512').update(str).digest('hex')
 }
 
 /**
  * 生成随机的32位16进制字符串（常用作salt值）。
  */
 export function genRandom32BitsHexString() {
-  return crypto.randomBytes(length).toString('hex')
+  return crypto.randomBytes(16).toString('hex')
 }
 
 /**

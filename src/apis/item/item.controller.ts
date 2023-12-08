@@ -2,7 +2,7 @@ import callAsync from '@/lib/callAsync'
 import { NextFunction, Request, Response } from 'express'
 import ItemService from '@/business/item/item.service'
 import { ItemDoc, ItemFilter, ItemUpdate } from '@/entities/item.model'
-import { Paging } from '@/dao/utils'
+import { getPagingOptions } from '@/dao/utils'
 import fileDao from '@/dao/file.dao'
 import { FileDoc, FileFilter, FileProps } from '@/entities/file.model'
 import itemDao from '@/dao/item.dao'
@@ -26,7 +26,7 @@ class ItemController {
   /** 查询items */
   public static async search(req: Request, res: Response, next: NextFunction) {
     const { name, price, ownerId } = req.query
-    const pagingOptions = new Paging(req.query)
+    const pagingOptions = getPagingOptions(req.query)
 
     const filter: ItemFilter = {}
     if (name) filter.name = name

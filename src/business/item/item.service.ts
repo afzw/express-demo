@@ -1,5 +1,5 @@
 import callAsync from '@/lib/callAsync'
-import { ItemDoc, ItemFilter } from '@/entities/item.model'
+import { ItemDoc, ItemFilter, ItemProps } from '@/entities/item.model'
 import ItemDao from '@/dao/item.dao'
 import _ from 'lodash'
 import ItemStore from './item.store'
@@ -13,7 +13,7 @@ class ItemService {
    * @param createInfo 创建item的属性信息
    * @return 新建的item
    */
-  public static async createItem(createInfo: Pojo): Promise<ItemDoc> {
+  public static async createItem(createInfo: Partial<ItemProps>): Promise<ItemDoc> {
     const createProps = _.pick(createInfo, ItemStore.theCreateKeys())
 
     const [errCreate, newItem] = await callAsync(ItemDao.create(createProps))
@@ -51,7 +51,7 @@ class ItemService {
    * @param updateInfo 更新属性信息
    * @return 更新后的item
    */
-  public static async updateItem(itemId: string, updateInfo: Pojo): Promise<ItemDoc> {
+  public static async updateItem(itemId: string, updateInfo: Partial<ItemProps>): Promise<ItemDoc> {
     const filter: ItemFilter = { _id: itemId }
     const updateProps = _.pick(updateInfo, ItemStore.theCreateKeys())
     const queryOptions = { new: true }

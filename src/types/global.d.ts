@@ -72,7 +72,7 @@ declare global {
       method: 'GET' | 'POST' | 'PUT' | 'DELETE'
       middlewares?: unknown[]
       permission?: string
-      threshold?: unknown
+      threshold?: any
       csrf?: boolean
     }
     /** 程序错误 */

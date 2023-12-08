@@ -17,9 +17,9 @@ const config: App.Config = {
     name: 'ExpressDemo',
     host: '127.0.0.1',
     port: 27017,
-    debug: false
-    // username: '',
-    // password: '',
+    debug: false,
+    username: 'root',
+    password: 'root'
     //  uri: '',
   },
   redis: {

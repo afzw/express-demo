@@ -2,7 +2,7 @@ import path from 'path'
 import callAsync from '@/lib/callAsync'
 import { moveFile, createDirRecursively, deleteFile, readFile, appendFile } from '@/lib/fs/base'
 import { getFileNameByPath } from '@/lib/fs/utils'
-import AppError from '../error'
+import { AppError } from '../error'
 
 /** 保存文件的选项 */
 interface SaveOptions {
