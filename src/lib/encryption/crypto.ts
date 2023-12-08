@@ -3,7 +3,7 @@ import crypto from 'crypto'
 /**
  * SH512加密
  */
-export function encryptStringUsingSH512(str: string) {
+export function encryptStringUsingSH512(str: string): string {
   return crypto.createHash('sha512').update(str).digest('hex')
 }
 
