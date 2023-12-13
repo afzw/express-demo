@@ -1,31 +1,31 @@
 import express from 'express'
 
-import registerRouter from '@/loaders/router/register'
+import { registerRoutes } from '@/loaders/router/register'
 import errorHandler from '../errorHandler'
 
-import __adminRoutes from '@/loaders/router/admin.route'
-import __moduleRoutes from '@/loaders/router/module.route'
-import __publicRoutes from '@/loaders/router/public.route'
-
-//  路由字典
-export const routesMap = new Map()
+import { __adminRoutes } from '@/loaders/router/routes/admin.route'
+import { __userRoutes } from '@/loaders/router/routes/user.route'
+import { __publicRoutes } from '@/loaders/router/routes/public.route'
+import { __openRoutes } from '@/loaders/router/routes/open.route'
 
 /**
- * 初始化路由器。
+ * 加载路由。
  */
 function loadRouters(app: express.Express) {
-  // 监听系统管理层级路由
   const adminRouter = express.Router()
-  registerRouter(adminRouter, __adminRoutes, 'admin')
+  registerRoutes(adminRouter, __adminRoutes, 'admin')
+  app.use('/', adminRouter)
 
-  //  监听业务路由
-  const moduleRouter = express.Router()
-  registerRouter(moduleRouter, __moduleRoutes, 'user')
-  app.use('/', moduleRouter)
+  const userRouter = express.Router()
+  registerRoutes(userRouter, __userRoutes, 'user')
+  app.use('/', userRouter)
 
-  //  监听公开路由
+  const openRouter = express.Router()
+  registerRoutes(openRouter, __openRoutes, 'open')
+  app.use('/', openRouter)
+
   const publicRouter = express.Router()
-  registerRouter(publicRouter, __publicRoutes, 'public')
+  registerRoutes(publicRouter, __publicRoutes, 'public')
   app.use('/', publicRouter)
 
   // 添加错误处理器

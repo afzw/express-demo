@@ -5,10 +5,9 @@ import { NextFunction, Request, Response } from 'express'
 import sessionInfoDao from '@/dao/sessionInfo.dao'
 import { SessionInfoProps } from '@/entities/sessionInfo.model'
 import { UserFilter, UserProps } from '@/entities/auth/user.model'
-import UserStore from '@/business/user/user.store'
 import { LocalAuthStore } from '@/business/auth/local/local-auth.store'
 import { AppError } from '@/lib/error'
-import { encryptStringUsingSH512, genRandom32BitsHexString, genUniqString, genPBK } from '@/lib/encryption/crypto'
+import { genRandom32BitsHexString, genUniqString, genPBK } from '@/lib/encryption/crypto'
 import { Types } from 'mongoose'
 
 /** 用户登录信息 */
@@ -56,9 +55,7 @@ class LocalAuthController {
       const [createSessionInfoErr] = await callAsync(sessionInfoDao.create(sessionInfoProps))
       if (createSessionInfoErr) console.log(`记录sessionInfo失败 => ${createSessionInfoErr}`)
 
-      const profile = _.pick(user, UserStore.theProfileKeys())
-
-      return res.send(profile)
+      return res.sendStatus(200)
     })
   }
 
@@ -83,10 +80,10 @@ class LocalAuthController {
       password,
       salt
     }
-    const [createUserErr, user] = await callAsync(UserDao.create(newUserProps))
+    const [createUserErr] = await callAsync(UserDao.create(newUserProps))
     if (createUserErr) return next(new AppError({ message: `创建用户失败 => ${createUserErr} ` }))
 
-    return res.send(user)
+    return res.sendStatus(200)
   }
 
   public static async logout(req: Request<null, number, null>, res: Response, next: NextFunction) {

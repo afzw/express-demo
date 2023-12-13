@@ -1,7 +1,6 @@
 import express from 'express'
 import loadMongoDB from './mongo'
 import loadExpress from './express'
-import initRbac from './rbac'
 import loadRouters from './router'
 import { executScripts } from './script'
 import { makeLogDir } from './log'
@@ -21,7 +20,6 @@ async function initApp(app: express.Express, config: App.Config) {
   loadRouters(app)
 
   // 业务逻辑初始化
-  initRbac()
   await executScripts(config.scriptDir)
 
   // 定时任务

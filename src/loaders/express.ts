@@ -10,7 +10,6 @@ import { Redis } from 'ioredis'
 import RedisStore from 'connect-redis'
 
 import { config } from '@/_config/config'
-import { permissionValidatorRegister } from '@/loaders/rbac/validator'
 import { localSerialize, localDeserialize } from '@/loaders/auth/local-auth'
 
 /**
@@ -58,8 +57,6 @@ function loadExpress(app: express.Express) {
   /** passport 本地策略 */
   passport.serializeUser(localSerialize)
   passport.deserializeUser(localDeserialize)
-  /** 注册权限校验器 */
-  app.use(permissionValidatorRegister)
 }
 
 export default loadExpress
