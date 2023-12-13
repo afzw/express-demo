@@ -44,4 +44,4 @@ if (process.env.MONGO_USERNAME) config.mongo.username = process.env.MONGO_USERNA
 if (process.env.MONGO_PASSWORD) config.mongo.password = process.env.MONGO_PASSWORD
 if (process.env.MONGO_URI) config.mongo.uri = process.env.MONGO_URI
 
-export default { config }
+export { config }
