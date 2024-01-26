@@ -8,15 +8,15 @@ export interface UserProps extends App.User {
   /**
    * 用户名
    */
-  username: string
+  //username: string
   /**
    * 用户昵称
    */
-  nickname?: string
+  //nickname?: string
   /**
    * 用户头像保存路径
    */
-  avatar?: string
+  //avatar?: string
   /**
    * 密码
    */
@@ -109,14 +109,14 @@ const userSchema = new Schema<UserProps, UserModelType, UserMethods, UserQueryHe
       required: true,
       unique: true
     },
-    username: {
-      type: String,
-      index: true,
-      required: true,
-      unique: true
-    },
-    nickname: String,
-    avatar: String,
+    // username: {
+    //   type: String,
+    //   index: true,
+    //   required: true,
+    //   unique: true
+    // },
+    // nickname: String,
+    // avatar: String,
     password: {
       type: String,
       required: true

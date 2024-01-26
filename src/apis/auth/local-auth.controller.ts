@@ -10,21 +10,12 @@ import { AppError } from '@/lib/error'
 import { genRandom32BitsHexString, genUniqString, genPBK } from '@/lib/encryption/crypto'
 import { Types } from 'mongoose'
 
-/** 用户登录信息 */
 interface LoginInfo {
-  /** 用户邮箱 */
   email: string
-  /** 用户密码 */
   password: string
 }
 
-/** 用户注册信息 */
-interface RegisterInfo {
-  /** 用户注册邮箱 */
-  email: string
-  /** 用户密码 */
-  password: string
-}
+type RegisterInfo = LoginInfo
 
 class LocalAuthController {
   public static async login(req: Request<null, UserProps, LoginInfo>, res: Response, next: NextFunction) {
@@ -72,11 +63,9 @@ class LocalAuthController {
 
     const salt = genRandom32BitsHexString()
     const password = genPBK(registerInfo.password, salt)
-    const username = `user-${genUniqString()}`
 
     const newUserProps: Partial<UserProps> = {
       email: registerInfo.email,
-      username,
       password,
       salt
     }

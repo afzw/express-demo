@@ -9,17 +9,14 @@ import UserStore from '../../business/user/user.store'
  * 获取用户主页信息
  */
 export async function getProfile(req: Request, res: Response) {
+  const user = req.user
+
   const [updateSessionInfoErr] = await callAsync(
     SessionInfoDao.findOneAndUpdate({ sessionId: req.sessionID }, { activeAt: new Date() })
   )
-  if (updateSessionInfoErr) return res.status(500).send(`更新会话信息失败 => ${updateSessionInfoErr}`)
+  if (updateSessionInfoErr) console.log(`更新会话信息失败 => ${updateSessionInfoErr}`)
 
-  const [findUserInfoErr, userInfo] = await callAsync(
-    UserDao.findOne({ _id: req.user._id }, { activeAt: new Date() }, { lean: true })
-  )
-  if (findUserInfoErr) return res.status(500).send(`获取用户信息失败 => ${findUserInfoErr}`)
-
-  const profile = _.pick(userInfo, UserStore.theProfileKeys())
+  const profile = _.pick(user, UserStore.theProfileKeys())
 
   res.send(profile)
 }
