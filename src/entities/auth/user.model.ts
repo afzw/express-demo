@@ -144,9 +144,9 @@ const userSchema = new Schema<UserProps, UserModelType, UserMethods, UserQueryHe
 )
 
 // 虚拟值
-userSchema.virtual('symbol').get(function () {
-  return `${this.username}-${this.email}`
-})
+// userSchema.virtual('symbol').get(function () {
+//   return `${this.username}-${this.email}`
+// })
 //  定义用户集合实例方法
 userSchema.method('isRole', function isRole(roleName: string, only = false) {
   return only ? this.roles.includes(roleName) && this.roles.length === 1 : this.roles.includes(roleName)

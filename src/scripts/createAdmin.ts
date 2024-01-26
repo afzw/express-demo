@@ -18,8 +18,6 @@ exports.start = async function start() {
 
   const adminDoc: Partial<UserProps> = {
     email: 'admin@example.com',
-    username: 'admin',
-    nickname: '系统管理员',
     role: 'admin',
     salt,
     password
