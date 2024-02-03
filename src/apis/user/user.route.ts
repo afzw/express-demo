@@ -7,13 +7,6 @@ const userRoutes: App.Route[] = [
     method: 'GET',
     middlewares: [UserController.search],
     permission: 'admin'
-  },
-  //  获取用户个人简介
-  {
-    path: '/profile',
-    method: 'GET',
-    middlewares: [UserController.getProfile],
-    permission: 'user'
   }
 ]
 

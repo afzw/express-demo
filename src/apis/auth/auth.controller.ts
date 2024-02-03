@@ -7,7 +7,12 @@ class AuthController {
   public static async getProfile(req: Request, res: Response, next: NextFunction) {
     const user = req.user
 
-    return res.send({ user })
+    const profile = {
+      email: user.email,
+      role: user.role
+    }
+
+    return res.send({ profile })
   }
 }
 

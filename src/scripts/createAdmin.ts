@@ -23,7 +23,7 @@ exports.start = async function start() {
     password
   }
 
-  return UserDao.findOneAndUpdate({ username: 'admin' }, adminDoc, {
+  return UserDao.findOneAndUpdate({ email: 'admin@example.com' }, adminDoc, {
     upsert: true,
     new: false
   })

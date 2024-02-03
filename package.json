@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "web后台服务",
   "engines": {
-    "node": ">=20",
+    "node": ">=18",
+    "mongo": ">=4.2",
     "pnpm": ">=8"
   },
   "scripts": {
     "prepare": "husky install",
-    "initial": "chmod +x ./init.sh | ./init.sh",
+    "initial": "chmod +x ./initial.sh | ./initial.sh",
     "dev": "nodemon -r tsconfig-paths/register src/main.ts",
     "build": "gulp",
     "start": "node dist/src/main.js"

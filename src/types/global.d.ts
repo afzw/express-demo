@@ -51,8 +51,6 @@ declare global {
     interface User {
       /** 用户id */
       _id: string
-      /** 用户状态 */
-      status: number
       /** 用户角色(用户类型) */
       role: string
       /** 上次活跃时间 */
@@ -72,8 +70,6 @@ declare global {
       method: 'GET' | 'POST' | 'PUT' | 'DELETE'
       middlewares?: unknown[]
       permission?: string
-      threshold?: any
-      csrf?: boolean
     }
     /** 程序错误 */
     interface Error extends globalThis.Error {
@@ -95,7 +91,9 @@ declare global {
   // 修改Express原声明
   namespace Express {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface User extends App.User {}
+    interface User extends App.User {
+      email: string
+    }
     interface Request {
       user?: User
       hasPermission(permission: string): boolean

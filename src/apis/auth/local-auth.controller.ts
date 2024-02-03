@@ -7,7 +7,7 @@ import { SessionInfoProps } from '@/entities/sessionInfo.model'
 import { UserFilter, UserProps } from '@/entities/auth/user.model'
 import { LocalAuthStore } from '@/business/auth/local/local-auth.store'
 import { AppError } from '@/lib/error'
-import { genRandom32BitsHexString, genUniqString, genPBK } from '@/lib/encryption/crypto'
+import { genRandom32BitsHexString, genPBK } from '@/lib/encryption/crypto'
 import { Types } from 'mongoose'
 
 interface LoginInfo {
@@ -29,8 +29,8 @@ class LocalAuthController {
     const [findUserErr, user] = await callAsync(UserDao.findOne(userFilter, null, { lean: true }))
     if (findUserErr) return next(new AppError({ message: `查询用户失败 => ${findUserErr}` }))
     if (!user) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
-    if (user.status !== 1) return next(new AppError({ statusCode: 401, message: '用户状态异常' }))
     const enPass = genPBK(loginInfo.password, user.salt)
+    console.log(enPass, '\n', user.password)
     if (enPass !== user.password) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
 
     req.login(user, async (error: unknown) => {

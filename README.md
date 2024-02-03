@@ -4,26 +4,27 @@
 
 ## 项目参数
 
-- Node.js >= v16
+- Node.js >= v18
 - MongoDB >= v4.2
 
 ## 快速开始
 
-- 项目开发
+### 项目开发
 
 ```sh
 # 在项目根目录下：
-./init.sh     # 项目初始化
+npm run prepare # （可选）安装husky
+npm run initial     # 项目初始化
 npm run dev   # 启动开发环境
 ```
 
-- 构建上线（通过 github actions 实现 ci）
+### 构建上线（通过 github actions 实现 ci）
 
-  - 在 github repo 中配置`actions secrets`.
-    - DOCKER_REPO - docker 仓库，例如`John/express-demo`.
-    - DOCKER_USER - docker 用户, 例如`John`
-    - DOCKER_PASS - docker 用户密码.
-  - 代码提交到 github repo，自动执行 github actions。
+- 在 github repo 中配置`actions secrets`.
+  - DOCKER_REPO - docker 仓库，例如`John/express-demo`.
+  - DOCKER_USER - docker 用户, 例如`John`
+  - DOCKER_PASS - docker 用户密码.
+- 代码提交到 github repo，自动执行 github actions。
 
 ## 功能介绍
 
@@ -31,7 +32,6 @@ npm run dev   # 启动开发环境
 - 用户登录/注册（本地策略）
 - 基于`rbac`的角色权限管理
 - 基于`multer`实现文件的上传
-- 支持插件
 - 支持自定义脚本
 
 ## 目录结构
