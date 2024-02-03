@@ -30,7 +30,6 @@ class LocalAuthController {
     if (findUserErr) return next(new AppError({ message: `查询用户失败 => ${findUserErr}` }))
     if (!user) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
     const enPass = genPBK(loginInfo.password, user.salt)
-    console.log(enPass, '\n', user.password)
     if (enPass !== user.password) return next(new AppError({ statusCode: 401, message: '邮箱或密码错误' }))
 
     req.login(user, async (error: unknown) => {
