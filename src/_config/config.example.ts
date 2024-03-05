@@ -44,4 +44,9 @@ if (process.env.MONGO_USERNAME) config.mongo.username = process.env.MONGO_USERNA
 if (process.env.MONGO_PASSWORD) config.mongo.password = process.env.MONGO_PASSWORD
 if (process.env.MONGO_URI) config.mongo.uri = process.env.MONGO_URI
 
+if (process.env.REDIS_HOST) config.redis.host = process.env.REDIS_HOST
+if (process.env.REDIS_PORT) config.redis.host = process.env.REDIS_PORT
+if (process.env.REDIS_USERNAME) config.redis.host = process.env.REDIS_USERNAME
+if (process.env.REDIS_PASSWORD) config.redis.host = process.env.REDIS_PASSWORD
+
 export { config }

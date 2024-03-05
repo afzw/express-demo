@@ -18,7 +18,7 @@ const authRoutes: App.Route[] = [
   {
     path: '/logout',
     method: 'POST',
-    middlewares: [LocalAuthController.register],
+    middlewares: [LocalAuthController.logout],
     permission: 'public'
   },
   {
