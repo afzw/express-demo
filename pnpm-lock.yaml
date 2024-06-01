@@ -63,7 +63,7 @@ dependencies:
     specifier: ^4.1.4
     version: 4.17.2(@aws-sdk/client-sso-oidc@3.588.0)
   mongoose:
-    specifier: '>=6.11.3'
+    specifier: '>=6.9.1'
     version: 8.4.1
   morgan:
     specifier: ^1.10.0
