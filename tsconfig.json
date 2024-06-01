@@ -4,7 +4,6 @@
     "files": true //  使 ts-node 识别 tsconfig.json 的 files, include or exclude 配置
   },
   "compilerOptions": {
-    "outDir": "dist-compile",
     "module": "CommonJS",
     "target": "ES6",
     "esModuleInterop": true,

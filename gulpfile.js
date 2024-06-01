@@ -11,17 +11,17 @@ gulp.task('compile-src', function () {
     .src(['src/**/*.ts'])
     .pipe(project())
     .pipe($.if('*.js', $.terser().on('error', console.error)))
-    .pipe(gulp.dest('dist-compile'))
+    .pipe(gulp.dest('build-internal'))
 })
 
 // 拷贝js源代码
 gulp.task('copy-src', function () {
   return gulp
-    .src(['dist-compile/**/*.js'], {
-      base: 'dist-compile',
+    .src(['build-internal/**/*.js'], {
+      base: 'build-internal',
       dot: true
     })
-    .pipe(gulp.dest('dist/src'))
+    .pipe(gulp.dest('build/internal'))
 })
 
 // 拷贝资源文件
@@ -32,12 +32,12 @@ gulp.task('copy-assets', function () {
       dot: true,
       allowEmpty: true
     })
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest('build/'))
 })
 
 gulp.task('build', gulp.series('compile-src', 'copy-src', 'copy-assets'))
 
 // 清理之前的dist
-gulp.task('clean', del.bind(null, ['dist-compile', 'dist']))
+gulp.task('clean', del.bind(null, ['build-internal', 'build']))
 
 gulp.task('default', gulp.series('clean', 'build'))

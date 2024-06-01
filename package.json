@@ -1,7 +1,7 @@
 {
   "name": "express-demo",
-  "version": "1.0.0",
-  "description": "web后台服务",
+  "version": "0.0.1",
+  "description": "demo for express with ts",
   "engines": {
     "node": ">=18",
     "mongo": ">=4.2",
@@ -12,7 +12,7 @@
     "initial": "chmod +x ./initial.sh | ./initial.sh",
     "dev": "nodemon -r tsconfig-paths/register src/main.ts",
     "build": "gulp",
-    "start": "node dist/src/main.js"
+    "start": "node build/internal/main.js"
   },
   "nodemonConfig": {
     "verbose": true,
