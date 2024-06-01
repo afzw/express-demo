@@ -4,7 +4,7 @@ ARG WORKDIR=/app/express-server
 
 WORKDIR ${WORKDIR}
 
-COPY ./dist/ ${WORKDIR}/
+COPY ./build/ ${WORKDIR}/
 
 EXPOSE 9000
 
