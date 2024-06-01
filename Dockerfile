@@ -8,4 +8,4 @@ COPY ./build/ ${WORKDIR}/
 
 EXPOSE 9000
 
-CMD ["node", "src/main.js"]
+CMD ["node", "internal/main.js"]
