@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register src/main.ts"
+    "dev": "nodemon -r tsconfig-paths/register src/main.ts",
+    "build": "npx tsc",
+    "start": "node dist/main.js"
   },
   "author": "afzw",
   "license": "MIT",
