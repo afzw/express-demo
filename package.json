@@ -1,5 +1,5 @@
 {
-  "name": "jcc-recommander-server",
+  "name": "express-demo",
   "version": "0.0.1",
   "description": "",
   "main": "main.js",
@@ -14,6 +14,7 @@
     "compression": "^1.7.5",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "module-alias": "^2.2.3",
     "morgan": "^1.10.0"

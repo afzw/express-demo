@@ -9,6 +9,7 @@ import { initRouter } from './router'
  * @param app 应用程序
  */
 async function initApp(app: express.Express, config: Config) {
+  initConfig(config)
   await makeLogDir()
   initExpress(app)
   initRouter(app)
